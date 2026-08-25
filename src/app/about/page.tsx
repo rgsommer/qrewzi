@@ -1,6 +1,24 @@
 import Link from "next/link";
 
-export const metadata = { title: "About" };
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "About",
+  description:
+    "Qrewzi is a live classroom game engine built for teachers who want kids on their feet. Small team in Hamilton, Ontario. Made for K-12.",
+  alternates: { canonical: "https://qrewzi.com/about" },
+  openGraph: {
+    title: "About Qrewzi",
+    description:
+      "A live classroom game engine for teachers who want kids on their feet. Small team, Hamilton, Ontario.",
+    url: "https://qrewzi.com/about",
+  },
+  twitter: {
+    title: "About Qrewzi",
+    description:
+      "A live classroom game engine for teachers who want kids on their feet. Small team, Hamilton, Ontario.",
+  },
+};
 
 export default function AboutPage() {
   return (

@@ -1,4 +1,12 @@
-export const metadata = { title: "Privacy" };
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Privacy",
+  description:
+    "How Qrewzi handles student and teacher data. Built for K-12: no student accounts, no third-party trackers, no ad identifiers.",
+  alternates: { canonical: "https://qrewzi.com/privacy" },
+  robots: { index: true, follow: true },
+};
 
 export default function PrivacyPage() {
   return (

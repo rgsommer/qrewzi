@@ -1,6 +1,24 @@
 import Link from "next/link";
 
-export const metadata = { title: "Pricing" };
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Pricing",
+  description:
+    "Free for teachers during the Qrewzi beta. Every beta teacher gets the full product free through the end of the school year, then grandfathered into launch pricing.",
+  alternates: { canonical: "https://qrewzi.com/pricing" },
+  openGraph: {
+    title: "Pricing — free for beta teachers",
+    description:
+      "Free during the beta, grandfathered at launch. District pricing available on request.",
+    url: "https://qrewzi.com/pricing",
+  },
+  twitter: {
+    title: "Pricing — free for beta teachers",
+    description:
+      "Free during the beta, grandfathered at launch. District pricing available on request.",
+  },
+};
 
 export default function PricingPage() {
   return (

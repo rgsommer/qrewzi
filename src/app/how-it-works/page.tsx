@@ -1,6 +1,24 @@
 import Link from "next/link";
 
-export const metadata = { title: "How it works" };
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "How it works",
+  description:
+    "Five minutes from lesson idea to a running classroom game. Describe a topic, print eight QR stations, share a room code, run the GameMaster dashboard.",
+  alternates: { canonical: "https://qrewzi.com/how-it-works" },
+  openGraph: {
+    title: "How Qrewzi turns a lesson into a game",
+    description:
+      "The five-step teacher walkthrough — describe, print, share, run, report. Every session wraps in a class period.",
+    url: "https://qrewzi.com/how-it-works",
+  },
+  twitter: {
+    title: "How Qrewzi turns a lesson into a game",
+    description:
+      "The five-step teacher walkthrough — describe, print, share, run, report. Every session wraps in a class period.",
+  },
+};
 
 export default function HowItWorks() {
   return (

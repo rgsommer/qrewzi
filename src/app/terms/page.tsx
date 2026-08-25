@@ -1,4 +1,12 @@
-export const metadata = { title: "Terms" };
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Terms",
+  description:
+    "Qrewzi Terms of Service. Beta terms and general use covering data, subscriptions, and school-district compliance.",
+  alternates: { canonical: "https://qrewzi.com/terms" },
+  robots: { index: true, follow: true },
+};
 
 export default function TermsPage() {
   return (

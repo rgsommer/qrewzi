@@ -1,6 +1,24 @@
 import Link from "next/link";
 
-export const metadata = { title: "Features" };
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Features",
+  description:
+    "30+ interactive task types, GameMaster projector dashboard, secret team superpowers, mixed-device sessions, class rosters, standards-aligned parent reports.",
+  alternates: { canonical: "https://qrewzi.com/features" },
+  openGraph: {
+    title: "Every feature Qrewzi ships with",
+    description:
+      "The full box: 30+ task types, GameMaster mode, secret superpowers, Device Mode support, class rosters, parent-ready reports.",
+    url: "https://qrewzi.com/features",
+  },
+  twitter: {
+    title: "Every feature Qrewzi ships with",
+    description:
+      "The full box: 30+ task types, GameMaster mode, secret superpowers, Device Mode support, class rosters, parent-ready reports.",
+  },
+};
 
 const FEATURES = [
   { name: "30+ task types", body: "Multiple choice, sort, sequence, mind map, matching, cloze, brain blitz, flashcards race, motion mission, speech recognition, script play, role-play deck, hangman duel, and more." },
