@@ -11,10 +11,10 @@ export default function AboutPage() {
 
         <div style={{ marginTop: 32, display: "grid", gap: 24, fontSize: 17, color: "var(--slate)", lineHeight: 1.7 }}>
           <p>
-            Qrewzi started as the classroom game half of{" "}
-            <a href="https://curriculate.net">Curriculate</a>. The other half — Pulse Grading —
-            saves teachers hours on marking. This half turns a lesson into
-            a room-wide team game kids actually want to play.
+            Qrewzi is a live classroom game engine. Teachers describe a
+            lesson, we build a room-wide team scavenger hunt across 30+
+            interactive task types, and kids play on any device. The whole
+            thing runs in a class period.
           </p>
           <p>
             The name is a mash-up of <b>QR</b> (the scan mechanic — kids run
@@ -22,9 +22,8 @@ export default function AboutPage() {
             teams). The mascot's name is <b>Qrew</b>. 🦊
           </p>
           <p>
-            We're a small team in Hamilton, Ontario. If Qrewzi is a
-            good fit for your class or district, we want to hear from you
-            directly.
+            We're a small team in Hamilton, Ontario. If Qrewzi is a good fit
+            for your class or district, we want to hear from you directly.
           </p>
         </div>
 

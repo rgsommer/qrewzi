@@ -55,7 +55,7 @@ export default function SiteFooter() {
       >
         <div className="container" style={{ display: "flex", justifyContent: "space-between", gap: 16, flexWrap: "wrap" }}>
           <div>© {new Date().getFullYear()} Qrewzi · Hamilton, ON</div>
-          <div>Grading? See our sister product <a href="https://curriculate.net/grading" style={{ color: "var(--butter)" }}>Pulse Grading</a></div>
+          <div>Made for teachers · Made in Canada 🇨🇦</div>
         </div>
       </div>
     </footer>
