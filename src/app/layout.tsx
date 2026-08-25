@@ -23,15 +23,56 @@ export const metadata: Metadata = {
     template: "%s · Qrewzi",
   },
   description:
-    "Qrewzi turns any lesson into a live team scavenger hunt. Teachers describe a topic, Qrewzi builds a room-wide game across 30+ interactive task types, students play on their phones or Chromebooks.",
+    "Qrewzi turns any lesson into a live team scavenger hunt. Describe a topic and Qrewzi builds a room-wide game across 30+ interactive task types — kids play on any device, teachers run the GameMaster dashboard on the projector.",
+  keywords: [
+    "classroom games", "live classroom activities", "team-based learning",
+    "scavenger hunt lessons", "QR code learning", "interactive lessons",
+    "K-12 game engine", "GameMaster dashboard", "educational games",
+    "teacher game platform",
+  ],
   metadataBase: new URL("https://qrewzi.com"),
+  alternates: {
+    canonical: "https://qrewzi.com",
+  },
+  authors: [{ name: "Qrewzi" }],
+  creator: "Qrewzi",
+  publisher: "Qrewzi",
+  category: "Education",
+  applicationName: "Qrewzi",
   openGraph: {
     title: "Qrewzi — the classroom becomes the game",
     description:
-      "AI-generated live classroom games. 30+ interactive task types. Kids play on their phones, teachers run the room.",
+      "AI-generated live classroom games. 30+ interactive task types. Kids play on any device, teachers run the GameMaster dashboard on the projector.",
     url: "https://qrewzi.com",
     siteName: "Qrewzi",
     type: "website",
+    locale: "en_CA",
+    images: [
+      {
+        url: "/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "Qrewzi — the classroom becomes the game",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Qrewzi — the classroom becomes the game",
+    description:
+      "AI-generated live classroom games. 30+ interactive task types. Kids play on any device, teachers run the GameMaster dashboard on the projector.",
+    images: ["/og-image.png"],
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
   },
   icons: {
     icon: "/favicon.svg",
