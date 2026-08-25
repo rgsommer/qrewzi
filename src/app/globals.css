@@ -1,0 +1,182 @@
+/* qrewzi-web/globals.css — brand tokens + base styles */
+
+:root {
+  /* Brand palette (locked in the brand pitch, see Marketing&Instructions/qrewzi-brand/) */
+  --coral: #FF4D5B;
+  --coral-deep: #E63946;
+  --navy: #0B1F3A;
+  --navy-2: #142B4D;
+  --butter: #FFD147;
+  --cream: #FEF9F0;
+  --cream-shade: #F1EADB;
+  --slate: #4A5B7A;
+  --slate-soft: #94A3B8;
+
+  /* Type roles */
+  --font-display: "Unbounded", ui-sans-serif, system-ui, sans-serif;
+  --font-body: "Nunito", ui-sans-serif, system-ui, sans-serif;
+
+  /* Rhythm */
+  --content-max: 1120px;
+  --gutter: clamp(16px, 4vw, 40px);
+
+  color-scheme: light;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background: var(--cream);
+  color: var(--navy);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+img, svg, video { max-width: 100%; height: auto; display: block; }
+
+a { color: var(--coral); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+::selection { background: var(--butter); color: var(--navy); }
+
+/* ---------- Typography scale ---------- */
+h1, h2, h3, h4 {
+  font-family: var(--font-display);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: var(--navy);
+  text-wrap: balance;
+  margin: 0;
+}
+h1 { font-size: clamp(40px, 6.4vw, 76px); line-height: 1.02; }
+h2 { font-size: clamp(28px, 3.6vw, 40px); line-height: 1.1; }
+h3 { font-size: clamp(20px, 2.2vw, 24px); line-height: 1.2; }
+
+p { margin: 0; }
+
+.eyebrow {
+  font-family: var(--font-body);
+  font-weight: 900;
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--coral);
+}
+
+/* ---------- Layout primitives ---------- */
+.container {
+  max-width: var(--content-max);
+  margin: 0 auto;
+  padding-left: var(--gutter);
+  padding-right: var(--gutter);
+}
+.section {
+  padding: clamp(64px, 8vw, 120px) 0;
+}
+.section-tight { padding: clamp(40px, 5vw, 72px) 0; }
+
+/* ---------- Buttons ---------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 24px;
+  border-radius: 999px;
+  font-family: var(--font-body);
+  font-weight: 900;
+  font-size: 15.5px;
+  letter-spacing: 0.01em;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  transition: transform 100ms ease, box-shadow 200ms ease, background 200ms ease;
+}
+.btn:hover { text-decoration: none; }
+.btn-primary {
+  background: var(--coral);
+  color: var(--cream);
+  box-shadow: 0 6px 20px rgba(255, 77, 91, 0.28);
+}
+.btn-primary:hover { background: var(--coral-deep); transform: translateY(-1px); }
+.btn-secondary {
+  background: transparent;
+  color: var(--navy);
+  border: 2px solid var(--navy);
+  padding: 12px 22px;
+}
+.btn-secondary:hover { background: var(--navy); color: var(--cream); }
+.btn-ghost {
+  background: transparent;
+  color: var(--navy);
+  font-weight: 700;
+}
+.btn-ghost:hover { color: var(--coral); }
+
+/* ---------- Form ---------- */
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-family: var(--font-body);
+}
+.field label {
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--slate);
+}
+.field input,
+.field select,
+.field textarea {
+  font-family: var(--font-body);
+  font-size: 16px;
+  padding: 12px 14px;
+  border-radius: 10px;
+  border: 2px solid var(--navy);
+  background: #fff;
+  color: var(--navy);
+  outline: none;
+  transition: border-color 100ms ease, box-shadow 100ms ease;
+}
+.field input:focus,
+.field select:focus,
+.field textarea:focus {
+  border-color: var(--coral);
+  box-shadow: 0 0 0 3px rgba(255, 77, 91, 0.15);
+}
+.field textarea { min-height: 100px; resize: vertical; }
+
+/* ---------- Utility: dark card + status pill ---------- */
+.card {
+  background: #fff;
+  border: 2px solid var(--navy);
+  border-radius: 20px;
+  padding: 28px;
+}
+.pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-family: var(--font-body);
+  font-weight: 900;
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  background: var(--butter);
+  color: var(--navy);
+}
+
+/* ---------- Focus ring (accessibility) ---------- */
+:focus-visible {
+  outline: 3px solid var(--coral);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
