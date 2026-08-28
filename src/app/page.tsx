@@ -21,9 +21,10 @@ export default function HomePage() {
               The classroom<br />becomes the game.
             </h1>
             <p style={{ marginTop: 20, fontSize: 19, color: "var(--slate)", maxWidth: "56ch" }}>
-              Qrewzi turns any lesson into a live team scavenger hunt. Describe a
-              topic, we build a room-wide game across 30+ interactive task types,
-              your class plays on any device. Ready in minutes.
+              Turn any lesson into a live team game your class begs to play.
+              Describe a topic — AI builds the whole room in minutes, kids play
+              on any device, and you get grades and a parent-ready report when
+              the bell rings. Zero prep, zero marking.
             </p>
             <div style={{ marginTop: 32, display: "flex", gap: 12, flexWrap: "wrap" }}>
               <Link href="/beta" className="btn btn-primary">
@@ -44,7 +45,7 @@ export default function HomePage() {
       {/* ============================ WHAT'S IN IT FOR YOU ============================ */}
       <section className="section-tight">
         <div className="container">
-          <div className="eyebrow" style={{ textAlign: "center" }}>What&rsquo;s in it for you</div>
+          <div className="eyebrow" style={{ textAlign: "center" }}>The payoff</div>
           <h2 style={{ textAlign: "center", marginTop: 12, marginBottom: 40 }}>
             Everyone in the room wins.
           </h2>
