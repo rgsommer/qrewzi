@@ -16,26 +16,33 @@ export default function HomePage() {
           }}
         >
           <div>
-            <div className="eyebrow">Now in beta</div>
+            <div className="eyebrow">Now in beta · A full year, free</div>
             <h1 style={{ marginTop: 12 }}>
               The classroom<br />becomes the game.
             </h1>
-            <p style={{ marginTop: 20, fontSize: 19, color: "var(--slate)", maxWidth: "56ch" }}>
-              Turn any lesson into a live team game your class begs to play.
-              Describe a topic — AI builds the whole room in minutes, kids play
-              on any device, and you get grades and a parent-ready report when
-              the bell rings. Zero prep, zero marking.
+            <p style={{ marginTop: 20, fontSize: 20, color: "var(--slate)", maxWidth: "56ch", lineHeight: 1.5 }}>
+              Describe a lesson. AI builds a room-wide team game your class
+              begs to play. Grades and a parent-ready report land in your
+              inbox before the bell rings.
             </p>
-            <div style={{ marginTop: 32, display: "flex", gap: 12, flexWrap: "wrap" }}>
+
+            {/* WIIFM pills — the three big wins, above the fold */}
+            <div style={{ marginTop: 24, display: "flex", flexWrap: "wrap", gap: 8 }}>
+              <Win icon="🕐" label="Zero prep" />
+              <Win icon="🎮" label="Kids beg to play" />
+              <Win icon="✅" label="Marking done" />
+            </div>
+
+            <div style={{ marginTop: 28, display: "flex", gap: 12, flexWrap: "wrap" }}>
               <Link href="/beta" className="btn btn-primary">
-                Join the beta →
+                Get a year free →
               </Link>
               <Link href="/how-it-works" className="btn btn-secondary">
                 See how it works
               </Link>
             </div>
-            <p style={{ marginTop: 24, fontSize: 13, color: "var(--slate)" }}>
-              A full year free for beta teachers · No credit card · Works on phones, Chromebooks, tablets
+            <p style={{ marginTop: 20, fontSize: 13, color: "var(--slate)" }}>
+              No credit card · Any device (phones, Chromebooks, tablets) · Ready in 5 minutes
             </p>
           </div>
           <HeroArt />
@@ -154,6 +161,32 @@ export default function HomePage() {
 }
 
 /* ---------- Local components ---------- */
+
+function Win({ icon, label }: { icon: string; label: string }) {
+  // Small pill that answers "what's in it for me?" at a glance, before
+  // the CTAs. Kept intentionally spare — one glyph, one benefit.
+  return (
+    <div
+      style={{
+        display: "inline-flex",
+        alignItems: "center",
+        gap: 8,
+        padding: "8px 14px",
+        borderRadius: 999,
+        background: "#fff",
+        border: "2px solid var(--navy)",
+        fontFamily: "var(--font-body)",
+        fontSize: 14,
+        fontWeight: 900,
+        color: "var(--navy)",
+        lineHeight: 1,
+      }}
+    >
+      <span aria-hidden="true" style={{ fontSize: 16 }}>{icon}</span>
+      <span>{label}</span>
+    </div>
+  );
+}
 
 function Step({ n, title, body }: { n: number; title: string; body: string }) {
   return (
