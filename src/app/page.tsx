@@ -34,10 +34,40 @@ export default function HomePage() {
               </Link>
             </div>
             <p style={{ marginTop: 24, fontSize: 13, color: "var(--slate)" }}>
-              Free for teachers during beta · No credit card · Works on phones, Chromebooks, tablets
+              A full year free for beta teachers · No credit card · Works on phones, Chromebooks, tablets
             </p>
           </div>
           <HeroArt />
+        </div>
+      </section>
+
+      {/* ============================ WHAT'S IN IT FOR YOU ============================ */}
+      <section className="section-tight">
+        <div className="container">
+          <div className="eyebrow" style={{ textAlign: "center" }}>What&rsquo;s in it for you</div>
+          <h2 style={{ textAlign: "center", marginTop: 12, marginBottom: 40 }}>
+            Everyone in the room wins.
+          </h2>
+          <div
+            style={{
+              display: "grid",
+              gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))",
+              gap: 16,
+            }}
+          >
+            <Audience
+              who="For teachers"
+              body="Five minutes of prep and the class runs itself. Kids beg to play, you referee from the projector — and every game ends with real grades, standards coverage, and a parent-ready report. No marking pile."
+            />
+            <Audience
+              who="For students"
+              body="It doesn't feel like school. Team up, race between stations, chase a secret superpower, and watch your name climb the live leaderboard."
+            />
+            <Audience
+              who="For your school"
+              body="More engagement with zero new hardware — any phone, Chromebook, or tablet works. Standards-aligned reports on every session, and it's free for your teachers for a full year."
+            />
+          </div>
         </div>
       </section>
 
@@ -104,11 +134,13 @@ export default function HomePage() {
       {/* ============================ BETA CTA ============================ */}
       <section className="section" style={{ background: "var(--butter)" }}>
         <div className="container" style={{ textAlign: "center", maxWidth: 700 }}>
-          <div className="eyebrow" style={{ color: "var(--navy)" }}>Free for teachers during beta</div>
-          <h2 style={{ marginTop: 12 }}>Try Qrewzi with your class this week.</h2>
+          <div className="eyebrow" style={{ color: "var(--navy)" }}>A full year, on us</div>
+          <h2 style={{ marginTop: 12 }}>One year of Qrewzi, free.</h2>
           <p style={{ marginTop: 16, fontSize: 17, color: "var(--navy)" }}>
-            Beta teachers get everything free, direct access to us for feedback,
-            and their name on the "Original Qrew" list forever.
+            Beta teachers get the complete product free for a <strong>full year</strong>.
+            The only ask: run a game with your class <strong>at least once a month</strong> and
+            send us your honest feedback. That&rsquo;s the whole deal — plus direct access to
+            us and a spot on the &ldquo;Original Qrew&rdquo; wall.
           </p>
           <div style={{ marginTop: 28, display: "flex", justifyContent: "center", gap: 12, flexWrap: "wrap" }}>
             <Link href="/beta" className="btn btn-primary">Join the beta</Link>
@@ -152,6 +184,15 @@ function Feat({ title, body }: { title: string; body: string }) {
     <div className="card">
       <h3 style={{ fontSize: 18 }}>{title}</h3>
       <p style={{ marginTop: 8, color: "var(--slate)", fontSize: 15 }}>{body}</p>
+    </div>
+  );
+}
+
+function Audience({ who, body }: { who: string; body: string }) {
+  return (
+    <div className="card">
+      <div className="eyebrow" style={{ color: "var(--coral)" }}>{who}</div>
+      <p style={{ marginTop: 12, color: "var(--slate)", fontSize: 16, lineHeight: 1.6 }}>{body}</p>
     </div>
   );
 }

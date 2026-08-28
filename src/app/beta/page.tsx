@@ -69,11 +69,29 @@ export default function BetaPage() {
     <section className="section">
       <div className="container" style={{ maxWidth: 720 }}>
         <div className="eyebrow">Beta program</div>
-        <h1 style={{ marginTop: 12 }}>Bring Qrewzi to your class.</h1>
+        <h1 style={{ marginTop: 12 }}>One year of Qrewzi, free.</h1>
         <p style={{ marginTop: 16, fontSize: 18, color: "var(--slate)", maxWidth: "56ch" }}>
-          Beta teachers get everything free, direct access to us for feedback, and
-          their name on the "Original Qrew" wall. Two-minute form.
+          You get the complete product free for a full year. In return, we ask two
+          simple things — and you also get direct access to us and a spot on the
+          &ldquo;Original Qrew&rdquo; wall. Two-minute form.
         </p>
+
+        <div
+          style={{
+            marginTop: 28,
+            padding: "20px 22px",
+            borderRadius: 14,
+            background: "var(--butter)",
+            border: "2px solid var(--navy)",
+          }}
+        >
+          <div className="eyebrow" style={{ color: "var(--navy)" }}>The deal</div>
+          <ul style={{ marginTop: 12, marginBottom: 0, paddingLeft: 20, color: "var(--navy)", fontSize: 16, lineHeight: 1.7 }}>
+            <li><strong>You get:</strong> the full Qrewzi product, free for one year.</li>
+            <li><strong>You do:</strong> run a game with your class at least once a month.</li>
+            <li><strong>You share:</strong> quick, honest feedback so we can make it better.</li>
+          </ul>
+        </div>
 
         <form onSubmit={onSubmit} style={{ marginTop: 40, display: "grid", gap: 20 }}>
           <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16 }}>
