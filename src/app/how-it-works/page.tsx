@@ -56,7 +56,7 @@ export default function HowItWorks() {
         </div>
 
         <div style={{ marginTop: 64, textAlign: "center" }}>
-          <Link href="/beta" className="btn btn-primary">Try it with your class →</Link>
+          <a href="https://set.qrewzi.com/quickstart" className="btn btn-primary">Launch a ready-made game →</a>
         </div>
       </div>
     </section>

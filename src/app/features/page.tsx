@@ -55,7 +55,7 @@ export default function FeaturesPage() {
         </div>
 
         <div style={{ marginTop: 56, textAlign: "center" }}>
-          <Link href="/beta" className="btn btn-primary">Try Qrewzi with your class →</Link>
+          <a href="https://set.qrewzi.com/quickstart" className="btn btn-primary">Launch a ready-made game →</a>
         </div>
       </div>
     </section>
