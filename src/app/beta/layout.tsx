@@ -4,20 +4,21 @@ import type { Metadata } from "next";
 // `metadata` directly. This layout wraps it and provides the metadata
 // Next.js needs for that route.
 export const metadata: Metadata = {
-  title: "Join the beta",
+  title: "Join the beta — a full year of Qrewzi, free",
   description:
-    "Bring Qrewzi to your class this week. Beta teachers get everything free, direct access to us for feedback, and their name on the Original Qrew wall.",
+    "Get a full year of Qrewzi free. Four quick fields, your setup link by email within a minute, and a game running in your room this week. The only ask: play once a month and tell us what broke.",
   alternates: { canonical: "https://qrewzi.com/beta" },
+  keywords: ["free classroom game", "teacher beta", "Kahoot alternative", "classroom team game free trial"],
   openGraph: {
-    title: "Join the Qrewzi beta",
+    title: "Join the Qrewzi beta — a full year, free",
     description:
-      "Free for beta teachers. Two-minute signup. Bring it to your class this week.",
+      "Four fields, setup link within a minute, a game in your room this week. Free for a full year.",
     url: "https://qrewzi.com/beta",
   },
   twitter: {
-    title: "Join the Qrewzi beta",
+    title: "Join the Qrewzi beta — a full year, free",
     description:
-      "Free for beta teachers. Two-minute signup. Bring it to your class this week.",
+      "Four fields, setup link within a minute, a game in your room this week. Free for a full year.",
   },
 };
 

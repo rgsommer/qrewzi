@@ -3,20 +3,21 @@ import Link from "next/link";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Pricing",
+  title: "Pricing — free for a full year for beta teachers",
   description:
-    "Free for teachers during the Qrewzi beta. Every beta teacher gets the full product free through the end of the school year, then grandfathered into launch pricing.",
+    "Qrewzi is free for a full year for beta teachers: every task type, GameMaster mode and reports. The only ask is one game a month and honest feedback. Beta teachers are grandfathered into launch pricing; district pricing on request.",
   alternates: { canonical: "https://qrewzi.com/pricing" },
+  keywords: ["free classroom game app", "Kahoot alternative free", "teacher beta program", "school district pricing"],
   openGraph: {
-    title: "Pricing — free for beta teachers",
+    title: "Pricing — a full year free for beta teachers",
     description:
-      "Free during the beta, grandfathered at launch. District pricing available on request.",
+      "Free for a full year in beta, grandfathered at launch. District pricing on request.",
     url: "https://qrewzi.com/pricing",
   },
   twitter: {
-    title: "Pricing — free for beta teachers",
+    title: "Pricing — a full year free for beta teachers",
     description:
-      "Free during the beta, grandfathered at launch. District pricing available on request.",
+      "Free for a full year in beta, grandfathered at launch. District pricing on request.",
   },
 };
 

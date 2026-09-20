@@ -1,11 +1,13 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Privacy",
+  title: "Privacy — no student accounts, no trackers",
   description:
-    "How Qrewzi handles student and teacher data. Built for K-12: no student accounts, no third-party trackers, no ad identifiers.",
+    "How Qrewzi handles student and teacher data. Built for K-12: students join with a room code and no account, no third-party trackers, no ad identifiers, reports go only to the teacher.",
   alternates: { canonical: "https://qrewzi.com/privacy" },
   robots: { index: true, follow: true },
+  openGraph: { title: "Qrewzi — Privacy — no student accounts, no trackers", description: "How Qrewzi handles student and teacher data. Built for K-12: students join with a room code and no account, no third-party trackers, no ad identifiers, reports go only to the teacher.", url: "https://qrewzi.com/privacy" },
+  twitter: { title: "Qrewzi — Privacy — no student accounts, no trackers", description: "How Qrewzi handles student and teacher data. Built for K-12: students join with a room code and no account, no third-party trackers, no ad identifiers, reports go only to the teacher." },
 };
 
 export default function PrivacyPage() {

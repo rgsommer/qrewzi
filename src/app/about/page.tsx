@@ -3,20 +3,20 @@ import Link from "next/link";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "About",
+  title: "About Qrewzi — a small team in Hamilton, Ontario",
   description:
-    "Qrewzi is a live classroom game engine built for teachers who want kids on their feet. Small team in Hamilton, Ontario. Made for K-12.",
+    "Qrewzi (say crew-zee) is a live classroom game engine built by a small team of teachers who wanted kids on their feet. Made in Hamilton, Ontario for K-12 classrooms across Canada and the US.",
   alternates: { canonical: "https://qrewzi.com/about" },
   openGraph: {
-    title: "About Qrewzi",
+    title: "About Qrewzi — built by a teacher, for teachers",
     description:
-      "A live classroom game engine for teachers who want kids on their feet. Small team, Hamilton, Ontario.",
+      "A live classroom game engine from a small team in Hamilton, Ontario. Made for K-12.",
     url: "https://qrewzi.com/about",
   },
   twitter: {
-    title: "About Qrewzi",
+    title: "About Qrewzi — built by a teacher, for teachers",
     description:
-      "A live classroom game engine for teachers who want kids on their feet. Small team, Hamilton, Ontario.",
+      "A live classroom game engine from a small team in Hamilton, Ontario. Made for K-12.",
   },
 };
 

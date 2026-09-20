@@ -3,20 +3,21 @@ import Link from "next/link";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Features",
+  title: "Features — 30+ task types, GameMaster projector mode, any device",
   description:
-    "30+ interactive task types, GameMaster projector dashboard, secret team superpowers, mixed-device sessions, class rosters, standards-aligned parent reports.",
+    "Everything in Qrewzi: 30+ interactive task types beyond multiple choice, the GameMaster projector dashboard with live leaderboard and kill switch, secret team superpowers, phones-Chromebooks-tablets in one room, and standards-aligned parent reports.",
   alternates: { canonical: "https://qrewzi.com/features" },
+  keywords: ["classroom game features", "GameMaster dashboard", "projector leaderboard", "team superpowers", "mixed device classroom", "standards-aligned reports", "Ontario curriculum"],
   openGraph: {
     title: "Every feature Qrewzi ships with",
     description:
-      "The full box: 30+ task types, GameMaster mode, secret superpowers, Device Mode support, class rosters, parent-ready reports.",
+      "30+ task types, GameMaster projector mode, secret superpowers, any device in one room, Ontario-curriculum reports. Free for a year in beta.",
     url: "https://qrewzi.com/features",
   },
   twitter: {
     title: "Every feature Qrewzi ships with",
     description:
-      "The full box: 30+ task types, GameMaster mode, secret superpowers, Device Mode support, class rosters, parent-ready reports.",
+      "30+ task types, GameMaster projector mode, secret superpowers, any device in one room, Ontario-curriculum reports. Free for a year in beta.",
   },
 };
 

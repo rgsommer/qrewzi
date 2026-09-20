@@ -1,11 +1,13 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Terms",
+  title: "Terms of Service",
   description:
-    "Qrewzi Terms of Service. Beta terms and general use covering data, subscriptions, and school-district compliance.",
+    "Qrewzi Terms of Service: beta terms and general use covering data, subscriptions, and school-district compliance.",
   alternates: { canonical: "https://qrewzi.com/terms" },
   robots: { index: true, follow: true },
+  openGraph: { title: "Qrewzi — Terms of Service", description: "Qrewzi Terms of Service: beta terms and general use covering data, subscriptions, and school-district compliance.", url: "https://qrewzi.com/terms" },
+  twitter: { title: "Qrewzi — Terms of Service", description: "Qrewzi Terms of Service: beta terms and general use covering data, subscriptions, and school-district compliance." },
 };
 
 export default function TermsPage() {

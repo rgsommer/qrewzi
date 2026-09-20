@@ -19,16 +19,17 @@ const body = Nunito({
 
 export const metadata: Metadata = {
   title: {
-    default: "Qrewzi — the classroom becomes the game",
+    default: "Qrewzi — the classroom becomes the game | Live team games for K-12",
     template: "%s · Qrewzi",
   },
   description:
-    "Qrewzi (say \"crew-zee\") turns any lesson into a live, room-wide team game. Describe a topic and Qrewzi builds a game across 30+ interactive task types — kids play on any device, teachers run the GameMaster dashboard on the projector.",
+    "Qrewzi (say crew-zee) turns a one-line lesson into a live, room-wide team game. Kids move between QR stations on any device, the projector keeps score, and grades plus a parent-ready report arrive at the bell. Free for a full year for beta teachers.",
   keywords: [
-    "classroom games", "live classroom activities", "team-based learning",
-    "Kahoot alternative", "QR code learning", "interactive lessons",
-    "K-12 game engine", "GameMaster dashboard", "educational games",
-    "teacher game platform",
+    "classroom games", "Kahoot alternative", "live classroom activities",
+    "team-based learning", "station rotation", "QR code learning",
+    "interactive lessons", "K-12 game engine", "GameMaster dashboard",
+    "educational games", "teacher game platform", "phone ban classroom activities",
+    "Chromebook classroom games", "Ontario curriculum",
   ],
   metadataBase: new URL("https://qrewzi.com"),
   alternates: {
@@ -42,7 +43,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Qrewzi — the classroom becomes the game",
     description:
-      "AI-generated live classroom games. 30+ interactive task types. Kids play on any device, teachers run the GameMaster dashboard on the projector.",
+      "Live, room-wide team games from a one-line lesson. 30+ task types, any device, projector scoreboard, report at the bell. Free for a full year for beta teachers.",
     url: "https://qrewzi.com",
     siteName: "Qrewzi",
     type: "website",
@@ -60,7 +61,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Qrewzi — the classroom becomes the game",
     description:
-      "AI-generated live classroom games. 30+ interactive task types. Kids play on any device, teachers run the GameMaster dashboard on the projector.",
+      "Live, room-wide team games from a one-line lesson. 30+ task types, any device, projector scoreboard, report at the bell. Free for a full year for beta teachers.",
     images: ["/og-image.png"],
   },
   robots: {
@@ -81,10 +82,56 @@ export const metadata: Metadata = {
   themeColor: "#FF4D5B",
 };
 
+// Structured data: who we are and what the product is, including the app
+// store listings. Rendered once in the root layout so every page carries it.
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://qrewzi.com/#org",
+      name: "Qrewzi",
+      url: "https://qrewzi.com",
+      logo: "https://qrewzi.com/apple-touch-icon.svg",
+      email: "hello@qrewzi.com",
+      address: { "@type": "PostalAddress", addressLocality: "Hamilton", addressRegion: "ON", addressCountry: "CA" },
+    },
+    {
+      "@type": "SoftwareApplication",
+      "@id": "https://qrewzi.com/#app",
+      name: "Qrewzi",
+      alternateName: "Qrewzi (crew-zee)",
+      applicationCategory: "EducationalApplication",
+      operatingSystem: "Web, Android, iOS",
+      url: "https://qrewzi.com",
+      description:
+        "Turns a one-line lesson into a live, room-wide classroom team game. Kids move between QR stations on any device; the projector keeps score; grades and a parent-ready report arrive at the bell.",
+      publisher: { "@id": "https://qrewzi.com/#org" },
+      offers: { "@type": "Offer", price: "0", priceCurrency: "CAD", description: "Free for a full year for beta teachers" },
+      installUrl: [
+        "https://play.google.com/store/apps/details?id=net.curriculate.student",
+        "https://apps.apple.com/app/id6788738826",
+      ],
+      audience: { "@type": "EducationalAudience", educationalRole: "teacher" },
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://qrewzi.com/#site",
+      url: "https://qrewzi.com",
+      name: "Qrewzi",
+      publisher: { "@id": "https://qrewzi.com/#org" },
+    },
+  ],
+};
+
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className={`${display.variable} ${body.variable}`}>
       <body>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
         <SiteHeader />
         <main>{children}</main>
         <SiteFooter />

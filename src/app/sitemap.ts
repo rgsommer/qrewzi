@@ -5,7 +5,9 @@ import type { MetadataRoute } from "next";
 // because that's the conversion page.
 export default function sitemap(): MetadataRoute.Sitemap {
   const base = "https://qrewzi.com";
-  const now = new Date();
+  // Bump this when page content changes; a fresh date on every build tells
+  // crawlers nothing.
+  const now = new Date("2026-09-20");
   const p = (path: string, priority: number, changeFrequency: "daily" | "weekly" | "monthly") => ({
     url: `${base}${path}`,
     lastModified: now,

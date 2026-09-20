@@ -3,20 +3,21 @@ import Link from "next/link";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "How it works",
+  title: "How it works — from a one-line lesson to a running game in 5 minutes",
   description:
-    "Five minutes from lesson idea to a running classroom game. Describe a topic, print eight QR stations, share a room code, run the GameMaster dashboard.",
+    "Describe a lesson in one line, print eight QR stations, share a room code, and run the GameMaster dashboard on the projector. Kids move between stations on any device; grades and a parent-ready report land in your inbox at the bell.",
   alternates: { canonical: "https://qrewzi.com/how-it-works" },
+  keywords: ["how to run a classroom game", "QR code stations", "station rotation activity", "no-prep lesson", "team quiz game"],
   openGraph: {
     title: "How Qrewzi turns a lesson into a game",
     description:
-      "The five-step teacher walkthrough — describe, print, share, run, report. Every session wraps in a class period.",
+      "Describe, print, share, run, report. Five minutes of prep, one class period, zero marking.",
     url: "https://qrewzi.com/how-it-works",
   },
   twitter: {
     title: "How Qrewzi turns a lesson into a game",
     description:
-      "The five-step teacher walkthrough — describe, print, share, run, report. Every session wraps in a class period.",
+      "Describe, print, share, run, report. Five minutes of prep, one class period, zero marking.",
   },
 };
 
