@@ -23,10 +23,10 @@ export const metadata: Metadata = {
     template: "%s · Qrewzi",
   },
   description:
-    "Qrewzi turns any lesson into a live team scavenger hunt. Describe a topic and Qrewzi builds a room-wide game across 30+ interactive task types — kids play on any device, teachers run the GameMaster dashboard on the projector.",
+    "Qrewzi (say \"crew-zee\") turns any lesson into a live, room-wide team game. Describe a topic and Qrewzi builds a game across 30+ interactive task types — kids play on any device, teachers run the GameMaster dashboard on the projector.",
   keywords: [
     "classroom games", "live classroom activities", "team-based learning",
-    "scavenger hunt lessons", "QR code learning", "interactive lessons",
+    "Kahoot alternative", "QR code learning", "interactive lessons",
     "K-12 game engine", "GameMaster dashboard", "educational games",
     "teacher game platform",
   ],

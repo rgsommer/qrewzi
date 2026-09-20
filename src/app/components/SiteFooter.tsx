@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Wordmark from "./Wordmark";
+import { PLAY_URL, APP_STORE_URL } from "./StoreBadges";
 
 export default function SiteFooter() {
   return (
@@ -24,7 +25,7 @@ export default function SiteFooter() {
         <div
           style={{
             display: "grid",
-            gridTemplateColumns: "repeat(3, 1fr)",
+            gridTemplateColumns: "repeat(4, 1fr)",
             gap: 24,
             fontSize: 14,
           }}
@@ -34,6 +35,11 @@ export default function SiteFooter() {
             <FLink href="/features">Features</FLink>
             <FLink href="/pricing">Pricing</FLink>
             <FLink href="/beta">Join the beta</FLink>
+          </FooterCol>
+          <FooterCol title="Student app">
+            <FLink href={PLAY_URL}>Google Play</FLink>
+            <FLink href={APP_STORE_URL}>App Store</FLink>
+            <FLink href="https://play.qrewzi.com">Join in a browser</FLink>
           </FooterCol>
           <FooterCol title="Company">
             <FLink href="/about">About</FLink>

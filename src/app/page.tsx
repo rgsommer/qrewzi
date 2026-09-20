@@ -1,5 +1,5 @@
 import Link from "next/link";
-import Wordmark from "./components/Wordmark";
+import StoreBadges from "./components/StoreBadges";
 
 export default function HomePage() {
   return (
@@ -20,6 +20,9 @@ export default function HomePage() {
             <h1 style={{ marginTop: 12 }}>
               The classroom<br />becomes the game.
             </h1>
+            <div style={{ marginTop: 10, fontFamily: "var(--font-display)", fontSize: 13, letterSpacing: "0.12em", textTransform: "uppercase", color: "var(--coral)" }}>
+              Qrewzi · say &ldquo;crew-zee&rdquo;
+            </div>
             <p style={{ marginTop: 20, fontSize: 20, color: "var(--slate)", maxWidth: "56ch", lineHeight: 1.5 }}>
               Describe a lesson. AI builds a room-wide team game your class
               begs to play. Grades and a parent-ready report land in your
@@ -44,6 +47,10 @@ export default function HomePage() {
             <p style={{ marginTop: 20, fontSize: 13, color: "var(--slate)" }}>
               No credit card · Any device (phones, Chromebooks, tablets) · Ready in 5 minutes
             </p>
+            <p style={{ marginTop: 6, fontSize: 13, color: "var(--slate)" }}>
+              Students join from any browser — nothing to install. Prefer an app? It&rsquo;s free:
+            </p>
+            <StoreBadges />
           </div>
           <HeroArt />
         </div>
@@ -231,38 +238,45 @@ function Audience({ who, body }: { who: string; body: string }) {
   );
 }
 
-/* Hero art — the wordmark blown up on a warm cream tile with the mark's shape echoed. */
+/* Hero art — the station-rotation loop, muted and looping, in the brand tile. */
 function HeroArt() {
   return (
     <div
       style={{
-        background: "linear-gradient(135deg, var(--cream-shade) 0%, var(--cream) 100%)",
+        background: "var(--navy)",
         border: "2px solid var(--navy)",
         borderRadius: 24,
-        padding: 40,
         aspectRatio: "1 / 1",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
         position: "relative",
         overflow: "hidden",
       }}
     >
-      {/* Big background finder pattern, decorative */}
-      <svg
-        viewBox="0 0 200 200"
-        style={{ position: "absolute", inset: -20, width: "110%", opacity: 0.06 }}
-        aria-hidden="true"
+      <video
+        src="/videos/station-rotation-single-room.mp4"
+        autoPlay
+        muted
+        loop
+        playsInline
+        preload="metadata"
+        aria-label="A class rotating between Qrewzi stations while the projector keeps score"
+        style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
+      />
+      <div
+        style={{
+          position: "absolute",
+          left: 16,
+          bottom: 16,
+          padding: "8px 12px",
+          borderRadius: 999,
+          background: "rgba(254, 249, 240, 0.92)",
+          fontFamily: "var(--font-display)",
+          fontSize: 12,
+          letterSpacing: "0.15em",
+          textTransform: "uppercase",
+          color: "var(--navy)",
+        }}
       >
-        <rect x="0" y="0" width="200" height="200" rx="44" fill="var(--navy)" />
-        <rect x="30" y="30" width="140" height="140" rx="30" fill="var(--cream)" />
-        <rect x="65" y="65" width="70" height="70" rx="16" fill="var(--navy)" />
-      </svg>
-      <div style={{ position: "relative", textAlign: "center" }}>
-        <Wordmark height={80} />
-        <div style={{ marginTop: 20, fontFamily: "var(--font-display)", fontSize: 14, letterSpacing: "0.15em", textTransform: "uppercase", color: "var(--slate)" }}>
-          Room 112 · 8 stations · live
-        </div>
+        Room 112 · 8 stations · live
       </div>
     </div>
   );

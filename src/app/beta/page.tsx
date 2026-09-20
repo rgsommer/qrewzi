@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 
 type Status = "idle" | "sending" | "sent" | "error";
@@ -22,6 +22,23 @@ export default function BetaPage() {
   const [intent, setIntent] = useState("");
   const [status, setStatus] = useState<Status>("idle");
   const [error, setError] = useState("");
+  const [ref, setRef] = useState("");
+
+  // Pre-fill from the link: /beta?subject=Integers&grade=6-8 lets a "steal this
+  // game" post land the teacher on a form that already knows what to send them.
+  // UTM tags ride along as `ref` so the sign-up can be traced to the post.
+  useEffect(() => {
+    const q = new URLSearchParams(window.location.search);
+    const subj = q.get("subject");
+    const grade = q.get("grade");
+    if (subj) setSubject(subj);
+    if (grade && GRADE_BANDS.includes(grade)) setGradeBand(grade);
+    const utm = ["utm_source", "utm_medium", "utm_campaign", "utm_content"]
+      .map((k) => (q.get(k) ? `${k}=${q.get(k)}` : ""))
+      .filter(Boolean)
+      .join("&");
+    if (utm) setRef(utm);
+  }, []);
 
   async function onSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -32,7 +49,7 @@ export default function BetaPage() {
       const res = await fetch("/api/beta", {
         method: "POST",
         headers: { "content-type": "application/json" },
-        body: JSON.stringify({ name, email, school, gradeBand, subject, intent, source: "qrewzi" }),
+        body: JSON.stringify({ name, email, school, gradeBand, subject, intent, source: "qrewzi", ref }),
       });
       if (!res.ok) {
         const j = await res.json().catch(() => ({}));
@@ -53,7 +70,7 @@ export default function BetaPage() {
           <div className="pill">You're in the Qrew</div>
           <h1 style={{ marginTop: 20 }}>Welcome aboard.</h1>
           <p style={{ marginTop: 20, fontSize: 18, color: "var(--slate)" }}>
-            Check your inbox — we've sent a welcome email with your beta setup link.
+            Your welcome email with the beta setup link and the free student app is on its way.
             If it doesn't arrive within a minute, drop us a note at{" "}
             <a href="mailto:hello@qrewzi.com">hello@qrewzi.com</a>.
           </p>
@@ -73,7 +90,8 @@ export default function BetaPage() {
         <p style={{ marginTop: 16, fontSize: 18, color: "var(--slate)", maxWidth: "56ch" }}>
           You get the complete product free for a full year. In return, we ask two
           simple things — and you also get direct access to us and a spot on the
-          &ldquo;Original Qrew&rdquo; wall. Two-minute form.
+          &ldquo;Original Qrew&rdquo; wall. Four quick fields; your setup link is in your
+          inbox within a minute.
         </p>
 
         <div
@@ -114,7 +132,7 @@ export default function BetaPage() {
           </div>
 
           <div className="field">
-            <label htmlFor="school">School or district</label>
+            <label htmlFor="school">School or district <Optional /></label>
             <input
               id="school" name="school"
               value={school} onChange={(e) => setSchool(e.target.value)}
@@ -124,7 +142,7 @@ export default function BetaPage() {
           <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16 }}>
             <div className="field">
               <label htmlFor="grade">Grade band</label>
-              <select id="grade" name="gradeBand" value={gradeBand} onChange={(e) => setGradeBand(e.target.value)}>
+              <select id="grade" name="gradeBand" required value={gradeBand} onChange={(e) => setGradeBand(e.target.value)}>
                 <option value="">Choose one…</option>
                 {GRADE_BANDS.map((g) => <option key={g} value={g}>{g}</option>)}
               </select>
@@ -132,14 +150,14 @@ export default function BetaPage() {
             <div className="field">
               <label htmlFor="subject">Main subject</label>
               <input
-                id="subject" name="subject" placeholder="Science, History, PE…"
+                id="subject" name="subject" required placeholder="Science, History, PE…"
                 value={subject} onChange={(e) => setSubject(e.target.value)}
               />
             </div>
           </div>
 
           <div className="field">
-            <label htmlFor="intent">What are you hoping to try?</label>
+            <label htmlFor="intent">What are you hoping to try? <Optional /></label>
             <select id="intent" name="intent" value={intent} onChange={(e) => setIntent(e.target.value)}>
               <option value="">Choose one…</option>
               {INTENTS.map((i) => <option key={i} value={i}>{i}</option>)}
@@ -157,11 +175,19 @@ export default function BetaPage() {
               {status === "sending" ? "Sending…" : "Join the beta →"}
             </button>
             <div style={{ fontSize: 13, color: "var(--slate)" }}>
-              We'll reply within one business day.
+              Setup link by email within a minute. A human follows up the next school day.
             </div>
           </div>
         </form>
       </div>
     </section>
+  );
+}
+
+function Optional() {
+  return (
+    <span style={{ fontWeight: 400, fontSize: 12, color: "var(--slate)", marginLeft: 6 }}>
+      optional
+    </span>
   );
 }
