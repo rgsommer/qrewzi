@@ -23,16 +23,21 @@ export default function BetaPage() {
   const [status, setStatus] = useState<Status>("idle");
   const [error, setError] = useState("");
   const [ref, setRef] = useState("");
+  const [promoCode, setPromoCode] = useState("");
 
   // Pre-fill from the link: /beta?subject=Integers&grade=6-8 lets a "steal this
   // game" post land the teacher on a form that already knows what to send them.
+  // ?promo=QREWFREE carries the code a teacher got on the business card so the
+  // signup is tagged with it and the free-month fulfilment can find them later.
   // UTM tags ride along as `ref` so the sign-up can be traced to the post.
   useEffect(() => {
     const q = new URLSearchParams(window.location.search);
     const subj = q.get("subject");
     const grade = q.get("grade");
+    const promo = q.get("promo");
     if (subj) setSubject(subj);
     if (grade && GRADE_BANDS.includes(grade)) setGradeBand(grade);
+    if (promo) setPromoCode(promo.toUpperCase().slice(0, 32));
     const utm = ["utm_source", "utm_medium", "utm_campaign", "utm_content"]
       .map((k) => (q.get(k) ? `${k}=${q.get(k)}` : ""))
       .filter(Boolean)
@@ -49,7 +54,7 @@ export default function BetaPage() {
       const res = await fetch("/api/beta", {
         method: "POST",
         headers: { "content-type": "application/json" },
-        body: JSON.stringify({ name, email, school, gradeBand, subject, intent, source: "qrewzi", ref }),
+        body: JSON.stringify({ name, email, school, gradeBand, subject, intent, source: "qrewzi", ref, promoCode }),
       });
       if (!res.ok) {
         const j = await res.json().catch(() => ({}));
@@ -163,6 +168,29 @@ export default function BetaPage() {
               {INTENTS.map((i) => <option key={i} value={i}>{i}</option>)}
             </select>
           </div>
+
+          {promoCode && (
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                gap: 10,
+                padding: "10px 14px",
+                borderRadius: 10,
+                background: "var(--butter)",
+                border: "2px solid var(--navy)",
+                fontSize: 14,
+                color: "var(--navy)",
+                fontWeight: 700,
+              }}
+            >
+              <span aria-hidden="true" style={{ fontSize: 16 }}>🎁</span>
+              <span>
+                Promo code <strong style={{ letterSpacing: "0.08em" }}>{promoCode}</strong> applied —
+                your first month on Qrewzi is on us.
+              </span>
+            </div>
+          )}
 
           {error && (
             <div style={{ background: "#FEE2E2", color: "#7F1D1D", padding: 12, borderRadius: 10, fontSize: 14 }}>

@@ -8,6 +8,10 @@ import { NextResponse } from "next/server";
 // frontend and already handles rate limiting, Mongo persistence, internal
 // notification, and the welcome auto-reply.
 //
+// Body fields flow through verbatim, so adding a field to the beta form
+// (e.g. `promoCode` from the /free business-card funnel) requires no
+// change here — just add the matching persistence on the upstream side.
+//
 // Set QREWZI_BETA_UPSTREAM to point elsewhere in staging / preview.
 
 const UPSTREAM =
