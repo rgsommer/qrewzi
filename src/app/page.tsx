@@ -37,10 +37,23 @@ export default function HomePage() {
             </div>
 
             <div style={{ marginTop: 28, display: "flex", gap: 12, flexWrap: "wrap" }}>
-              <Link href="/beta" className="btn btn-primary">
-                Get a year free →
+              {/* Primary CTA: a teacher lands on this page and in ONE click
+                  is projecting a live Qrewzi room with code QREWDEMO. The
+                  backend self-provisions the demo on host:join; students
+                  join at play.qrewzi.com from any device. "Get a year free"
+                  stays secondary — that's for teachers already sold. */}
+              <a
+                href="https://set.qrewzi.com/demo"
+                target="_blank"
+                rel="noopener"
+                className="btn btn-primary"
+              >
+                Try it live now →
+              </a>
+              <Link href="/beta" className="btn btn-secondary">
+                Get a year free
               </Link>
-              <Link href="/how-it-works" className="btn btn-secondary">
+              <Link href="/how-it-works" className="btn btn-ghost">
                 See how it works
               </Link>
             </div>
