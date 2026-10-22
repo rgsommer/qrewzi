@@ -22,6 +22,7 @@ export const metadata: Metadata = {
 };
 
 const FEATURES = [
+  { name: "🔐 Classroom escape rooms (NEW)", body: "Any lesson, any theme, generated in 90 sec. Six teams play their own themed room in the same classroom — keys, locks, cipher fragments, a brass-plate vault. The theme pre-fills with today's season (Halloween, Reformation Day, Nativity, Easter). See qrewzi.com/escape-rooms." },
   { name: "30+ task types", body: "Multiple choice, sort, sequence, mind map, matching, cloze, brain blitz, flashcards race, motion mission, speech recognition, script play, role-play deck, hangman duel, and more." },
   { name: "GameMaster mode", body: "Projector dashboard the teacher runs. Live leaderboard, station heat map, streak banners, celebration layer, session-complete finale." },
   { name: "Secret superpowers", body: "1-in-4 teams get a hidden power on join: Wild Card, Torchlight, Jump Higher, Truth Seeker, Second Chance, X-Ray. Kids trade rumors." },

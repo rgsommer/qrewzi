@@ -25,6 +25,7 @@ export const metadata: Metadata = {
   description:
     "Qrewzi (say crew-zee) turns a one-line lesson into a live, room-wide team game. Kids move between QR stations on any device, the projector keeps score, and grades plus a parent-ready report arrive at the bell. Free for a full year for beta teachers.",
   keywords: [
+    "classroom escape room", "AI escape room generator", "Breakout EDU alternative",
     "classroom games", "Kahoot alternative", "live classroom activities",
     "team-based learning", "station rotation", "QR code learning",
     "interactive lessons", "K-12 game engine", "GameMaster dashboard",

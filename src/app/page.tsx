@@ -149,6 +149,7 @@ export default function HomePage() {
               gap: 16,
             }}
           >
+            <Feat title="🔐 Classroom escape rooms" body="Six teams, one classroom, six themed escape rooms. Any lesson, any theme, 90-sec setup. Keys, locks, cipher fragments, a brass-plate vault. Pre-fills with today's season." />
             <Feat title="30+ task types" body="Beyond MCQ — sorts, mind maps, sequences, motion missions, speech recognition, script plays, role-play decks, and more." />
             <Feat title="GameMaster mode" body="Projector dashboard for the teacher — live leaderboard, station heat map, celebration confetti, kill-switch controls." />
             <Feat title="Secret superpowers" body="1 in 4 teams gets a rare hidden power on join. Wild Card, Torchlight, Jump Higher, Truth Seeker — kids trade rumors about who has what." />

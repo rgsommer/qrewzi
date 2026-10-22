@@ -17,10 +17,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   return [
     p("/",              1.0, "weekly"),
+    p("/escape-rooms",  0.95, "weekly"),
     p("/beta",          0.9, "weekly"),
     p("/features",      0.8, "monthly"),
     p("/how-it-works",  0.8, "monthly"),
     p("/pricing",       0.7, "monthly"),
+    p("/free",          0.6, "monthly"),
     p("/about",         0.5, "monthly"),
     p("/privacy",       0.3, "monthly"),
     p("/terms",         0.3, "monthly"),
