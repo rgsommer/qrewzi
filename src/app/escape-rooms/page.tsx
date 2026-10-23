@@ -48,7 +48,7 @@ export default function EscapeRoomsPage() {
 
           <div style={{ marginTop: 32, display: "flex", gap: 12, flexWrap: "wrap", justifyContent: "center" }}>
             <a
-              href="https://set.qrewzi.com/demo"
+              href="https://set.qrewzi.com/demo?mode=escape"
               target="_blank"
               rel="noopener"
               className="btn btn-primary"
@@ -257,7 +257,7 @@ export default function EscapeRoomsPage() {
           </p>
           <div style={{ marginTop: 28, display: "flex", justifyContent: "center", gap: 12, flexWrap: "wrap" }}>
             <a
-              href="https://set.qrewzi.com/demo"
+              href="https://set.qrewzi.com/demo?mode=escape"
               target="_blank"
               rel="noopener"
               className="btn btn-primary"
