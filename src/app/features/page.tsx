@@ -3,26 +3,37 @@ import Link from "next/link";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Features — 30+ task types, GameMaster projector mode, any device",
+  title: "Features — trivia nights, team builds, houses, 30+ task types",
   description:
-    "Everything in Qrewzi: 30+ interactive task types beyond multiple choice, the GameMaster projector dashboard with live leaderboard and kill switch, secret team superpowers, phones-Chromebooks-tablets in one room, and standards-aligned parent reports.",
+    "Everything in Qrewzi: classroom trivia nights from checked question banks (Bible, history, Christmas, Easter and more), groups and school houses with a house showdown, builder mode where every answer adds to a team's castle, classroom escape rooms, 30+ task types, the GameMaster projector dashboard, and any device in one room.",
   alternates: { canonical: "https://qrewzi.com/features" },
-  keywords: ["classroom game features", "GameMaster dashboard", "projector leaderboard", "team superpowers", "mixed device classroom", "standards-aligned reports", "Ontario curriculum"],
+  keywords: [
+    "classroom trivia night", "Bible trivia game for kids", "Christmas trivia classroom", "house points game",
+    "school houses competition", "team building classroom game", "classroom escape room", "classroom game features",
+    "GameMaster dashboard", "projector leaderboard", "team superpowers", "mixed device classroom", "Ontario curriculum",
+  ],
   openGraph: {
     title: "Every feature Qrewzi ships with",
     description:
-      "30+ task types, GameMaster projector mode, secret superpowers, any device in one room, Ontario-curriculum reports. Free for a year in beta.",
+      "Trivia nights, groups and houses, builder mode, escape rooms, 30+ task types, a projector scoreboard, any device in one room. Free for a year in beta.",
     url: "https://qrewzi.com/features",
   },
   twitter: {
     title: "Every feature Qrewzi ships with",
     description:
-      "30+ task types, GameMaster projector mode, secret superpowers, any device in one room, Ontario-curriculum reports. Free for a year in beta.",
+      "Trivia nights, groups and houses, builder mode, escape rooms, 30+ task types, a projector scoreboard, any device in one room. Free for a year in beta.",
   },
 };
 
 const FEATURES = [
-  { name: "🔐 Classroom escape rooms (NEW)", body: "Any lesson, any theme, generated in 90 sec. Six teams play their own themed room in the same classroom — keys, locks, cipher fragments, a brass-plate vault. The theme pre-fills with today's season (Halloween, Reformation Day, Nativity, Easter). See qrewzi.com/escape-rooms." },
+  { name: "🏆 Trivia nights (NEW)", body: "A whole trivia night, nothing to write. Pick a topic and a length; questions come from checked banks — Bible, history, the Middle Ages, the 1950s, Christmas, Easter, Thanksgiving and more — with mystery clues, a Mad Dash and duels between rounds. Or type your own topic and get a night in a minute or two." },
+  { name: "👥 Groups & houses (NEW)", body: "The room splits into groups named for the lesson — 🔥 Flames vs 🕊️ Doves for Pentecost, ⚛️ Atoms vs 🧪 Beakers for chemistry — or your school's own houses, joined by code. Every point counts for the group, and a house showdown settles it. Latecomers slot in and catch up." },
+  { name: "🏗️ Builder mode (NEW)", body: "Each team builds a castle, a rocket, Noah's Ark… and every task adds a layer: gold, stone, brick, wood or straw, by how well it went. Tap a cracked part to redo that task and rebuild it stronger. The projector shows every build." },
+  { name: "✅ Answers marked in place (NEW)", body: "The reveal lands on the student's own answers: boxes turn green or red, typed answers get a see-through correction, a sequence slides into order. And a timeline task finally looks like a timeline." },
+  { name: "📱 Turn the phone sideways (NEW)", body: "In landscape, tasks use the width — options two across, statements in columns, the timeline across the screen — and the extra strips fold away." },
+  { name: "🕹️ Arcade & Galaxy skins (NEW)", body: "Two new looks for student screens: a neon Arcade sunset over a rolling grid, and a Galaxy of drifting stars and a ringed planet." },
+  { name: "👀 Preview on a phone or tablet (NEW)", body: "Step through any set exactly as a student's device shows it, task by task — no session, nothing to scan." },
+  { name: "🔐 Classroom escape rooms", body: "Any lesson, any theme, generated in 90 sec. Six teams play their own themed room in the same classroom — keys, locks, cipher fragments, a brass-plate vault. The theme pre-fills with today's season (Halloween, Reformation Day, Nativity, Easter). See qrewzi.com/escape-rooms." },
   { name: "30+ task types", body: "Multiple choice, sort, sequence, mind map, matching, cloze, brain blitz, flashcards race, motion mission, speech recognition, script play, role-play deck, hangman duel, and more." },
   { name: "GameMaster mode", body: "Projector dashboard the teacher runs. Live leaderboard, station heat map, streak banners, celebration layer, session-complete finale." },
   { name: "Secret superpowers", body: "1-in-4 teams get a hidden power on join: Wild Card, Torchlight, Jump Higher, Truth Seeker, Second Chance, X-Ray. Kids trade rumors." },

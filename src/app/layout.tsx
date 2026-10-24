@@ -26,6 +26,7 @@ export const metadata: Metadata = {
     "Qrewzi (say crew-zee) turns a one-line lesson into a live, room-wide team game. Kids move between QR stations on any device, the projector keeps score, and grades plus a parent-ready report arrive at the bell. Free for a full year for beta teachers.",
   keywords: [
     "classroom escape room", "AI escape room generator", "Breakout EDU alternative",
+    "classroom trivia night", "Bible trivia game", "house points game", "team building classroom game",
     "classroom games", "Kahoot alternative", "live classroom activities",
     "team-based learning", "station rotation", "QR code learning",
     "interactive lessons", "K-12 game engine", "GameMaster dashboard",
@@ -114,6 +115,16 @@ const jsonLd = {
         "https://apps.apple.com/app/id6788738826",
       ],
       audience: { "@type": "EducationalAudience", educationalRole: "teacher" },
+      featureList: [
+        "Trivia nights from checked question banks, or on your own topic",
+        "Groups named for the lesson, or your school's houses, with a house showdown",
+        "Builder mode: every answer adds a layer to the team's build",
+        "Classroom escape rooms generated from any lesson",
+        "30+ task types beyond multiple choice",
+        "GameMaster projector dashboard with a live leaderboard",
+        "Phones, tablets and Chromebooks in one room",
+        "Parent-ready, standards-aligned session reports",
+      ],
     },
     {
       "@type": "WebSite",

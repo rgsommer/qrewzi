@@ -149,6 +149,9 @@ export default function HomePage() {
               gap: 16,
             }}
           >
+            <Feat title="🏆 Trivia nights" body="A whole trivia night from a checked question bank — Bible, history, the 1950s, Christmas, Easter and more — with mystery clues, a Mad Dash and duels between the rounds. Or your own topic, written in a minute or two." />
+            <Feat title="👥 Groups & houses" body="The room splits into groups named for the lesson — Flames vs Doves for Pentecost — or your school's own houses. Every point counts for the group; a house showdown settles it." />
+            <Feat title="🏗️ Builder mode" body="Every answer adds a layer to the team's castle, rocket or ark — gold, stone, brick, wood or straw. Tap a cracked part to redo that task and rebuild it stronger." />
             <Feat title="🔐 Classroom escape rooms" body="Six teams, one classroom, six themed escape rooms. Any lesson, any theme, 90-sec setup. Keys, locks, cipher fragments, a brass-plate vault. Pre-fills with today's season." />
             <Feat title="30+ task types" body="Beyond MCQ — sorts, mind maps, sequences, motion missions, speech recognition, script plays, role-play decks, and more." />
             <Feat title="GameMaster mode" body="Projector dashboard for the teacher — live leaderboard, station heat map, celebration confetti, kill-switch controls." />
