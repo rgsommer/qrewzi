@@ -7,7 +7,7 @@ export default function HomePage() {
       {/* ============================ HERO ============================ */}
       <section className="section" style={{ paddingTop: "clamp(48px, 6vw, 96px)", paddingBottom: "clamp(48px, 6vw, 96px)" }}>
         <div
-          className="container"
+          className="container stack-sm"
           style={{
             display: "grid",
             gridTemplateColumns: "1.15fr 0.85fr",
@@ -57,6 +57,13 @@ export default function HomePage() {
                 See how it works
               </Link>
             </div>
+            {/* A student who typed qrewzi.com with a code in hand: straight
+                into their game (play.qrewzi.com fills in ?room=). */}
+            <form action="https://play.qrewzi.com/" method="get" className="join-code">
+              <label htmlFor="room">🎮 Got a room code?</label>
+              <input id="room" name="room" placeholder="Type it here" maxLength={12} autoComplete="off" autoCapitalize="characters" spellCheck={false} required />
+              <button type="submit" className="btn btn-primary" style={{ padding: "10px 18px", fontSize: 14 }}>Join →</button>
+            </form>
             <p style={{ marginTop: 20, fontSize: 13, color: "var(--slate)" }}>
               No credit card · Any device (phones, Chromebooks, tablets) · Ready in 5 minutes
             </p>
@@ -110,6 +117,7 @@ export default function HomePage() {
             From "what should we play?" to a running game in five minutes.
           </h2>
           <div
+            className="stack-sm"
             style={{
               display: "grid",
               gridTemplateColumns: "repeat(3, 1fr)",

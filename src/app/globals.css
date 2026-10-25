@@ -180,3 +180,42 @@ p { margin: 0; }
   outline-offset: 2px;
   border-radius: 4px;
 }
+
+/* ---------- Small screens ----------
+   The header keeps "Sign in" and "Join a game" on a phone; the rest folds. */
+.show-sm { display: none; }
+@media (max-width: 760px) {
+  .hide-sm { display: none !important; }
+  .show-sm { display: inline; }
+  /* Grids laid out for a desktop stack on a phone (inline styles set the desktop columns). */
+  .stack-sm { grid-template-columns: 1fr !important; }
+  .join-code label { flex-basis: 100%; }
+}
+
+/* ---------- The room-code box ---------- */
+.join-code {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  margin-top: 22px;
+  padding: 12px 12px 12px 18px;
+  background: #fff;
+  border: 2px solid var(--navy);
+  border-radius: 24px;
+  max-width: 520px;
+}
+.join-code label { font-weight: 800; color: var(--navy); font-size: 14px; }
+.join-code input {
+  flex: 1 1 120px;
+  min-width: 0;
+  border: none;
+  outline: none;
+  font-family: var(--font-display);
+  font-size: 20px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--navy);
+  background: transparent;
+}
+.join-code input::placeholder { font-family: var(--font-body); letter-spacing: 0; text-transform: none; font-size: 15px; color: var(--slate-soft); }

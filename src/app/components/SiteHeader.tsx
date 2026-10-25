@@ -26,13 +26,24 @@ export default function SiteHeader() {
         <Link href="/" aria-label="Qrewzi home" style={{ display: "flex", alignItems: "center" }}>
           <Wordmark height={36} />
         </Link>
+        {/* The site is the brand; the game and the teacher's screens live at
+            play. and set. — so a student who typed qrewzi.com, or a teacher
+            who did, is one tap from where they meant to go. On a phone the
+            reading links fold away and those two stay. */}
         <nav
-          style={{ display: "flex", alignItems: "center", gap: 20, fontWeight: 700, fontSize: 15 }}
+          style={{ display: "flex", alignItems: "center", gap: 18, fontWeight: 700, fontSize: 15 }}
         >
-          <Link href="/how-it-works" style={{ color: "var(--navy)" }}>How it works</Link>
-          <Link href="/features" style={{ color: "var(--navy)" }}>Features</Link>
-          <Link href="/pricing" style={{ color: "var(--navy)" }}>Pricing</Link>
-          <Link href="/beta" className="btn btn-primary" style={{ padding: "10px 18px", fontSize: 14 }}>
+          <Link href="/how-it-works" className="hide-sm" style={{ color: "var(--navy)" }}>How it works</Link>
+          <Link href="/features" className="hide-sm" style={{ color: "var(--navy)" }}>Features</Link>
+          <Link href="/pricing" className="hide-sm" style={{ color: "var(--navy)" }}>Pricing</Link>
+          <a href="https://set.qrewzi.com/" style={{ color: "var(--navy)" }}>
+            <span className="hide-sm">Teacher sign in</span>
+            <span className="show-sm">Sign in</span>
+          </a>
+          <a href="https://play.qrewzi.com/" className="btn btn-secondary" style={{ padding: "8px 16px", fontSize: 14 }}>
+            🎮 Join a game
+          </a>
+          <Link href="/beta" className="btn btn-primary hide-sm" style={{ padding: "10px 18px", fontSize: 14 }}>
             Join the beta
           </Link>
         </nav>
