@@ -36,16 +36,14 @@ export default function SiteHeader() {
           <Link href="/how-it-works" className="hide-sm" style={{ color: "var(--navy)" }}>How it works</Link>
           <Link href="/features" className="hide-sm" style={{ color: "var(--navy)" }}>Features</Link>
           <Link href="/pricing" className="hide-sm" style={{ color: "var(--navy)" }}>Pricing</Link>
-          <a href="https://set.qrewzi.com/" style={{ color: "var(--navy)" }}>
-            <span className="hide-sm">Teacher sign in</span>
-            <span className="show-sm">Sign in</span>
-          </a>
+          <a href="https://set.qrewzi.com/" style={{ color: "var(--navy)" }}>Sign in</a>
           <a href="https://play.qrewzi.com/" className="btn btn-secondary" style={{ padding: "8px 16px", fontSize: 14 }}>
             🎮 Join a game
           </a>
-          <Link href="/beta" className="btn btn-primary hide-sm" style={{ padding: "10px 18px", fontSize: 14 }}>
-            Join the beta
-          </Link>
+          {/* An account of your own, straight away — teachers, youth leaders, churches. */}
+          <a href="https://set.qrewzi.com/signup" className="btn btn-primary hide-sm" style={{ padding: "10px 18px", fontSize: 14 }}>
+            Sign up free
+          </a>
         </nav>
       </div>
     </header>
