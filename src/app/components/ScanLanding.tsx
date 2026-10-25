@@ -55,17 +55,17 @@ export default function ScanLanding() {
               the apps use (frontend/public/images/mascot/promo). */}
           <img
             src="/qrew.png"
-            alt="Qrew, the QRewzi fox"
+            alt="Qrew, the Qrewzi fox"
             width={220}
             height={220}
             style={{ width: "min(220px, 55vw)", height: "auto", margin: "0 auto", display: "block" }}
           />
           <div className="eyebrow" style={{ marginTop: 12 }}>You scanned a QRewzi station card</div>
-          <h1 style={{ marginTop: 12 }}>QRewzi</h1>
+          <h1 style={{ marginTop: 12 }}>Qrewzi</h1>
           <p style={{ marginTop: 6, fontSize: 22, fontWeight: 700, color: "var(--slate)" }}>{TAGLINE}</p>
           <p style={{ marginTop: 20, fontSize: 18, color: "var(--slate)", lineHeight: 1.5 }}>
             Hi, I&apos;m Qrew. This code marks {station}{where} in a classroom game. Teams scan it
-            inside the QRewzi player to arrive at their next task. If you are playing, open the
+            inside the Qrewzi player to arrive at their next task. If you are playing, open the
             player and enter the room code your teacher put on the board.
           </p>
           <div style={{ marginTop: 28, display: "flex", gap: 12, justifyContent: "center", flexWrap: "wrap" }}>
@@ -89,7 +89,7 @@ export default function ScanLanding() {
           <div className="eyebrow">For teachers</div>
           <h2 style={{ marginTop: 10 }}>The classroom becomes the game.</h2>
           <p style={{ marginTop: 14, fontSize: 17, color: "var(--slate)", lineHeight: 1.5 }}>
-            Describe a lesson and QRewzi builds a set of stations — questions, games, debates,
+            Describe a lesson and Qrewzi builds a set of stations — questions, games, debates,
             drawing, movement — that teams play around the room, scanning cards like this one
             to move from task to task. Scores land on the projector as they happen; a report
             lands with you at the end.
