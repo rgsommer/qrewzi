@@ -42,7 +42,7 @@ export default function SiteHeader() {
           </a>
           {/* An account of your own, straight away — teachers, youth leaders, churches. */}
           <a href="https://set.qrewzi.com/signup" className="btn btn-primary hide-sm" style={{ padding: "10px 18px", fontSize: 14 }}>
-            Sign up free
+            Join for free
           </a>
         </nav>
       </div>

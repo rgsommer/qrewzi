@@ -16,7 +16,7 @@ export default function HomePage() {
           }}
         >
           <div>
-            <div className="eyebrow">Now in beta · A full year, free</div>
+            <div className="eyebrow">Limited time · 3 months free</div>
             <h1 style={{ marginTop: 12 }}>
               The classroom<br />becomes the game.
             </h1>
@@ -40,7 +40,7 @@ export default function HomePage() {
               {/* Primary CTA: a teacher lands on this page and in ONE click
                   is projecting a live Qrewzi room with code QREWDEMO. The
                   backend self-provisions the demo on host:join; students
-                  join at play.qrewzi.com from any device. "Get a year free"
+                  join at play.qrewzi.com from any device. "Join for free"
                   stays secondary — that's for teachers already sold. */}
               <a
                 href="https://set.qrewzi.com/demo"
@@ -50,9 +50,9 @@ export default function HomePage() {
               >
                 Try it live now →
               </a>
-              <Link href="/beta" className="btn btn-secondary">
-                Get a year free
-              </Link>
+              <a href="https://set.qrewzi.com/signup" className="btn btn-secondary">
+                Join for free
+              </a>
               <Link href="/how-it-works" className="btn btn-ghost">
                 See how it works
               </Link>
@@ -171,19 +171,19 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ============================ BETA CTA ============================ */}
+      {/* ============================ JOIN CTA ============================ */}
       <section className="section" style={{ background: "var(--butter)" }}>
         <div className="container" style={{ textAlign: "center", maxWidth: 700 }}>
-          <div className="eyebrow" style={{ color: "var(--navy)" }}>A full year, on us</div>
-          <h2 style={{ marginTop: 12 }}>One year of Qrewzi, free.</h2>
+          <div className="eyebrow" style={{ color: "var(--navy)" }}>Limited time</div>
+          <h2 style={{ marginTop: 12 }}>Three months of Qrewzi, free.</h2>
           <p style={{ marginTop: 16, fontSize: 17, color: "var(--navy)" }}>
-            Beta teachers get the complete product free for a <strong>full year</strong>.
-            The only ask: run a game with your class <strong>at least once a month</strong> and
-            send us your honest feedback. That&rsquo;s the whole deal — plus direct access to
-            us and a spot on the &ldquo;Original Qrew&rdquo; wall.
+            Make an account and the complete product is yours, free, for your first{" "}
+            <strong>three months</strong> — every task type, GameMaster mode, trivia nights and
+            parent-ready reports. No card needed. After that, carry on with the Free plan or
+            choose the plan that fits.
           </p>
           <div style={{ marginTop: 28, display: "flex", justifyContent: "center", gap: 12, flexWrap: "wrap" }}>
-            <Link href="/beta" className="btn btn-primary">Join the beta</Link>
+            <a href="https://set.qrewzi.com/signup" className="btn btn-primary">Join for free</a>
             <Link href="/how-it-works" className="btn btn-ghost">Read the walkthrough</Link>
           </div>
         </div>

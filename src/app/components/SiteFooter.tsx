@@ -34,7 +34,7 @@ export default function SiteFooter() {
             <FLink href="/how-it-works">How it works</FLink>
             <FLink href="/features">Features</FLink>
             <FLink href="/pricing">Pricing</FLink>
-            <FLink href="/beta">Join the beta</FLink>
+            <FLink href="https://set.qrewzi.com/signup">Join for free</FLink>
           </FooterCol>
           <FooterCol title="Student app">
             <FLink href={PLAY_URL}>Google Play</FLink>

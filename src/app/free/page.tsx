@@ -6,7 +6,8 @@ import { useEffect, useState } from "react";
 // The landing page the business card points at (qrewzi.com/free). It reads
 // the code from ?code=XXX if present (teacher scanned a QR version of the
 // card), defaults to QREWFREE otherwise. CTA passes the code through to
-// /beta as ?promo=, where the signup form picks it up and tags the record.
+// the sign-up (set.qrewzi.com/signup?promo=), which keeps it with the account
+// for checkout to honour.
 
 const DEFAULT_CODE = "QREWFREE";
 
@@ -19,7 +20,7 @@ export default function FreePage() {
     if (c) setCode(c.toUpperCase().slice(0, 32));
   }, []);
 
-  const signupHref = `/beta?promo=${encodeURIComponent(code)}`;
+  const signupHref = `https://set.qrewzi.com/signup?promo=${encodeURIComponent(code)}`;
 
   return (
     <>

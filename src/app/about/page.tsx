@@ -46,7 +46,7 @@ export default function AboutPage() {
         </div>
 
         <div style={{ marginTop: 40, display: "flex", gap: 12, flexWrap: "wrap" }}>
-          <Link href="/beta" className="btn btn-primary">Join the beta</Link>
+          <a href="https://set.qrewzi.com/signup" className="btn btn-primary">Join for free</a>
           <a href="mailto:hello@qrewzi.com" className="btn btn-secondary">Email us</a>
         </div>
       </div>

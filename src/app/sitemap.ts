@@ -1,7 +1,7 @@
 import type { MetadataRoute } from "next";
 
 // Next.js sitemap.xml convention — served at /sitemap.xml.
-// One entry per public marketing route. Beta priority slightly bumped
+// One entry per public marketing route. Pricing priority slightly bumped
 // because that's the conversion page.
 export default function sitemap(): MetadataRoute.Sitemap {
   const base = "https://qrewzi.com";
@@ -18,7 +18,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
   return [
     p("/",              1.0, "weekly"),
     p("/escape-rooms",  0.95, "weekly"),
-    p("/beta",          0.9, "weekly"),
     p("/features",      0.8, "monthly"),
     p("/how-it-works",  0.8, "monthly"),
     p("/pricing",       0.7, "monthly"),

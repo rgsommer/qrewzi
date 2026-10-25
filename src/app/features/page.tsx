@@ -15,13 +15,13 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Every feature Qrewzi ships with",
     description:
-      "Trivia nights, groups and houses, builder mode, escape rooms, 30+ task types, a projector scoreboard, any device in one room. Free for a year in beta.",
+      "Trivia nights, groups and houses, builder mode, escape rooms, 30+ task types, a projector scoreboard, any device in one room. Your first three months free.",
     url: "https://qrewzi.com/features",
   },
   twitter: {
     title: "Every feature Qrewzi ships with",
     description:
-      "Trivia nights, groups and houses, builder mode, escape rooms, 30+ task types, a projector scoreboard, any device in one room. Free for a year in beta.",
+      "Trivia nights, groups and houses, builder mode, escape rooms, 30+ task types, a projector scoreboard, any device in one room. Your first three months free.",
   },
 };
 

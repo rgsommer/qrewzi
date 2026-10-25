@@ -10,7 +10,7 @@ import Link from "next/link";
  * teacher types, in 90 seconds. The copy below sells that gap.
  *
  * Primary CTA is the live demo (set.qrewzi.com/demo — Treasure Island
- * right now, no login needed). Secondary CTA is the beta sign-up.
+ * right now, no login needed). Secondary CTA is the free sign-up.
  */
 export default function EscapeRoomsPage() {
   return (
@@ -21,7 +21,7 @@ export default function EscapeRoomsPage() {
         style={{ paddingTop: "clamp(48px, 6vw, 96px)", paddingBottom: "clamp(32px, 4vw, 56px)" }}
       >
         <div className="container" style={{ maxWidth: 920, textAlign: "center" }}>
-          <div className="eyebrow">New · Beta teachers get it first</div>
+          <div className="eyebrow">Escape rooms</div>
           <h1 style={{ marginTop: 12 }}>
             Six teams. One classroom.<br />
             Six different escape rooms.<br />
@@ -55,9 +55,9 @@ export default function EscapeRoomsPage() {
             >
               Try the live demo now →
             </a>
-            <Link href="/beta" className="btn btn-secondary">
-              Get a year free
-            </Link>
+            <a href="https://set.qrewzi.com/signup" className="btn btn-secondary">
+              Join for free
+            </a>
           </div>
           <p style={{ marginTop: 18, fontSize: 13, color: "var(--slate)" }}>
             No sign-up. The demo opens the GameMaster projector with a room code and QR. Students scan to join.
@@ -264,9 +264,9 @@ export default function EscapeRoomsPage() {
             >
               Try the live demo →
             </a>
-            <Link href="/beta" className="btn btn-ghost" style={{ color: "var(--cream)", borderColor: "var(--cream)" }}>
-              Get a year free
-            </Link>
+            <a href="https://set.qrewzi.com/signup" className="btn btn-ghost" style={{ color: "var(--cream)", borderColor: "var(--cream)" }}>
+              Join for free
+            </a>
           </div>
         </div>
       </section>

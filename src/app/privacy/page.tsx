@@ -34,13 +34,13 @@ export default function PrivacyPage() {
           <p>
             <b>What we collect from teachers:</b> name, school email, school
             or district name, and gameplay analytics for the classes you run.
-            Payment info (once out of beta) is processed by Stripe; we never see
+            Payment info is processed by Stripe; we never see
             card numbers.
           </p>
           <p>
             <b>Retention:</b> we keep session data for as long as the teacher
-            wants to view historical reports. Delete-my-account is a one-click
-            action once out of beta.
+            wants to view historical reports. To delete your account and its data,
+            email hello@qrewzi.com.
           </p>
           <p>
             <b>Contact:</b> privacy questions to{" "}

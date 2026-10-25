@@ -23,7 +23,7 @@ export const metadata: Metadata = {
     template: "%s · Qrewzi",
   },
   description:
-    "Qrewzi (say crew-zee) turns a one-line lesson into a live, room-wide team game. Kids move between QR stations on any device, the projector keeps score, and grades plus a parent-ready report arrive at the bell. Free for a full year for beta teachers.",
+    "Qrewzi (say crew-zee) turns a one-line lesson into a live, room-wide team game. Kids move between QR stations on any device, the projector keeps score, and grades plus a parent-ready report arrive at the bell. Your first three months free.",
   keywords: [
     "classroom escape room", "AI escape room generator", "Breakout EDU alternative",
     "classroom trivia night", "Bible trivia game", "house points game", "team building classroom game",
@@ -45,7 +45,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Qrewzi — the classroom becomes the game",
     description:
-      "Live, room-wide team games from a one-line lesson. 30+ task types, any device, projector scoreboard, report at the bell. Free for a full year for beta teachers.",
+      "Live, room-wide team games from a one-line lesson. 30+ task types, any device, projector scoreboard, report at the bell. Your first three months free.",
     url: "https://qrewzi.com",
     siteName: "Qrewzi",
     type: "website",
@@ -63,7 +63,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Qrewzi — the classroom becomes the game",
     description:
-      "Live, room-wide team games from a one-line lesson. 30+ task types, any device, projector scoreboard, report at the bell. Free for a full year for beta teachers.",
+      "Live, room-wide team games from a one-line lesson. 30+ task types, any device, projector scoreboard, report at the bell. Your first three months free.",
     images: ["/og-image.png"],
   },
   robots: {
@@ -109,7 +109,7 @@ const jsonLd = {
       description:
         "Turns a one-line lesson into a live, room-wide classroom team game. Kids move between QR stations on any device; the projector keeps score; grades and a parent-ready report arrive at the bell.",
       publisher: { "@id": "https://qrewzi.com/#org" },
-      offers: { "@type": "Offer", price: "0", priceCurrency: "CAD", description: "Free for a full year for beta teachers" },
+      offers: { "@type": "Offer", price: "0", priceCurrency: "CAD", description: "First three months free, no card needed" },
       installUrl: [
         "https://play.google.com/store/apps/details?id=net.curriculate.student",
         "https://apps.apple.com/app/id6788738826",
