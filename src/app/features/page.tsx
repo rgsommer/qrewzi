@@ -71,6 +71,7 @@ const GROUPS: Group[] = [
     items: [
       { name: "📺 GameMaster mode", body: "The projector dashboard you run: live leaderboard, station heat map, streak banners, celebrations and a session-complete finale." },
       { name: "🏫 Multi-room hunts", body: "Spread the game across the gym, the library and the hall: a set of station cards for each room, teams shared out across them, and a scan in the wrong room says where to go." },
+      { name: "🪧 Tape the cards up once", body: "The station cards on your walls aren't tied to any one game. Any teacher can run any set on them, any day — and two classes can play on the same cards at the same time, because each phone's scan counts only in its own game. Print a set for each room and leave it up." },
       { name: "🖥️ On-screen only", body: "No scanning, no walking. Tasks that need students out of their seats are left out for that session, and everything else runs at the desk." },
       { name: "💻 Any device", body: "Phones, tablets and Chromebooks in one room. Hidden-QR laptop mode when webcams do the scanning." },
       { name: "🔊 Sound your way", body: "Sound on the projector and every device, on the projector only, or off — and every screen has its own mute." },
