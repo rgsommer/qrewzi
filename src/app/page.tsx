@@ -34,7 +34,7 @@ export default function HomePage() {
               Qrewzi · say &ldquo;crew-zee&rdquo;
             </div>
             <p style={{ marginTop: 20, fontSize: 20, color: "var(--slate)", maxWidth: "56ch", lineHeight: 1.5 }}>
-              Describe a lesson. AI builds a room-wide team game your class
+              Describe a lesson. Qrewzi builds a room-wide team game your class
               begs to play. Grades and a parent-ready report land in your
               inbox before the bell rings.
             </p>
