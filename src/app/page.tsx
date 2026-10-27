@@ -196,6 +196,7 @@ export default function HomePage() {
             }}
           >
             <Feat title="🏆 Trivia nights" body="A whole trivia night from a checked question bank — Bible, history, the 1950s, Christmas, Easter and more — with mystery clues, a Mad Dash and stretch breaks between the rounds. On Pro, your own topic, written and checked in a minute or two." href="/trivia-night" />
+            <Feat title="💭 Think-Pair-Share" body="Pairs of teams meet at a station: one shares an idea, the other writes down what it heard — then passes it on, from memory, to the next pair. Points for how much of each idea arrives." href="/think-pair-share" />
             <Feat title="👥 Groups & houses" body="The room splits into groups named for the lesson — Flames vs Doves for Pentecost — or your school's own houses. Every point counts for the group; a house showdown settles it." />
             <Feat title="⚔️ Face-offs & surprises" body="Two teams pulled into a surprise head-to-head for bonus points, Qrew the fox popping up to be caught, and a village to defend when a dragon heads for the builds." href="/game-modes" />
             <Feat title="🔐 Classroom escape rooms" body="Six teams, one classroom, six themed escape rooms. Any lesson, any theme, 90-sec setup. Keys, locks, cipher fragments, a brass-plate vault. Pre-fills with the season." href="/escape-rooms" />

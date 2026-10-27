@@ -6,14 +6,14 @@ export const metadata = pageMetadata({
   path: "/features",
   title: "Features — game modes, trivia nights, escape rooms",
   description:
-    "Every Qrewzi feature: Troopers, Raiders and Duels, Builder, face-offs, houses, trivia nights, escape rooms, quests, Prayer Rounds, multi-room hunts, 65+ task types.",
+    "Every Qrewzi feature: Troopers, Raiders and Duels, Builder, face-offs, houses, trivia nights, escape rooms, Think-Pair-Share, quests, Prayer Rounds, multi-room hunts, 65+ task types.",
   socialTitle: "Every feature Qrewzi ships with",
   socialDescription:
-    "Three game modes, Builder, face-offs, houses, trivia nights, escape rooms, quests, Prayer Rounds, multi-room hunts and 65+ task types. Your first three months free.",
+    "Three game modes, Builder, face-offs, houses, trivia nights, escape rooms, Think-Pair-Share, quests, Prayer Rounds, multi-room hunts and 65+ task types. Your first three months free.",
   keywords: [
     "classroom game features", "classroom game modes", "classroom trivia night", "Bible trivia game for kids",
     "house points game", "school houses competition", "team building classroom game", "classroom escape room",
-    "classroom quest game", "multi-room scavenger hunt", "GameMaster dashboard", "projector leaderboard",
+    "classroom quest game", "multi-room scavenger hunt", "think pair share game", "GameMaster dashboard", "projector leaderboard",
     "team superpowers", "mixed device classroom",
   ],
 });
@@ -46,6 +46,7 @@ const GROUPS: Group[] = [
       { name: "✅ Lesson review", body: "Describe the lesson in a line and Qrewzi builds a station game on what they've learned, from a mix of task types tuned to the topic and grade." },
       { name: "📚 Introduce a chapter", body: "A first meeting with new words, in five phases: guess what they mean, sort them, meet them in context, show them in a drawing, a mime or speech, then tie them together." },
       { name: "🔐 Escape rooms", body: "Any lesson, any theme, generated in 90 seconds. Six teams play their own themed room in the same classroom — keys, locks, cipher fragments, a brass-plate vault. The theme pre-fills with the season.", href: "/escape-rooms", cta: "Classroom escape rooms" },
+      { name: "💭 Think-Pair-Share", body: "List your topics and Qrewzi writes a question a round. Each round teams pair up at a station: one shares an idea, the other writes down what it heard — then passes it on, from memory, to the next pair. Scored on how much of each idea arrives.", href: "/think-pair-share", cta: "How Think-Pair-Share plays" },
       { name: "🗺️ Quests", body: "A story mission. Teams earn coins with their answers, buy the resources the mission needs — at prices that climb as the clock runs — trade scarce ones with other teams, and launch the mission." },
       { name: "🏆 Trivia nights", body: "Nine checked question banks — Bible, general knowledge, history, the Middle Ages, the 1950s, modern times, Christmas, Easter, Thanksgiving — dealt into rounds of buzzer clues, flashcard races, hangman and tic-tac-toe. Nothing to write; on Pro, your own topic too.", href: "/trivia-night", cta: "How a trivia night runs" },
       { name: "🙏 Prayer Rounds", body: "Paste your prayer points in any form. Small groups pray through them round by round, mixed afresh each round, with two Scripture promises on every card.", href: "/youth-groups#prayer-rounds", cta: "Prayer Rounds" },

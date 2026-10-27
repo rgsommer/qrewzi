@@ -36,6 +36,7 @@ export default function SiteFooter() {
             <FLink href="/game-modes">Game modes</FLink>
             <FLink href="/trivia-night">Trivia nights</FLink>
             <FLink href="/escape-rooms">Escape rooms</FLink>
+            <FLink href="/think-pair-share">Think-Pair-Share</FLink>
             <FLink href="/youth-groups">Youth groups</FLink>
             <FLink href="/pricing">Pricing</FLink>
             <FLink href="https://set.qrewzi.com/signup">Join for free</FLink>
