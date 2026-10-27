@@ -7,10 +7,10 @@ export const metadata = pageMetadata({
   path: "/game-modes",
   title: "Game modes — Troopers, Raiders and Duels",
   description:
-    "Three ways to play a Qrewzi set: Troopers (station to station), Raiders (pick your next mystery box) and Duels (every player 1-on-1, someone new each round).",
+    "Three ways to play a Qrewzi set: Troopers (station to station), Raiders (pick your next mystery box) and Duels (every player 1-on-1, someone new after every duel).",
   socialTitle: "Troopers, Raiders, Duels — three ways to play one set",
   socialDescription:
-    "Teams station to station, teams raiding mystery boxes, or every player 1-on-1 with someone new each round. Pick the mode before you press Start.",
+    "Teams station to station, teams raiding mystery boxes, or every player 1-on-1 with someone new after every duel. Pick the mode before you press Start.",
   keywords: [
     "classroom game modes", "1v1 classroom quiz game", "mystery box classroom game", "station rotation game",
     "team quiz game", "classroom duel game", "classroom building game", "Kahoot alternative", "Blooket alternative",
@@ -47,9 +47,9 @@ const DETAIL: Record<string, { lead: string; steps: string[]; bestFor: string; e
     lead: "Everyone plays, one on one.",
     steps: [
       "Every device is one player, so each player needs a device of their own.",
-      "Each round, every player is paired with someone they've met least, and the pair is sent to a station.",
+      "Every player is paired with someone they've met least, and the pair is sent to a station.",
       "When both have scanned, they race through the same few questions, new to both. The first right answer takes the points; a wrong answer locks only that player out of that question.",
-      "When every duel is done, or the round's time is up, everyone is paired again. You set the round's length and the questions per duel, and can add a minute or move to the next round.",
+      "The moment a duel ends, its players are paired again with whoever is free — nobody waits for the rest of the room. An opponent who isn't at the station a minute after the invite loses that duel by default. You set the questions per duel, and can re-pair everyone at any time.",
     ],
     bestFor: "A room where everyone has a device, and a set with plenty of questions.",
     extra:
@@ -72,7 +72,7 @@ const FAQ: FaqItem[] = [
   },
   {
     q: "What happens with an odd number of players in Duels?",
-    a: "Three play one duel together. A player whose opponent never scans in isn't kept waiting — the questions start without them — and anyone who joins mid-round is paired at the start of the next.",
+    a: "Three play one duel together. A player whose opponent isn't at the station a minute after the invite wins that duel by default, and anyone who joins part-way through is paired as soon as someone is free.",
   },
   {
     q: "Do duel points and bonuses count toward grades?",

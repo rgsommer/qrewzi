@@ -22,7 +22,7 @@ export const metadata = pageMetadata({
 const MODE_BODY: Record<string, string> = {
   troopers: "The main game. Teams go station to station through the set in order, scanning each station's QR code to open its task.",
   raiders: "Teams raid a grid of mystery boxes, picking their next one. Every box hides a task; some challenge another team head-to-head.",
-  duels: "Every player on their own device, paired 1-on-1 with someone new each round. The first right answer wins the points.",
+  duels: "Every player on their own device, paired 1-on-1, and with someone new the moment a duel ends. The first right answer wins the points; a no-show loses by default.",
 };
 
 type Feature = { name: string; body: string; href?: string; cta?: string };

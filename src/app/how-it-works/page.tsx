@@ -32,7 +32,7 @@ export default function HowItWorks() {
           <Step
             n={3}
             title="Pick a mode"
-            body="Troopers: teams go station to station, through the set in order. Raiders: teams pick which mystery box to raid next. Duels: every player on their own device, paired 1-on-1 with someone new each round. Add Builder to Troopers or Raiders and every task adds a layer to the team's build."
+            body="Troopers: teams go station to station, through the set in order. Raiders: teams pick which mystery box to raid next. Duels: every player on their own device, paired 1-on-1, and with someone new after every duel. Add Builder to Troopers or Raiders and every task adds a layer to the team's build."
             link={{ href: "/game-modes", label: "Compare the game modes" }}
           />
           <Step
