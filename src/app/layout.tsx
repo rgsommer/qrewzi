@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Unbounded, Nunito } from "next/font/google";
 import "./globals.css";
 import SiteHeader from "./components/SiteHeader";
@@ -23,20 +23,22 @@ export const metadata: Metadata = {
     template: "%s · Qrewzi",
   },
   description:
-    "Qrewzi (say crew-zee) turns a one-line lesson into a live, room-wide team game. Kids move between QR stations on any device, the projector keeps score, and grades plus a parent-ready report arrive at the bell. Your first three months free.",
+    "Qrewzi (say crew-zee) turns a one-line lesson into a live, room-wide team game: QR stations, any device, a projector scoreboard and your report at the bell. Three months free.",
   keywords: [
     "classroom escape room", "AI escape room generator", "Breakout EDU alternative",
     "classroom trivia night", "Bible trivia game", "house points game", "team building classroom game",
-    "classroom games", "Kahoot alternative", "live classroom activities",
-    "team-based learning", "station rotation", "QR code learning",
+    "classroom games", "Kahoot alternative", "Blooket alternative", "live classroom activities",
+    "classroom game modes", "1v1 classroom quiz game", "mystery box classroom game",
+    "youth group games", "church youth group activities", "small group prayer activity",
+    "team-based learning", "station rotation", "QR code learning", "multi-room scavenger hunt",
     "interactive lessons", "K-12 game engine", "GameMaster dashboard",
     "educational games", "teacher game platform", "phone ban classroom activities",
     "Chromebook classroom games", "Ontario curriculum",
   ],
   metadataBase: new URL("https://qrewzi.com"),
-  alternates: {
-    canonical: "https://qrewzi.com",
-  },
+  // No canonical here: it would be inherited by every page that does not
+  // set its own. Each page names itself (seo.ts pageMetadata; the home page
+  // in page.tsx).
   authors: [{ name: "Qrewzi" }],
   creator: "Qrewzi",
   publisher: "Qrewzi",
@@ -45,7 +47,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Qrewzi — the classroom becomes the game",
     description:
-      "Live, room-wide team games from a one-line lesson. 30+ task types, any device, projector scoreboard, report at the bell. Your first three months free.",
+      "Live, room-wide team games from a one-line lesson. Three game modes, 65+ task types, any device, projector scoreboard, report at the bell. Your first three months free.",
     url: "https://qrewzi.com",
     siteName: "Qrewzi",
     type: "website",
@@ -63,7 +65,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Qrewzi — the classroom becomes the game",
     description:
-      "Live, room-wide team games from a one-line lesson. 30+ task types, any device, projector scoreboard, report at the bell. Your first three months free.",
+      "Live, room-wide team games from a one-line lesson. Three game modes, 65+ task types, any device, projector scoreboard, report at the bell. Your first three months free.",
     images: ["/og-image.png"],
   },
   robots: {
@@ -81,6 +83,10 @@ export const metadata: Metadata = {
     icon: "/favicon.svg",
     apple: "/apple-touch-icon.svg",
   },
+};
+
+// Next 14 takes the theme colour from the viewport export, not metadata.
+export const viewport: Viewport = {
   themeColor: "#FF4D5B",
 };
 
@@ -107,7 +113,7 @@ const jsonLd = {
       operatingSystem: "Web, Android, iOS",
       url: "https://qrewzi.com",
       description:
-        "Turns a one-line lesson into a live, room-wide classroom team game. Kids move between QR stations on any device; the projector keeps score; grades and a parent-ready report arrive at the bell.",
+        "Turns a one-line lesson into a live, room-wide team game for classrooms, trivia nights and youth groups. Teams move between QR stations on any device, played as Troopers, Raiders or Duels; the projector keeps score; the teacher's grades and a parent-ready report arrive at the bell.",
       publisher: { "@id": "https://qrewzi.com/#org" },
       offers: { "@type": "Offer", price: "0", priceCurrency: "CAD", description: "First three months free, no card needed" },
       installUrl: [
@@ -116,14 +122,18 @@ const jsonLd = {
       ],
       audience: { "@type": "EducationalAudience", educationalRole: "teacher" },
       featureList: [
-        "Trivia nights from checked question banks, or on your own topic",
+        "Three game modes: Troopers (station to station), Raiders (mystery boxes) and Duels (1-on-1 rounds)",
+        "Builder add-on: every task adds a layer to the team's build, with a Master Builder award",
+        "Face-offs: surprise team head-to-heads for bonus points",
         "Groups named for the lesson, or your school's houses, with a house showdown",
-        "Builder mode: every answer adds a layer to the team's build",
-        "Classroom escape rooms generated from any lesson",
-        "30+ task types beyond multiple choice",
+        "Trivia nights from nine checked question banks, or on your own topic",
+        "Classroom escape rooms and quests generated from any lesson",
+        "Prayer Rounds: small-group prayer times for churches and youth groups",
+        "Multi-room hunts, or on-screen only with no walking",
+        "65+ task types beyond multiple choice",
         "GameMaster projector dashboard with a live leaderboard",
         "Phones, tablets and Chromebooks in one room",
-        "Parent-ready, standards-aligned session reports",
+        "A report after every session with grades for the teacher, Bloom's coverage and a note to parents",
       ],
     },
     {

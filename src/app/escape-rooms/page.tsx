@@ -268,6 +268,12 @@ export default function EscapeRoomsPage() {
               Join for free
             </a>
           </div>
+          <p style={{ marginTop: 28, fontSize: 15, color: "var(--cream)", opacity: 0.85 }}>
+            Not an escape-room day? The same lesson plays as{" "}
+            <Link href="/game-modes" style={{ color: "var(--butter)" }}>Troopers, Raiders or Duels</Link>, or try a{" "}
+            <Link href="/trivia-night" style={{ color: "var(--butter)" }}>trivia night</Link>.{" "}
+            <Link href="/features" style={{ color: "var(--butter)" }}>Every feature →</Link>
+          </p>
         </div>
       </section>
     </>

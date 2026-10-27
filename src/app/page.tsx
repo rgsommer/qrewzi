@@ -1,5 +1,15 @@
 import Link from "next/link";
+import type { Metadata } from "next";
 import StoreBadges from "./components/StoreBadges";
+import { GAME_MODES, BUILDER } from "./components/gameModes";
+import { SITE_URL } from "./seo";
+
+// The home page keeps the layout's title, description and share card; it
+// only names itself as the canonical address (the layout no longer does, so
+// a page without its own canonical never claims to be the home page).
+export const metadata: Metadata = {
+  alternates: { canonical: SITE_URL },
+};
 
 export default function HomePage() {
   return (
@@ -100,7 +110,7 @@ export default function HomePage() {
             />
             <Audience
               who="For your school"
-              body="More engagement with zero new hardware — any phone, Chromebook, or tablet works. Standards-aligned reports on every session, and it's free for your teachers for a full year."
+              body="More engagement with zero new hardware — any phone, Chromebook, or tablet works. A report on every session, and your teachers' first three months are free."
             />
           </div>
         </div>
@@ -143,6 +153,34 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* ============================ GAME MODES ============================ */}
+      <section className="section-tight">
+        <div className="container">
+          <div className="eyebrow" style={{ textAlign: "center" }}>Game modes</div>
+          <h2 style={{ textAlign: "center", marginTop: 12, marginBottom: 12 }}>
+            Three ways to play.
+          </h2>
+          <p style={{ textAlign: "center", color: "var(--slate)", marginBottom: 36, maxWidth: "60ch", marginLeft: "auto", marginRight: "auto" }}>
+            Pick one before you press Start. The projector and every device show its name, so your class learns them.
+          </p>
+          <div
+            style={{
+              display: "grid",
+              gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))",
+              gap: 16,
+            }}
+          >
+            {GAME_MODES.map((m) => (
+              <Feat key={m.id} title={`${m.emoji} ${m.name}`} body={m.blurb} href={`/game-modes#${m.id}`} />
+            ))}
+            <Feat title={`${BUILDER.emoji} + ${BUILDER.name}`} body={BUILDER.blurb} href="/game-modes#builder" />
+          </div>
+          <p style={{ marginTop: 24, textAlign: "center" }}>
+            <Link href="/game-modes" style={{ fontWeight: 900 }}>Compare the game modes →</Link>
+          </p>
+        </div>
+      </section>
+
       {/* ============================ FEATURES STRIP ============================ */}
       <section className="section-tight">
         <div className="container">
@@ -157,16 +195,16 @@ export default function HomePage() {
               gap: 16,
             }}
           >
-            <Feat title="🏆 Trivia nights" body="A whole trivia night from a checked question bank — Bible, history, the 1950s, Christmas, Easter and more — with mystery clues, a Mad Dash and duels between the rounds. Or your own topic, written in a minute or two." />
+            <Feat title="🏆 Trivia nights" body="A whole trivia night from a checked question bank — Bible, history, the 1950s, Christmas, Easter and more — with mystery clues, a Mad Dash and stretch breaks between the rounds. On Pro, your own topic, written and checked in a minute or two." href="/trivia-night" />
             <Feat title="👥 Groups & houses" body="The room splits into groups named for the lesson — Flames vs Doves for Pentecost — or your school's own houses. Every point counts for the group; a house showdown settles it." />
-            <Feat title="🏗️ Builder mode" body="Every answer adds a layer to the team's castle, rocket or ark — gold, stone, brick, wood or straw. Tap a cracked part to redo that task and rebuild it stronger." />
-            <Feat title="🔐 Classroom escape rooms" body="Six teams, one classroom, six themed escape rooms. Any lesson, any theme, 90-sec setup. Keys, locks, cipher fragments, a brass-plate vault. Pre-fills with today's season." />
-            <Feat title="30+ task types" body="Beyond MCQ — sorts, mind maps, sequences, motion missions, speech recognition, script plays, role-play decks, and more." />
-            <Feat title="GameMaster mode" body="Projector dashboard for the teacher — live leaderboard, station heat map, celebration confetti, kill-switch controls." />
-            <Feat title="Secret superpowers" body="1 in 4 teams gets a rare hidden power on join. Wild Card, Torchlight, Jump Higher, Truth Seeker — kids trade rumors about who has what." />
-            <Feat title="Any device" body="Phones, Chromebooks, tablets. Hidden-QR laptop mode. Rooms mix devices seamlessly." />
-            <Feat title="Real reports" body="Session finishes with a parent-ready recap: Bloom's coverage, per-student grades, standards alignment, Class Chat Blurb." />
-            <Feat title="Standards-aligned" body="Ontario curriculum today, extensible to other jurisdictions. Report page cites the standards each task covered." />
+            <Feat title="⚔️ Face-offs & surprises" body="Two teams pulled into a surprise head-to-head for bonus points, Qrew the fox popping up to be caught, and a village to defend when a dragon heads for the builds." href="/game-modes" />
+            <Feat title="🔐 Classroom escape rooms" body="Six teams, one classroom, six themed escape rooms. Any lesson, any theme, 90-sec setup. Keys, locks, cipher fragments, a brass-plate vault. Pre-fills with the season." href="/escape-rooms" />
+            <Feat title="🙏 Youth nights & Prayer Rounds" body="Fun nights for youth groups and camps, Bible trivia, and Prayer Rounds: small groups praying through your points, round by round." href="/youth-groups" />
+            <Feat title="🧩 65+ task types" body="Beyond multiple choice — sorts, mind maps, sequences, motion missions, speech recognition, script plays, role-play decks, live debates, and more." href="/features" />
+            <Feat title="📺 GameMaster mode" body="Projector dashboard for the teacher — live leaderboard, station heat map, celebration confetti, kill-switch controls." />
+            <Feat title="🏫 One room, several, or none" body="Stations around one classroom, a hunt across the gym, the library and the hall, or on-screen only — no scanning, no walking." />
+            <Feat title="💻 Any device" body="Phones, Chromebooks, tablets. Hidden-QR laptop mode. Rooms mix devices seamlessly." />
+            <Feat title="📄 Real reports" body="Every session ends with your report: grades for each student, Bloom's coverage, the standards it touched, a note to parents and a class-chat blurb." />
           </div>
         </div>
       </section>
@@ -178,7 +216,7 @@ export default function HomePage() {
           <h2 style={{ marginTop: 12 }}>Three months of Qrewzi, free.</h2>
           <p style={{ marginTop: 16, fontSize: 17, color: "var(--navy)" }}>
             Make an account and the complete product is yours, free, for your first{" "}
-            <strong>three months</strong> — every task type, GameMaster mode, trivia nights and
+            <strong>three months</strong> — every task type and game mode, trivia nights and
             parent-ready reports. No card needed. After that, carry on with the Free plan or
             choose the plan that fits.
           </p>
@@ -245,10 +283,10 @@ function Step({ n, title, body }: { n: number; title: string; body: string }) {
   );
 }
 
-function Feat({ title, body }: { title: string; body: string }) {
+function Feat({ title, body, href }: { title: string; body: string; href?: string }) {
   return (
     <div className="card">
-      <h3 style={{ fontSize: 18 }}>{title}</h3>
+      <h3 style={{ fontSize: 18 }}>{href ? <Link href={href} style={{ color: "inherit" }}>{title}</Link> : title}</h3>
       <p style={{ marginTop: 8, color: "var(--slate)", fontSize: 15 }}>{body}</p>
     </div>
   );

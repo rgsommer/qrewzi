@@ -6,7 +6,7 @@ export default function SiteFooter() {
   return (
     <footer style={{ background: "var(--navy)", color: "var(--cream)", marginTop: 40 }}>
       <div
-        className="container"
+        className="container stack-sm"
         style={{
           display: "grid",
           gridTemplateColumns: "1fr 1fr",
@@ -33,6 +33,10 @@ export default function SiteFooter() {
           <FooterCol title="Product">
             <FLink href="/how-it-works">How it works</FLink>
             <FLink href="/features">Features</FLink>
+            <FLink href="/game-modes">Game modes</FLink>
+            <FLink href="/trivia-night">Trivia nights</FLink>
+            <FLink href="/escape-rooms">Escape rooms</FLink>
+            <FLink href="/youth-groups">Youth groups</FLink>
             <FLink href="/pricing">Pricing</FLink>
             <FLink href="https://set.qrewzi.com/signup">Join for free</FLink>
           </FooterCol>

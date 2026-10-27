@@ -37,10 +37,13 @@ Port 3100 to avoid colliding with the main frontend at 3000.
 ## Structure
 
 - `src/app/page.tsx` — homepage
-- `src/app/beta/page.tsx` — beta signup form (POSTs to `/api/beta`)
-- `src/app/api/beta/route.ts` — proxy to shared upstream
 - `src/app/{how-it-works,features,pricing,about,privacy,terms}/page.tsx`
+- `src/app/{game-modes,trivia-night,youth-groups,escape-rooms}/page.tsx` — landing pages for the modes and audiences
+- `src/app/seo.ts` — `pageMetadata()`: every page's title, description, canonical and full Open Graph / Twitter card (a page's `openGraph` replaces the layout's, image included, so each builds its own)
+- `src/app/components/Faq.tsx` — a page's questions, rendered and emitted as FAQPage JSON-LD from one list
+- `src/app/components/gameModes.ts` — Troopers / Raiders / Duels / Builder names and one-liners, matching the app's `shared/gameModes.js`
 - `src/app/components/{Wordmark,Mark,SiteHeader,SiteFooter}.tsx`
+- `/beta` redirects to `set.qrewzi.com/signup` (`next.config.mjs`)
 - `src/app/globals.css` — brand tokens (coral / navy / butter / cream / slate)
 - `public/favicon.svg` — Qrewzi mark
 

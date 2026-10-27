@@ -1,24 +1,14 @@
 import Link from "next/link";
+import { pageMetadata } from "../seo";
 
-import type { Metadata } from "next";
-
-export const metadata: Metadata = {
+export const metadata = pageMetadata({
+  path: "/about",
   title: "About Qrewzi — a small team in Hamilton, Ontario",
   description:
-    "Qrewzi (say crew-zee) is a live classroom game engine built by a small team of teachers who wanted kids on their feet. Made in Hamilton, Ontario for K-12 classrooms across Canada and the US.",
-  alternates: { canonical: "https://qrewzi.com/about" },
-  openGraph: {
-    title: "About Qrewzi — built by a teacher, for teachers",
-    description:
-      "A live classroom game engine from a small team in Hamilton, Ontario. Made for K-12.",
-    url: "https://qrewzi.com/about",
-  },
-  twitter: {
-    title: "About Qrewzi — built by a teacher, for teachers",
-    description:
-      "A live classroom game engine from a small team in Hamilton, Ontario. Made for K-12.",
-  },
-};
+    "Qrewzi (say crew-zee) is a live team game engine for classrooms, trivia nights and youth groups, made by a small team in Hamilton, Ontario.",
+  socialTitle: "About Qrewzi — built by a teacher, for teachers",
+  socialDescription: "A live team game engine from a small team in Hamilton, Ontario. Made for K-12, and for youth nights too.",
+});
 
 export default function AboutPage() {
   return (
@@ -30,9 +20,15 @@ export default function AboutPage() {
         <div style={{ marginTop: 32, display: "grid", gap: 24, fontSize: 17, color: "var(--slate)", lineHeight: 1.7 }}>
           <p>
             Qrewzi is a live classroom game engine. Teachers describe a
-            lesson, we build a room-wide team scavenger hunt across 30+
+            lesson, we build a room-wide team scavenger hunt across 65+
             interactive task types, and kids play on any device. The whole
             thing runs in a class period.
+          </p>
+          <p>
+            A class can play it three ways — <Link href="/game-modes">Troopers, Raiders or Duels</Link> —
+            and the same engine runs <Link href="/trivia-night">trivia nights</Link>,{" "}
+            <Link href="/escape-rooms">escape rooms</Link>, and{" "}
+            <Link href="/youth-groups">youth nights and prayer times</Link> for churches and youth groups.
           </p>
           <p>
             The name is a mash-up of <b>QR</b> (the scan mechanic — kids run

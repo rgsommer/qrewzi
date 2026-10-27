@@ -1,14 +1,12 @@
-import type { Metadata } from "next";
+import { pageMetadata } from "../seo";
 
-export const metadata: Metadata = {
+export const metadata = pageMetadata({
+  path: "/terms",
   title: "Terms of Service",
   description:
     "Qrewzi Terms of Service: beta terms and general use covering data, subscriptions, and school-district compliance.",
-  alternates: { canonical: "https://qrewzi.com/terms" },
-  robots: { index: true, follow: true },
-  openGraph: { title: "Qrewzi — Terms of Service", description: "Qrewzi Terms of Service: beta terms and general use covering data, subscriptions, and school-district compliance.", url: "https://qrewzi.com/terms" },
-  twitter: { title: "Qrewzi — Terms of Service", description: "Qrewzi Terms of Service: beta terms and general use covering data, subscriptions, and school-district compliance." },
-};
+  socialTitle: "Qrewzi — Terms of Service",
+});
 
 export default function TermsPage() {
   return (

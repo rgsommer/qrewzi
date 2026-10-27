@@ -45,7 +45,7 @@ export default function FreePage() {
               lineHeight: 1.5,
             }}
           >
-            Run a Qrewzi session with your class this week — free for the first month.
+            Run a Qrewzi session with your class — free for the first month.
             All we ask is you tell us what you&rsquo;d change.
           </p>
 
@@ -144,11 +144,11 @@ export default function FreePage() {
             }}
           >
             <Feat title="Zero prep" body="A sentence becomes a 45-minute game." />
-            <Feat title="30+ task types" body="Sort, mind-map, speech, movement." />
+            <Feat title="65+ task types" body="Sort, mind-map, speech, movement." />
             <Feat title="GameMaster projector" body="Live leaderboard, heat map, celebrations." />
             <Feat title="Grades + reports" body="Parent-ready recap when the bell rings." />
             <Feat title="Any device" body="Phones, Chromebooks, tablets together." />
-            <Feat title="Standards-aligned" body="Ontario today, more jurisdictions soon." />
+            <Feat title="Three game modes" body="Troopers, Raiders or Duels — same set." />
           </div>
         </div>
       </section>
