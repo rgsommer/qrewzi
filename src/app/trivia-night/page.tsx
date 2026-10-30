@@ -50,6 +50,10 @@ const FAQ: FaqItem[] = [
     a: "You choose 30, 45, 60 or 90 minutes. The Free plan runs nights of up to 30 minutes for up to 12 devices; Plus runs them up to an hour for up to 40; Pro runs the longest nights, for any number of devices.",
   },
   {
+    q: "What happens when a team finishes early?",
+    a: "It keeps playing. The finishing places go in the order teams get through the night, and a team that's through is dealt more rounds from the same bank — new questions — for as long as the night runs, until you end it or its end time comes.",
+  },
+  {
     q: "If we play the same topic twice, will the questions repeat?",
     a: "A second night on the same topic draws questions you haven't had before, until the bank runs out.",
   },
@@ -78,7 +82,8 @@ export default function TriviaNightPage() {
           <p style={{ marginTop: 24, fontSize: 20, color: "var(--slate)", lineHeight: 1.5, maxWidth: "60ch", marginLeft: "auto", marginRight: "auto" }}>
             Pick a topic and a length. Qrewzi deals the night from a checked question bank — one
             category a round, each round one of six games, with mystery clues, a Mad Dash and
-            stretch breaks in between. Teams play on phones and tablets; the projector keeps score.
+            stretch breaks in between. A team that gets through it early keeps getting new rounds until
+            you call time. Teams play on phones and tablets; the projector keeps score.
           </p>
           <div style={{ marginTop: 32, display: "flex", gap: 12, flexWrap: "wrap", justifyContent: "center" }}>
             <a href="https://set.qrewzi.com/signup" className="btn btn-primary">Join for free</a>
