@@ -144,7 +144,7 @@ export default function FreePage() {
             }}
           >
             <Feat title="Zero prep" body="A sentence becomes a 45-minute game." />
-            <Feat title="65+ task types" body="Sort, mind-map, speech, movement." />
+            <Feat title="85+ task types" body="Sort, mind-map, speech, movement." />
             <Feat title="GameMaster projector" body="Live leaderboard, heat map, celebrations." />
             <Feat title="Grades + reports" body="Parent-ready recap when the bell rings." />
             <Feat title="Any device" body="Phones, Chromebooks, tablets together." />

@@ -21,6 +21,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     p("/game-modes",    0.9, "monthly"),
     p("/trivia-night",  0.9, "monthly"),
     p("/think-pair-share", 0.9, "monthly"),
+    p("/social-emotional-learning", 0.9, "monthly"),
     p("/youth-groups",  0.85, "monthly"),
     p("/features",      0.8, "monthly"),
     p("/how-it-works",  0.8, "monthly"),

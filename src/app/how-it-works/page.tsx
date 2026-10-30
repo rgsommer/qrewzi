@@ -22,7 +22,7 @@ export default function HowItWorks() {
           <Step
             n={1}
             title="Describe the lesson"
-            body="One line — 'water cycle for grade 5,' 'Macbeth Act 3,' 'Grade 8 slope-intercept form.' Qrewzi builds a set from a mix of its 65+ task types — sorts, sequences, mind maps, motion missions, speech, role-play — tuned to the topic and grade. Or skip the typing: a Quick Start preset, or a trivia night dealt from a checked question bank."
+            body="One line — 'water cycle for grade 5,' 'Macbeth Act 3,' 'Grade 8 slope-intercept form.' Qrewzi builds a set from a mix of its 85+ task types — sorts, sequences, mind maps, motion missions, speech, role-play — tuned to the topic and grade. Or skip the typing: a Quick Start preset, or a trivia night dealt from a checked question bank."
           />
           <Step
             n={2}

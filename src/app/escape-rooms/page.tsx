@@ -140,7 +140,7 @@ export default function EscapeRoomsPage() {
             <Step
               n={3}
               title="Run the room"
-              body="Projector shows the room code + QR. Six teams scan in. Each team's HUD shows their keys, fragments, locks. The vault opens when they synthesize the cipher digits."
+              body="Projector shows the room code + QR. Six teams scan in. Every device shows the team's five chests across the top — locked, ready, open — and the projector shows every team's. The vault opens when they put the clues together."
             />
           </div>
         </div>
@@ -205,12 +205,33 @@ export default function EscapeRoomsPage() {
         </div>
       </section>
 
+      {/* ============================ READY-MADE ROOMS ============================ */}
+      <section className="section">
+        <div className="container">
+          <div className="eyebrow" style={{ textAlign: "center" }}>Ready-made rooms</div>
+          <h2 style={{ textAlign: "center", marginTop: 12, marginBottom: 16 }}>
+            Six rooms to launch today.
+          </h2>
+          <p style={{ textAlign: "center", color: "var(--slate)", maxWidth: "62ch", margin: "0 auto 36px", lineHeight: 1.55 }}>
+            Real puzzles with real artifacts — letters, maps, ledgers, ciphers, a theatre programme — and every lock checked so the answer can be worked out from what the team is shown. Launch one from Quick Start, or copy it into your sets and make it your own.
+          </p>
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))", gap: 16 }}>
+            <Diff title="📜 The Confederation Dispatch Box" body="History · grade 8. A locked dispatch box from the Confederation conferences turns up in a Charlottetown attic. Open its four document cases with the clerk's own papers, then the box, before the museum van is back." />
+            <Diff title="🔬 Lockdown at the Cell Lab" body="Science · grade 8. A power surge has locked the biology lab and the freezer of cell samples is warming up. Open the four lab drawers, then the freezer, before the samples spoil." />
+            <Diff title="⛵ The Voyage to Rome" body="Bible · grade 6. The ship sails from Malta at first light and Luke's sea chest must be aboard. Open its four compartments — the steersman's box, the chart case, the centurion's order — then the chest." />
+            <Diff title="🕰️ The Clockmaker's Workshop" body="Math · grade 5. Locked in the clockmaker's workshop with the door key in his strongbox: open four tool drawers to find the code before the cuckoo clock strikes noon." />
+            <Diff title="🎭 Opening Night: Romeo and Juliet" body="English · grade 9. Forty minutes to curtain and the director has locked the prop trunks and the costume chest. Open all four trunks, then the chest, before the house lights go down." />
+            <Diff title="✈️ Gate 52: The Captain's Flight Bag" body="Geography · grade 9. The flight to Vancouver can't leave without the flight plan locked in the captain's bag. Open its four pockets, then the bag, before boarding closes." />
+          </div>
+        </div>
+      </section>
+
       {/* ============================ WHY QREWZI ============================ */}
       <section className="section">
         <div className="container">
           <div className="eyebrow" style={{ textAlign: "center" }}>What makes it work</div>
           <h2 style={{ textAlign: "center", marginTop: 12, marginBottom: 40 }}>
-            The five things nobody else packages together.
+            The things nobody else packages together.
           </h2>
 
           <div
@@ -239,6 +260,14 @@ export default function EscapeRoomsPage() {
             <Diff
               title="Reports anyway"
               body="The escape room runs on the same gradebook pipeline as any Qrewzi game. The session ends → parent-ready recap, Bloom's coverage, per-student grades."
+            />
+            <Diff
+              title="The chests stay in view"
+              body="Five chests sit across the top of every device the whole game, so a team always knows it's in an escape room and what's left. Tap a chest to see what it needs and which task gives it."
+            />
+            <Diff
+              title="A hint when they're stuck"
+              body="Each team can call for a hint — three to a room, each a little stronger than the last, for a small cost in points. You see every call, and can approve it, write your own, or send one unasked."
             />
             <Diff
               title="Zero prep"

@@ -20,7 +20,7 @@ export default function AboutPage() {
         <div style={{ marginTop: 32, display: "grid", gap: 24, fontSize: 17, color: "var(--slate)", lineHeight: 1.7 }}>
           <p>
             Qrewzi is a live classroom game engine. Teachers describe a
-            lesson, we build a room-wide team scavenger hunt across 65+
+            lesson, we build a room-wide team scavenger hunt across 85+
             interactive task types, and kids play on any device. The whole
             thing runs in a class period.
           </p>

@@ -6,15 +6,18 @@ export const metadata = pageMetadata({
   path: "/features",
   title: "Features — game modes, trivia nights, escape rooms",
   description:
-    "Every Qrewzi feature: Troopers, Raiders and Duels, Builder, face-offs, houses, trivia nights, escape rooms, Think-Pair-Share, quests, Prayer Rounds, multi-room and outdoor hunts, 65+ task types.",
+    "Every Qrewzi feature: Troopers, Raiders and Duels, Builder, face-offs, houses, trivia nights, escape rooms, Think-Pair-Share, quests, Prayer Rounds, multi-room and outdoor hunts, SEL and wellbeing breaks, 85+ task types.",
   socialTitle: "Every feature Qrewzi ships with",
   socialDescription:
-    "Three game modes, Builder, face-offs, houses, trivia nights, escape rooms, Think-Pair-Share, quests, Prayer Rounds, multi-room hunts and 65+ task types. Your first three months free.",
+    "Three game modes, Builder, face-offs, houses, trivia nights, escape rooms, Think-Pair-Share, quests, Prayer Rounds, multi-room hunts and 85+ task types. Your first three months free.",
   keywords: [
     "classroom game features", "classroom game modes", "classroom trivia night", "Bible trivia game for kids",
     "house points game", "school houses competition", "team building classroom game", "classroom escape room",
     "classroom quest game", "multi-room scavenger hunt", "outdoor scavenger hunt", "schoolyard scavenger hunt", "think pair share game", "GameMaster dashboard", "projector leaderboard",
     "team superpowers", "mixed device classroom",
+    "social emotional learning activities", "SEL games for the classroom", "classroom brain break", "mindfulness activity for kids",
+    "I see I think I wonder", "visible thinking routine", "historical figures interview activity", "sentence building activity",
+    "auto-assign student groups", "classroom group generator",
   ],
 });
 
@@ -45,7 +48,7 @@ const GROUPS: Group[] = [
     items: [
       { name: "✅ Lesson review", body: "Describe the lesson in a line and Qrewzi builds a station game on what they've learned, from a mix of task types tuned to the topic and grade." },
       { name: "📚 Introduce a chapter", body: "A first meeting with new words, in five phases: guess what they mean, sort them, meet them in context, show them in a drawing, a mime or speech, then tie them together." },
-      { name: "🔐 Escape rooms", body: "Any lesson, any theme, generated in 90 seconds. Six teams play their own themed room in the same classroom — keys, locks, cipher fragments, a brass-plate vault. The theme pre-fills with the season.", href: "/escape-rooms", cta: "Classroom escape rooms" },
+      { name: "🔐 Escape rooms", body: "Any lesson, any theme, generated in 90 seconds — or one of six ready-made rooms, from a Confederation dispatch box to a locked-down cell lab. Five chests stay in view on every device as teams open them, each team can call for a hint, and the projector shows every team's chests.", href: "/escape-rooms", cta: "Classroom escape rooms" },
       { name: "💭 Think-Pair-Share", body: "List your topics and Qrewzi writes a question a round. Each round teams pair up at a station: one shares an idea, the other writes down what it heard — then passes it on, from memory, to the next pair. Scored on how much of each idea arrives.", href: "/think-pair-share", cta: "How Think-Pair-Share plays" },
       { name: "🗺️ Quests", body: "A story mission. Teams earn coins with their answers, buy the resources the mission needs — at prices that climb as the clock runs — trade scarce ones with other teams, and launch the mission." },
       { name: "🏆 Trivia nights", body: "Nine checked question banks — Bible, general knowledge, history, the Middle Ages, the 1950s, modern times, Christmas, Easter, Thanksgiving — dealt into rounds of buzzer clues, flashcard races, hangman and tic-tac-toe. Nothing to write; on Pro, your own topic too.", href: "/trivia-night", cta: "How a trivia night runs" },
@@ -73,7 +76,10 @@ const GROUPS: Group[] = [
       { name: "📺 GameMaster mode", body: "The projector dashboard you run: live leaderboard, station heat map, streak banners, celebrations and a session-complete finale." },
       { name: "🏫 Multi-room hunts", body: "Spread the game across the gym, the library and the hall: a set of station cards for each room, teams shared out across them, and a scan in the wrong room says where to go." },
       { name: "🪧 Tape the cards up once", body: "The station cards on your walls aren't tied to any one game. Any teacher can run any set on them, any day — and two classes can play on the same cards at the same time, because each phone's scan counts only in its own game. Print a set for each room and leave it up." },
-      { name: "🌳 Take it outside", body: "The station cards work outdoors too: zip-tie or tape them to stakes, fence posts or playground equipment and the schoolyard becomes the hunt. A matte laminate or a sheet protector keeps them dry and scannable — gloss catches the sun. On a bright day turn screens to full brightness and play from the shade where you can: most tablets are hard to read in direct sun." },
+      { name: "🌳 Take it outside", body: "The station cards work outdoors too: zip-tie or tape them to stakes, fence posts or playground equipment and the schoolyard becomes the hunt. A matte laminate or a sheet protector keeps them dry and scannable — gloss catches the sun. Switch on Outdoor mode, and play from the shade where you can." },
+      { name: "☀️ Outdoor mode", body: "One switch puts every device in the room on high-contrast screens for a hunt in the sun: a black page, a white card, black type a size larger, nothing faded or see-through. Tablets running Fully Kiosk turn their own brightness up to full, and back down after." },
+      { name: "👥 Groups from your class list", body: "Pick the class, untick anyone who's away, choose a group size and tap Auto-assign. The groups get names of their own, each tablet taps its group instead of typing a team, and the first name in each group comes up for the tablet. Move a student or reshuffle any time." },
+      { name: "🎁 Release Bonuses", body: "The finishing and fastest-dash bonuses stay sealed when the game ends, until you release them with the whole class watching — then they pour in one team at a time, first place first, and the places can still change." },
       { name: "🖥️ On-screen only", body: "No scanning, no walking. Tasks that need students out of their seats are left out for that session, and everything else runs at the desk." },
       { name: "💻 Any device", body: "Phones, tablets and Chromebooks in one room. Hidden-QR laptop mode when webcams do the scanning." },
       { name: "🔊 Sound your way", body: "Sound on the projector and every device, on the projector only, or off — and every screen has its own mute." },
@@ -85,9 +91,15 @@ const GROUPS: Group[] = [
   {
     id: "tasks",
     eyebrow: "On the players' screens",
-    title: "65+ task types, well past multiple choice.",
+    title: "85+ task types, well past multiple choice.",
     items: [
-      { name: "🧩 65+ task types", body: "Multiple choice, sort, sequence, timeline, mind map, matching, cloze, buzzer clues, flashcard races, motion missions, speech recognition, script plays, role-play decks, hangman, Connect Four, live debates, drawing and miming, and more." },
+      { name: "🧩 85+ task types", body: "Multiple choice, sort, sequence, timeline, mind map, matching, cloze, buzzer clues, flashcard races, motion missions, speech recognition, script plays, role-play decks, hangman, Connect Four, live debates, drawing and miming, and more." },
+      { name: "🔍 Wonder and curiosity", body: "Mysterious Images sharpen from coloured blocks in five steps — guess early for a bonus. Curious Artifacts put a real museum object in their hands to zoom into: I see, I think, I wonder, then the reveal. Fake Texts let them eavesdrop on two people from history. People Meet and Enemies Meet put two historical figures side by side to answer the team's questions in character." },
+      { name: "🌿 Wellbeing breaks", body: "A Nature Walk in a real forest, garden or lake: imagine being there, one slow breath, then tap a feeling, an intention for the day and what helps when a feeling gets big — no typing, and you see how the class is feeling. Puzzle Pieces rebuild a nature photo around an encouraging line or a verse, and the Cross-Body Breath is a guided calming stretch.", href: "/social-emotional-learning", cta: "SEL & brain breaks" },
+      { name: "🤝 Social-emotional role play", body: "Teams act out an everyday school moment to practise one of seven skills — self-regulation, recognizing challenges, perseverance, relationships, self-awareness, self-confidence, critical and creative thinking — with pause points and a short talk at the end, always about the characters, never the students' own lives." },
+      { name: "✍️ Write Me and Magic Question", body: "Write Me builds a topic sentence from word tiles, then the supporting sentences, then the paragraph in order — capitals and full stops appear only where a tile lands. Magic Question gives two opposing views: find the good in both, then everyone drags their name under the one they'd choose." },
+      { name: "📄 Paper tasks", body: "Some thinking belongs on paper. A Printed task comes with a clean sheet to print — a drawing box, answer lines, a brainstorm web — you're reminded to print before the game, and teams hand in a photo of the finished page." },
+      { name: "✏️ Write on the screen", body: "Typed answers can be handwritten instead, with a finger or a stylus, on a lined pad that turns the writing into text — or on paper, photographed. Handwriting earns a bonus." },
       { name: "✅ Answers marked in place", body: "The reveal lands on the player's own answers: boxes turn green or red, typed answers get a see-through correction, a sequence slides into order. And a timeline task looks like a timeline." },
       { name: "📱 Turn the phone sideways", body: "In landscape, tasks use the width — options two across, statements in columns, the timeline across the screen — and the extra strips fold away." },
       { name: "🛠️ Fix a set in one click", body: "Diagnose & Fix checks every task in a set and repairs the ones that wouldn't play, before they reach the room." },

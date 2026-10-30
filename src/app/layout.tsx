@@ -47,7 +47,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Qrewzi — the classroom becomes the game",
     description:
-      "Live, room-wide team games from a one-line lesson. Three game modes, 65+ task types, any device, projector scoreboard, report at the bell. Your first three months free.",
+      "Live, room-wide team games from a one-line lesson. Three game modes, 85+ task types, any device, projector scoreboard, report at the bell. Your first three months free.",
     url: "https://qrewzi.com",
     siteName: "Qrewzi",
     type: "website",
@@ -65,7 +65,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Qrewzi — the classroom becomes the game",
     description:
-      "Live, room-wide team games from a one-line lesson. Three game modes, 65+ task types, any device, projector scoreboard, report at the bell. Your first three months free.",
+      "Live, room-wide team games from a one-line lesson. Three game modes, 85+ task types, any device, projector scoreboard, report at the bell. Your first three months free.",
     images: ["/og-image.png"],
   },
   robots: {
@@ -130,7 +130,7 @@ const jsonLd = {
         "Classroom escape rooms and quests generated from any lesson",
         "Prayer Rounds: small-group prayer times for churches and youth groups",
         "Multi-room hunts, or on-screen only with no walking",
-        "65+ task types beyond multiple choice",
+        "85+ task types beyond multiple choice",
         "GameMaster projector dashboard with a live leaderboard",
         "Phones, tablets and Chromebooks in one room",
         "A report after every session with grades for the teacher, Bloom's coverage and a note to parents",
