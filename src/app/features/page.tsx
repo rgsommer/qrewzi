@@ -6,14 +6,14 @@ export const metadata = pageMetadata({
   path: "/features",
   title: "Features — game modes, trivia nights, escape rooms",
   description:
-    "Every Qrewzi feature: Troopers, Raiders and Duels, Builder, face-offs, houses, trivia nights, escape rooms, Think-Pair-Share, quests, Prayer Rounds, multi-room hunts, 65+ task types.",
+    "Every Qrewzi feature: Troopers, Raiders and Duels, Builder, face-offs, houses, trivia nights, escape rooms, Think-Pair-Share, quests, Prayer Rounds, multi-room and outdoor hunts, 65+ task types.",
   socialTitle: "Every feature Qrewzi ships with",
   socialDescription:
     "Three game modes, Builder, face-offs, houses, trivia nights, escape rooms, Think-Pair-Share, quests, Prayer Rounds, multi-room hunts and 65+ task types. Your first three months free.",
   keywords: [
     "classroom game features", "classroom game modes", "classroom trivia night", "Bible trivia game for kids",
     "house points game", "school houses competition", "team building classroom game", "classroom escape room",
-    "classroom quest game", "multi-room scavenger hunt", "think pair share game", "GameMaster dashboard", "projector leaderboard",
+    "classroom quest game", "multi-room scavenger hunt", "outdoor scavenger hunt", "schoolyard scavenger hunt", "think pair share game", "GameMaster dashboard", "projector leaderboard",
     "team superpowers", "mixed device classroom",
   ],
 });
@@ -73,6 +73,7 @@ const GROUPS: Group[] = [
       { name: "📺 GameMaster mode", body: "The projector dashboard you run: live leaderboard, station heat map, streak banners, celebrations and a session-complete finale." },
       { name: "🏫 Multi-room hunts", body: "Spread the game across the gym, the library and the hall: a set of station cards for each room, teams shared out across them, and a scan in the wrong room says where to go." },
       { name: "🪧 Tape the cards up once", body: "The station cards on your walls aren't tied to any one game. Any teacher can run any set on them, any day — and two classes can play on the same cards at the same time, because each phone's scan counts only in its own game. Print a set for each room and leave it up." },
+      { name: "🌳 Take it outside", body: "The station cards work outdoors too: zip-tie or tape them to stakes, fence posts or playground equipment and the schoolyard becomes the hunt. A matte laminate or a sheet protector keeps them dry and scannable — gloss catches the sun. On a bright day turn screens to full brightness and play from the shade where you can: most tablets are hard to read in direct sun." },
       { name: "🖥️ On-screen only", body: "No scanning, no walking. Tasks that need students out of their seats are left out for that session, and everything else runs at the desk." },
       { name: "💻 Any device", body: "Phones, tablets and Chromebooks in one room. Hidden-QR laptop mode when webcams do the scanning." },
       { name: "🔊 Sound your way", body: "Sound on the projector and every device, on the projector only, or off — and every screen has its own mute." },
