@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { pageMetadata } from "../seo";
 
 export const metadata = pageMetadata({
@@ -14,7 +15,7 @@ export default function PrivacyPage() {
       <div className="container" style={{ maxWidth: 780 }}>
         <h1>Privacy</h1>
         <p style={{ marginTop: 24, fontSize: 15, color: "var(--slate)" }}>
-          Last updated: placeholder — replace before public launch.
+          Last updated: October 31, 2026
         </p>
         <div style={{ marginTop: 32, display: "grid", gap: 20, color: "var(--navy)", fontSize: 16, lineHeight: 1.7 }}>
           <p>
@@ -24,10 +25,15 @@ export default function PrivacyPage() {
             required to run sessions and generate reports.
           </p>
           <p>
-            <b>What we collect from students:</b> team + member name, task
-            answers, and optional camera/microphone/motion data for specific
-            task types (only while that task is active). No location, no ad
-            identifiers, no third-party sharing.
+            <b>What we collect from students:</b> team and member names, task
+            answers, and camera, microphone or motion data for the task types that
+            use them (only while that task is active). Optionally, an email address,
+            if a student asks for their results and streak by email. The app keeps
+            a random code on the device so a tablet can rejoin its team after a
+            reload. When a student sends a bug report from the app, it carries the
+            device type, the screen they were on, recent errors and the approximate
+            city the report came from (worked out from the network, never GPS). No
+            precise location, no ad identifiers, no third-party tracking.
           </p>
           <p>
             <b>What we collect from teachers:</b> name, school email, school
@@ -36,9 +42,17 @@ export default function PrivacyPage() {
             card numbers.
           </p>
           <p>
-            <b>Retention:</b> we keep session data for as long as the teacher
-            wants to view historical reports. To delete your account and its data,
-            email hello@qrewzi.com.
+            <b>Who else handles it:</b> we never sell data or use it for advertising.
+            A few service providers process it on our behalf and for no other
+            purpose — hosting and storage, sending email, and AI scoring of written
+            answers.
+          </p>
+          <p>
+            <b>Retention and deletion:</b> we keep session data for as long as the
+            teacher wants to view historical reports. Anyone can ask for their data to
+            be deleted, and we delete it within 30 days — see{" "}
+            <Link href="/delete-data">how to delete your data</Link> for the steps and
+            what is kept.
           </p>
           <p>
             <b>Contact:</b> privacy questions to{" "}

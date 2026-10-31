@@ -30,6 +30,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     p("/about",         0.5, "monthly"),
     p("/support",       0.4, "monthly"),
     p("/privacy",       0.3, "monthly"),
+    p("/delete-data",   0.2, "monthly"),
     p("/terms",         0.3, "monthly"),
   ];
 }

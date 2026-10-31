@@ -55,6 +55,7 @@ export default function SiteFooter() {
           <FooterCol title="Legal">
             <FLink href="/privacy">Privacy</FLink>
             <FLink href="/terms">Terms</FLink>
+            <FLink href="/delete-data">Delete your data</FLink>
           </FooterCol>
         </div>
       </div>
