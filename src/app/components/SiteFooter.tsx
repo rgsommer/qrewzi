@@ -49,6 +49,7 @@ export default function SiteFooter() {
           </FooterCol>
           <FooterCol title="Company">
             <FLink href="/about">About</FLink>
+            <FLink href="/support">Help</FLink>
             <FLink href="mailto:hello@qrewzi.com">Contact</FLink>
           </FooterCol>
           <FooterCol title="Legal">

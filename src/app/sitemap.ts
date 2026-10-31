@@ -28,6 +28,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     p("/pricing",       0.7, "monthly"),
     p("/free",          0.6, "monthly"),
     p("/about",         0.5, "monthly"),
+    p("/support",       0.4, "monthly"),
     p("/privacy",       0.3, "monthly"),
     p("/terms",         0.3, "monthly"),
   ];
