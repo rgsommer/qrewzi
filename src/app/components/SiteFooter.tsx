@@ -39,6 +39,7 @@ export default function SiteFooter() {
             <FLink href="/think-pair-share">Think-Pair-Share</FLink>
             <FLink href="/social-emotional-learning">SEL &amp; brain breaks</FLink>
             <FLink href="/youth-groups">Youth groups</FLink>
+            <FLink href="/prayer">Prayer Rounds</FLink>
             <FLink href="/pricing">Pricing</FLink>
             <FLink href="https://set.qrewzi.com/signup">Join for free</FLink>
           </FooterCol>

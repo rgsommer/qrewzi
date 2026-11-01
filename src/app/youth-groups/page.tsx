@@ -119,7 +119,7 @@ export default function YouthGroupsPage() {
           </div>
           <div style={{ marginTop: 24, display: "flex", gap: 12, flexWrap: "wrap" }}>
             <a href="https://set.qrewzi.com/prayer" className="btn btn-primary">Open Prayer Rounds →</a>
-            <a href="https://set.qrewzi.com/signup" className="btn btn-secondary">Make an account</a>
+            <Link href="/prayer" className="btn btn-secondary">How a prayer time runs</Link>
           </div>
         </div>
       </section>
