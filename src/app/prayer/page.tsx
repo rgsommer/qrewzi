@@ -29,7 +29,17 @@ const STEPS = [
   { emoji: "🤝", name: "Close together", body: "After the last round everyone gathers for the closing prayer. Its card lists every request, and any point no group got to." },
 ];
 
+// The sample prayer time: opened as an invitation, looked through, and led
+// once from a phone with no account (backend routes/prayerCode.js
+// GET /api/prayer/sample, teacher-app auth/prayerInvite.js).
+const SAMPLE_URL = "https://set.qrewzi.com/prayer?sample";
+const BUILD_URL = "https://set.qrewzi.com/prayer";
+
 const FAQ: FaqItem[] = [
+  {
+    q: "Can I try it before making an account?",
+    a: "Yes. Open the sample prayer time on this page and look through every round, then lead it from your phone with a few people, with no account at all. The room code it gives you works for twelve hours.",
+  },
   {
     q: "Do people need an app or an account?",
     a: "No. They scan the code on your sheet or your phone, or type it in at play.qrewzi.com. It works in any phone browser, or in the free Qrewzi app if they already have it.",
@@ -83,8 +93,8 @@ export default function PrayerPage() {
             small-group cards, and a closing prayer together.
           </p>
           <div style={{ marginTop: 32, display: "flex", gap: 12, flexWrap: "wrap", justifyContent: "center" }}>
-            <a href="https://set.qrewzi.com/prayer" className="btn btn-primary">Open Prayer Rounds →</a>
-            <a href="#how-it-runs" className="btn btn-secondary">How a prayer time runs</a>
+            <a href={SAMPLE_URL} className="btn btn-primary">See a sample prayer time →</a>
+            <a href={BUILD_URL} className="btn btn-secondary">Make your own</a>
           </div>
           <p style={{ marginTop: 16, fontSize: 13, color: "var(--slate)" }}>
             Everyone joins on their own phone — no app and no account for them. You host from yours.
@@ -128,6 +138,26 @@ export default function PrayerPage() {
         </div>
       </section>
 
+      {/* ============================ TRY THE SAMPLE ============================ */}
+      <section className="section-tight" style={{ background: "var(--navy)", color: "var(--cream)" }}>
+        <div className="container" style={{ maxWidth: 820, textAlign: "center" }}>
+          <div className="eyebrow" style={{ color: "var(--butter)" }}>Try it</div>
+          <h2 style={{ marginTop: 12, color: "var(--cream)" }}>Lead the sample, with no account.</h2>
+          <p style={{ marginTop: 16, fontSize: 17, lineHeight: 1.6, opacity: 0.92 }}>
+            <b>Pray Together</b> is a prayer time for any church or small group: praise and thanks, our
+            church, homes and families, people who are struggling, where we live, and the wider world.
+            Open it to see every round, then lead it from your phone with your small group, your family or
+            a few friends. There&rsquo;s nothing to sign up for or install, for you or for them.
+          </p>
+          <div style={{ marginTop: 24, display: "flex", gap: 12, flexWrap: "wrap", justifyContent: "center" }}>
+            <a href={SAMPLE_URL} className="btn btn-primary">See the sample prayer time →</a>
+          </div>
+          <p style={{ marginTop: 14, fontSize: 14, opacity: 0.8 }}>
+            Its room code works for twelve hours. Give your email when you start it if you&rsquo;d like the prayer report afterwards.
+          </p>
+        </div>
+      </section>
+
       {/* ============================ SETTING UP ============================ */}
       <section className="section-tight" style={{ background: "var(--butter)" }}>
         <div className="container" style={{ maxWidth: 980 }}>
@@ -163,12 +193,13 @@ export default function PrayerPage() {
         <div className="container" style={{ textAlign: "center", maxWidth: 720 }}>
           <h2 style={{ color: "var(--cream)" }}>Bring your prayer points. We&rsquo;ll do the shuffling.</h2>
           <p style={{ marginTop: 16, fontSize: 17, color: "var(--cream)", opacity: 0.9 }}>
-            Make an account. Your first three months of everything are free, with no card needed. For fun
-            nights and Bible trivia too, see <Link href="/youth-groups" style={{ color: "var(--butter)" }}>youth groups</Link>.
+            Try the sample first, or make an account and write your own: your first three months of
+            everything are free, with no card needed. Questions? <a href="mailto:hello@qrewzi.com" style={{ color: "var(--butter)" }}>hello@qrewzi.com</a>.
+            For fun nights and Bible trivia too, see <Link href="/youth-groups" style={{ color: "var(--butter)" }}>youth groups</Link>.
           </p>
           <div style={{ marginTop: 28, display: "flex", justifyContent: "center", gap: 12, flexWrap: "wrap" }}>
-            <a href="https://set.qrewzi.com/prayer" className="btn btn-primary">Open Prayer Rounds →</a>
-            <a href="mailto:hello@qrewzi.com" className="btn btn-ghost" style={{ color: "var(--cream)" }}>Ask us a question</a>
+            <a href={SAMPLE_URL} className="btn btn-primary">See a sample prayer time →</a>
+            <a href={BUILD_URL} className="btn btn-ghost" style={{ color: "var(--cream)" }}>Make your own</a>
           </div>
         </div>
       </section>
