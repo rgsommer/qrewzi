@@ -24,6 +24,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     p("/social-emotional-learning", 0.9, "monthly"),
     p("/youth-groups",  0.85, "monthly"),
     p("/prayer",        0.85, "monthly"),
+    p("/teams",         0.85, "monthly"),
     p("/features",      0.8, "monthly"),
     p("/how-it-works",  0.8, "monthly"),
     p("/pricing",       0.7, "monthly"),

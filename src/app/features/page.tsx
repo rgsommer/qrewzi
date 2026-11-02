@@ -53,7 +53,8 @@ const GROUPS: Group[] = [
       { name: "🗺️ Quests", body: "A story mission. Teams earn coins with their answers, buy the resources the mission needs — at prices that climb as the clock runs — trade scarce ones with other teams, and launch the mission." },
       { name: "🏆 Trivia nights", body: "Nine checked question banks — Bible, general knowledge, history, the Middle Ages, the 1950s, modern times, Christmas, Easter, Thanksgiving — dealt into rounds of buzzer clues, flashcard races, hangman and tic-tac-toe. Nothing to write; on Pro, your own topic too.", href: "/trivia-night", cta: "How a trivia night runs" },
       { name: "🙏 Prayer Rounds", body: "Paste your prayer points in any form. Small groups pray through them round by round, mixed afresh each round, with two Scripture promises on every card.", href: "/prayer", cta: "Prayer Rounds" },
-      { name: "🎉 Fun nights, parties & events", body: "Youth group and camp nights, birthday parties, team building at a conference or a training day: quick, active, guessable games on a light theme — never a test.", href: "/youth-groups#fun-nights", cta: "For youth groups" },
+      { name: "🎉 Fun nights & parties", body: "Youth group and camp nights and birthday parties: quick, active, guessable games on a light theme — never a test.", href: "/youth-groups#fun-nights", cta: "For youth groups" },
+      { name: "💼 Team days at work", body: "Icebreakers, onboarding, quarterly kickoffs, offsites and staff parties. Pick your industry and the occasion, add your own words, and the players' screens speak to adults.", href: "/teams", cta: "Qrewzi for Teams" },
     ],
   },
   {
