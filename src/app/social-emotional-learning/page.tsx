@@ -34,7 +34,7 @@ const BREAKS = [
   {
     emoji: "🧩",
     name: "Puzzle Pieces",
-    body: "A calm breather between harder tasks: the team rebuilds a nature photograph, several hands dragging pieces at once, and the finished picture shows an encouraging line, a positive-thinking line or a Bible verse.",
+    body: "A calm breather between harder tasks: the team rebuilds a nature photograph, several hands dragging pieces at once, and the finished picture shows a line from the lesson — a key term, a principle or an inspiring thought — or a Bible verse.",
   },
   {
     emoji: "🧘",
