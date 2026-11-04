@@ -2,14 +2,15 @@ import { pageMetadata } from "../seo";
 
 // /free is a client component (it builds the sign-up link client-side so the
 // browser-specific UTM tags carry through), so metadata lives in a layout.
+// It is the page sent to any teacher, the business card's included.
 export const metadata = pageMetadata({
   path: "/free",
-  title: "First month free — the Qrewzi offer",
+  title: "For teachers: 3 months free, plus QREWFREE",
   description:
-    "Teachers who got the Qrewzi card: redeem your QREWFREE code. The first month of Qrewzi is on us — try with your class and tell us what you'd change.",
-  socialTitle: "First month free — QREWFREE",
-  socialDescription: "Redeem your QREWFREE code. First month of Qrewzi free. Try with your class, tell us what you'd change.",
-  keywords: ["qrewzi promo code", "free classroom game trial", "qrewfree"],
+    "Turn your next lesson into a team game your class plays on any device. Try a demo game with no account, then start with three months of Qrewzi free, and your first paid month free with the code QREWFREE.",
+  socialTitle: "Your next lesson, as a team game — 3 months free",
+  socialDescription: "Try a demo game on your phone, then start free. Three months of Qrewzi, and a month more with QREWFREE.",
+  keywords: ["qrewzi promo code", "free classroom game trial", "qrewfree", "classroom team game", "free for teachers"],
 });
 
 export default function FreeLayout({ children }: { children: React.ReactNode }) {
