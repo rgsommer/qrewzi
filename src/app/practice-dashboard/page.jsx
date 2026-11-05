@@ -1,5 +1,6 @@
 "use client";
 import React, { useState, useEffect, useMemo } from "react";
+import CoverageTab from "./CoverageTab";
 
 const API = process.env.NEXT_PUBLIC_API_URL || "https://api.curriculate.net";
 // Qrewzi's practice only (play.qrewzi.com/practice); Curriculate's has its own
@@ -25,6 +26,7 @@ export default function PracticeDashboard() {
   const [feedbackData, setFeedbackData] = useState(null);
   const [feedbackLoading, setFeedbackLoading] = useState(false);
   const [feedbackAt, setFeedbackAt] = useState(null);
+  const [refreshTick, setRefreshTick] = useState(0);
 
   // Load key from localStorage
   useEffect(() => {
@@ -160,7 +162,7 @@ export default function PracticeDashboard() {
           <p style={styles.headerSub}>Student activity across demos & practice</p>
         </div>
         <button
-          onClick={() => { fetchData(key); fetchFeedback(key, { quiet: !!feedbackData }); }}
+          onClick={() => { fetchData(key); fetchFeedback(key, { quiet: !!feedbackData }); setRefreshTick((n) => n + 1); }}
           disabled={loading}
           style={styles.refreshBtn}
         >
@@ -272,7 +274,7 @@ export default function PracticeDashboard() {
 
       {/* Tabs */}
       <div style={styles.tabRow}>
-        {["students", "feedback"].map((t) => (
+        {["students", "feedback", "coverage"].map((t) => (
           <button
             key={t}
             onClick={() => setTab(t)}
@@ -283,10 +285,13 @@ export default function PracticeDashboard() {
               fontWeight: tab === t ? 800 : 600,
             }}
           >
-            {t === "students" ? "Students" : "Task Feedback"}
+            {t === "students" ? "Students" : t === "feedback" ? "Task Feedback" : "Testing Coverage"}
           </button>
         ))}
       </div>
+
+      {/* --- TESTING COVERAGE TAB --- */}
+      {tab === "coverage" ? <CoverageTab api={API} apiKey={key} refreshTick={refreshTick} /> : null}
 
       {/* --- STUDENTS TAB --- */}
       {tab !== "students" ? null : (
