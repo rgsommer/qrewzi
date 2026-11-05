@@ -24,6 +24,7 @@ export default function PracticeDashboard() {
   const [tab, setTab] = useState("students"); // students | feedback
   const [feedbackData, setFeedbackData] = useState(null);
   const [feedbackLoading, setFeedbackLoading] = useState(false);
+  const [feedbackAt, setFeedbackAt] = useState(null);
 
   // Load key from localStorage
   useEffect(() => {
@@ -70,24 +71,33 @@ export default function PracticeDashboard() {
   }, [sourceFilter, classroomFilter]);
 
   // Fetch feedback summary when switching to feedback tab
-  async function fetchFeedback(apiKey) {
-    setFeedbackLoading(true);
+  // A refresh keeps the list on screen; only the first load says "Loading".
+  async function fetchFeedback(apiKey, { quiet = false } = {}) {
+    if (!quiet) setFeedbackLoading(true);
     try {
-      const resp = await fetch(`${API}/api/conference/feedback-summary?key=${apiKey}&brand=${SITE}`);
+      const resp = await fetch(`${API}/api/conference/feedback-summary?key=${apiKey}&brand=${SITE}`, { cache: "no-store" });
       if (resp.ok) {
-        setFeedbackData(await resp.json());
+        const json = await resp.json();
+        // Newest first, whatever order the server sends.
+        const when = (c) => (c?.at ? new Date(c.at).getTime() || 0 : 0);
+        json.comments = [...(json.comments || [])].sort((a, b) => when(b) - when(a));
+        setFeedbackData(json);
+        setFeedbackAt(new Date());
       }
     } catch (err) {
       console.warn("Failed to fetch feedback:", err);
     } finally {
-      setFeedbackLoading(false);
+      if (!quiet) setFeedbackLoading(false);
     }
   }
 
+  // The tab is watched while students are playing: fetch on every visit and
+  // every minute while it is open, not once per page load.
   useEffect(() => {
-    if (tab === "feedback" && authed && key && !feedbackData) {
-      fetchFeedback(key);
-    }
+    if (tab !== "feedback" || !authed || !key) return undefined;
+    fetchFeedback(key, { quiet: !!feedbackData });
+    const id = setInterval(() => fetchFeedback(key, { quiet: true }), 60000);
+    return () => clearInterval(id);
   }, [tab, authed]);
 
   // Sort leads
@@ -150,7 +160,7 @@ export default function PracticeDashboard() {
           <p style={styles.headerSub}>Student activity across demos & practice</p>
         </div>
         <button
-          onClick={() => fetchData(key)}
+          onClick={() => { fetchData(key); fetchFeedback(key, { quiet: !!feedbackData }); }}
           disabled={loading}
           style={styles.refreshBtn}
         >
@@ -558,9 +568,14 @@ export default function PracticeDashboard() {
               {/* Comments section */}
               {feedbackData.comments.length > 0 && (
                 <div style={{ marginTop: 24 }}>
-                  <h3 style={{ fontSize: 16, fontWeight: 800, color: "#1e293b", marginBottom: 12 }}>
-                    Student Comments ({feedbackData.comments.length})
-                  </h3>
+                  <div style={{ display: "flex", alignItems: "baseline", justifyContent: "space-between", gap: 12, flexWrap: "wrap", marginBottom: 12 }}>
+                    <h3 style={{ fontSize: 16, fontWeight: 800, color: "#1e293b", margin: 0 }}>
+                      Student Comments ({feedbackData.comments.length}) · newest first
+                    </h3>
+                    <span style={{ fontSize: 12, color: "#94a3b8" }}>
+                      {feedbackAt ? `Updated ${feedbackAt.toLocaleTimeString([], { hour: "numeric", minute: "2-digit" })}` : ""}
+                    </span>
+                  </div>
                   <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
                     {feedbackData.comments.map((c, i) => (
                       <div
@@ -581,8 +596,10 @@ export default function PracticeDashboard() {
                           }}>
                             {c.type === "confusing" ? "⚠️ Confusing" : "💡 Suggestion"}
                           </span>
-                          <span style={{ fontSize: 12, color: "#94a3b8" }}>
+                          <span style={{ fontSize: 12, color: "#94a3b8", textAlign: "right" }}>
                             {c.title} · by {c.from}
+                            {c.device || c.subject ? ` · ${[c.device && `on ${c.device}`, c.subject].filter(Boolean).join(", ")}` : ""}
+                            {c.at ? ` · ${new Date(c.at).toLocaleString([], { month: "short", day: "numeric", hour: "numeric", minute: "2-digit" })}` : ""}
                           </span>
                         </div>
                         <div style={{ fontSize: 14, color: "#1e293b" }}>
