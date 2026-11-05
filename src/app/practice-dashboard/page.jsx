@@ -19,7 +19,7 @@ export default function PracticeDashboard() {
   const [data, setData] = useState(null);
   const [sourceFilter, setSourceFilter] = useState("all");
   const [classroomFilter, setClassroomFilter] = useState("all");
-  const [sortBy, setSortBy] = useState("points"); // points | name | tasks | date
+  const [sortBy, setSortBy] = useState("challenge"); // challenge | points | name | tasks | date
   const [expandedRow, setExpandedRow] = useState(null);
   const [tab, setTab] = useState("students"); // students | feedback
   const [feedbackData, setFeedbackData] = useState(null);
@@ -95,6 +95,8 @@ export default function PracticeDashboard() {
     if (!data?.leads) return [];
     const leads = [...data.leads];
     switch (sortBy) {
+      case "challenge":
+        return leads.sort((a, b) => (b.challengePoints || 0) - (a.challengePoints || 0) || b.totalPoints - a.totalPoints);
       case "points":
         return leads.sort((a, b) => b.totalPoints - a.totalPoints);
       case "name":
@@ -163,6 +165,12 @@ export default function PracticeDashboard() {
             <div style={styles.statValue}>{data.count}</div>
             <div style={styles.statLabel}>Students</div>
           </div>
+          {data.fest && (
+            <div style={{ ...styles.statCard, border: "2px solid #f59e0b" }}>
+              <div style={{ ...styles.statValue, color: "#b45309" }}>{data.fest.players}</div>
+              <div style={styles.statLabel}>In the {data.fest.name}</div>
+            </div>
+          )}
           <div style={styles.statCard}>
             <div style={styles.statValue}>{data.totalCompleted}</div>
             <div style={styles.statLabel}>Tasks Completed</div>
@@ -177,6 +185,25 @@ export default function PracticeDashboard() {
             <div style={styles.statValue}>{data.classrooms?.length || 0}</div>
             <div style={styles.statLabel}>Classrooms</div>
           </div>
+        </div>
+      )}
+
+      {/* Who is studying what in the challenge: the subject of each player's
+          latest session (backend/routes/demo.js /activity). */}
+      {data?.fest && (
+        <div style={{ display: "flex", flexWrap: "wrap", gap: 8, alignItems: "center", margin: "0 0 18px" }}>
+          <span style={{ fontSize: 13, fontWeight: 800, color: "#92400e" }}>
+            🏆 {data.fest.name} · until {new Date(data.fest.end).toLocaleString(undefined, { weekday: "short", month: "short", day: "numeric", hour: "numeric", minute: "2-digit" })}:
+          </span>
+          {Object.keys(data.fest.bySubject || {}).length === 0 ? (
+            <span style={{ fontSize: 13, color: "#64748b" }}>no one has finished a session yet</span>
+          ) : (
+            Object.entries(data.fest.bySubject).sort((a, b) => b[1] - a[1]).map(([sub, n]) => (
+              <span key={sub} style={{ fontSize: 13, fontWeight: 700, padding: "4px 10px", borderRadius: 999, background: "#fef3c7", color: "#92400e", border: "1px solid #fcd34d" }}>
+                {sub}: {n}
+              </span>
+            ))
+          )}
         </div>
       )}
 
@@ -241,7 +268,8 @@ export default function PracticeDashboard() {
             onChange={(e) => setSortBy(e.target.value)}
             style={styles.filterSelect}
           >
-            <option value="points">Points (high → low)</option>
+            <option value="challenge">Challenge points (high → low)</option>
+            <option value="points">All-time points (high → low)</option>
             <option value="tasks">Tasks completed</option>
             <option value="name">Name (A → Z)</option>
             <option value="date">Most recent</option>
@@ -258,9 +286,11 @@ export default function PracticeDashboard() {
               <th style={styles.th}>Name</th>
               <th style={styles.th}>Email</th>
               <th style={styles.th}>Source</th>
+              <th style={styles.th}>Studying</th>
               <th style={{ ...styles.th, textAlign: "center" }}>Completed</th>
               <th style={{ ...styles.th, textAlign: "center" }}>Skipped</th>
-              <th style={{ ...styles.th, textAlign: "center" }}>Points</th>
+              <th style={{ ...styles.th, textAlign: "center" }}>Challenge</th>
+              <th style={{ ...styles.th, textAlign: "center" }}>All-time pts</th>
               <th style={styles.th}>Date</th>
             </tr>
           </thead>
@@ -298,11 +328,18 @@ export default function PracticeDashboard() {
                       {lead.source || "conference"}
                     </span>
                   </td>
+                  <td style={{ ...styles.td, fontSize: 13 }} title={(lead.subjects || []).join(", ")}>
+                    {lead.studying || <span style={{ color: "#94a3b8" }}>—</span>}
+                    {(lead.subjects || []).length > 1 && <span style={{ color: "#94a3b8" }}> +{lead.subjects.length - 1}</span>}
+                  </td>
                   <td style={{ ...styles.td, textAlign: "center", fontWeight: 700, color: "#16a34a" }}>
                     {lead.tasksCompleted}
                   </td>
                   <td style={{ ...styles.td, textAlign: "center", color: "#94a3b8" }}>
                     {lead.tasksSkipped}
+                  </td>
+                  <td style={{ ...styles.td, textAlign: "center", fontWeight: 900, fontSize: 16, color: lead.challengePoints ? "#b45309" : "#cbd5e1" }} title={lead.challengeTasks ? `${lead.challengeTasks} tasks in the challenge` : ""}>
+                    {lead.challengePoints || "—"}
                   </td>
                   <td
                     style={{
@@ -325,7 +362,7 @@ export default function PracticeDashboard() {
                 {/* Expanded row: task details */}
                 {expandedRow === i && lead.results?.length > 0 && (
                   <tr>
-                    <td colSpan={8} style={{ padding: 0 }}>
+                    <td colSpan={10} style={{ padding: 0 }}>
                       <div style={styles.expandedPanel}>
                         <div style={styles.expandedTitle}>
                           Task details for {lead.name}
