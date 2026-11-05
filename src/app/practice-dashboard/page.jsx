@@ -219,58 +219,10 @@ export default function PracticeDashboard() {
         </div>
       )}
 
-      {/* The standings, in the order the students see them (own points plus
-          recruits'), with who each player is — the prizes are awarded from
-          here. The top 3 win; once the challenge is over this is the final
-          list, and Copy winners puts it on the clipboard. */}
-      {data?.fest?.standings && (
-        <div style={{ margin: "0 0 22px", padding: 18, borderRadius: 16, background: "#fff", border: `2px solid ${data.fest.ended ? "#16a34a" : "#f59e0b"}` }}>
-          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", gap: 12, flexWrap: "wrap", marginBottom: 10 }}>
-            <div style={{ fontWeight: 900, fontSize: 17, color: "#0f172a" }}>
-              {data.fest.ended ? `🏆 Final standings — ${data.fest.prize || "the top 3 win"}` : "🏆 Top 5 right now"}
-              <span style={{ fontWeight: 600, fontSize: 13, color: "#64748b" }}> · a player's total includes the family they recruited</span>
-            </div>
-            {data.fest.ended && data.fest.standings.length > 0 && (
-              <button
-                type="button"
-                style={{ padding: "6px 14px", borderRadius: 10, border: "1px solid #16a34a", background: "#f0fdf4", color: "#166534", fontWeight: 800, cursor: "pointer" }}
-                onClick={() => {
-                  const lines = data.fest.standings.slice(0, 3).map((w) => `${w.rank}. ${w.name} <${w.email}> — ${w.points} points${w.recruits.length ? ` (incl. ${w.recruits.map((r) => r.name).join(", ")})` : ""}`);
-                  try { navigator.clipboard.writeText(`${data.fest.name} winners\n${lines.join("\n")}`); } catch {}
-                }}
-              >
-                Copy winners
-              </button>
-            )}
-          </div>
-          {data.fest.standings.length === 0 ? (
-            <div style={{ fontSize: 14, color: "#64748b" }}>No one has finished a session yet — players appear here once they reach the results screen.</div>
-          ) : (
-            <table style={{ width: "100%", borderCollapse: "collapse", fontSize: 14 }}>
-              <tbody>
-                {data.fest.standings.slice(0, 5).map((w) => (
-                  <tr key={w.email} style={{ borderTop: "1px solid #f1f5f9", background: w.rank <= 3 ? "#fffbeb" : "transparent" }}>
-                    <td style={{ padding: "8px 6px", width: 48, fontSize: 18 }}>{["🥇", "🥈", "🥉"][w.rank - 1] || `#${w.rank}`}</td>
-                    <td style={{ padding: "8px 6px" }}>
-                      <div style={{ fontWeight: 800, color: "#0f172a" }}>{w.name}{w.rank <= 3 ? <span style={{ marginLeft: 8, fontSize: 12, fontWeight: 800, color: "#b45309" }}>🎁 gift card</span> : null}</div>
-                      <div style={{ fontSize: 12.5, color: "#64748b" }}>{w.email}</div>
-                      {w.recruits.length > 0 && (
-                        <div style={{ fontSize: 12.5, color: "#475569", marginTop: 3 }}>
-                          Recruits: {w.recruits.map((r) => `${r.name} (${r.email}, ${r.points} pts)`).join(" · ")}
-                        </div>
-                      )}
-                    </td>
-                    <td style={{ padding: "8px 6px", textAlign: "right", whiteSpace: "nowrap" }}>
-                      <div style={{ fontWeight: 900, fontSize: 17, color: "#b45309" }}>{w.points}</div>
-                      <div style={{ fontSize: 12, color: "#64748b" }}>{w.recruits.length ? `${w.own} own + ${w.points - w.own} recruits` : `${w.tasks} tasks`}</div>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          )}
-        </div>
-      )}
+      {/* The fest that ended last, beside the running one: its winners are
+          still to be read off after the next fest has begun. */}
+      {data?.previousFest?.standings && <StandingsCard fest={data.previousFest} />}
+      {data?.fest?.standings && <StandingsCard fest={data.fest} />}
 
       {/* Tabs */}
       <div style={styles.tabRow}>
@@ -618,6 +570,61 @@ export default function PracticeDashboard() {
             </>
           )}
         </div>
+      )}
+    </div>
+  );
+}
+
+/* The standings of one fest, in the order the students see them (own points
+   plus recruits'), with who each player is — the prizes are awarded from
+   here. The top 3 win; once the fest is over this is the final list, and
+   Copy winners puts it on the clipboard. */
+function StandingsCard({ fest }) {
+  return (
+    <div style={{ margin: "0 0 22px", padding: 18, borderRadius: 16, background: "#fff", border: `2px solid ${fest.ended ? "#16a34a" : "#f59e0b"}` }}>
+      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", gap: 12, flexWrap: "wrap", marginBottom: 10 }}>
+        <div style={{ fontWeight: 900, fontSize: 17, color: "#0f172a" }}>
+          {fest.ended ? `🏆 ${fest.name}: final standings — ${fest.prize || "the top 3 win"}` : `🏆 ${fest.name}: top 5 right now`}
+          <span style={{ fontWeight: 600, fontSize: 13, color: "#64748b" }}> · a player's total includes the family they recruited</span>
+        </div>
+        {fest.ended && fest.standings.length > 0 && (
+          <button
+            type="button"
+            style={{ padding: "6px 14px", borderRadius: 10, border: "1px solid #16a34a", background: "#f0fdf4", color: "#166534", fontWeight: 800, cursor: "pointer" }}
+            onClick={() => {
+              const lines = fest.standings.slice(0, 3).map((w) => `${w.rank}. ${w.name} <${w.email}> — ${w.points} points${w.recruits.length ? ` (incl. ${w.recruits.map((r) => r.name).join(", ")})` : ""}`);
+              try { navigator.clipboard.writeText(`${fest.name} winners\n${lines.join("\n")}`); } catch {}
+            }}
+          >
+            Copy winners
+          </button>
+        )}
+      </div>
+      {fest.standings.length === 0 ? (
+        <div style={{ fontSize: 14, color: "#64748b" }}>No one has finished a session yet — players appear here once they reach the results screen.</div>
+      ) : (
+        <table style={{ width: "100%", borderCollapse: "collapse", fontSize: 14 }}>
+          <tbody>
+            {fest.standings.slice(0, 5).map((w) => (
+              <tr key={w.email} style={{ borderTop: "1px solid #f1f5f9", background: w.rank <= 3 ? "#fffbeb" : "transparent" }}>
+                <td style={{ padding: "8px 6px", width: 48, fontSize: 18 }}>{["🥇", "🥈", "🥉"][w.rank - 1] || `#${w.rank}`}</td>
+                <td style={{ padding: "8px 6px" }}>
+                  <div style={{ fontWeight: 800, color: "#0f172a" }}>{w.name}{w.rank <= 3 ? <span style={{ marginLeft: 8, fontSize: 12, fontWeight: 800, color: "#b45309" }}>🎁 gift card</span> : null}</div>
+                  <div style={{ fontSize: 12.5, color: "#64748b" }}>{w.email}</div>
+                  {w.recruits.length > 0 && (
+                    <div style={{ fontSize: 12.5, color: "#475569", marginTop: 3 }}>
+                      Recruits: {w.recruits.map((r) => `${r.name} (${r.email}, ${r.points} pts)`).join(" · ")}
+                    </div>
+                  )}
+                </td>
+                <td style={{ padding: "8px 6px", textAlign: "right", whiteSpace: "nowrap" }}>
+                  <div style={{ fontWeight: 900, fontSize: 17, color: "#b45309" }}>{w.points}</div>
+                  <div style={{ fontSize: 12, color: "#64748b" }}>{w.recruits.length ? `${w.own} own + ${w.points - w.own} recruits` : `${w.tasks} tasks`}</div>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
       )}
     </div>
   );
