@@ -304,7 +304,7 @@ export default function PracticeDashboard() {
             <tr>
               <th style={styles.th}>#</th>
               <th style={styles.th}>Name</th>
-              <th style={styles.th}>Email</th>
+              <th style={styles.th}>Email / player code</th>
               <th style={styles.th}>Source</th>
               <th style={styles.th}>Studying</th>
               <th style={{ ...styles.th, textAlign: "center" }}>Completed</th>
@@ -316,7 +316,7 @@ export default function PracticeDashboard() {
           </thead>
           <tbody>
             {sortedLeads.map((lead, i) => (
-              <React.Fragment key={lead.email + i}>
+              <React.Fragment key={(lead.email || lead.playerCode || "") + i}>
                 <tr
                   onClick={() =>
                     setExpandedRow(expandedRow === i ? null : i)
@@ -330,7 +330,9 @@ export default function PracticeDashboard() {
                   <td style={styles.td}>{i + 1}</td>
                   <td style={{ ...styles.td, fontWeight: 700 }}>{lead.name}</td>
                   <td style={{ ...styles.td, color: "#64748b", fontSize: 13 }}>
-                    {lead.email}
+                    {/* A nickname player has no email: their player code is
+                        how they are known (backend/routes/demo.js /activity). */}
+                    {lead.playerCode ? <PlayerCode code={lead.playerCode} /> : lead.email}
                   </td>
                   <td style={styles.td}>
                     <span
@@ -592,7 +594,9 @@ function StandingsCard({ fest }) {
             type="button"
             style={{ padding: "6px 14px", borderRadius: 10, border: "1px solid #16a34a", background: "#f0fdf4", color: "#166534", fontWeight: 800, cursor: "pointer" }}
             onClick={() => {
-              const lines = fest.standings.slice(0, 3).map((w) => `${w.rank}. ${w.name} <${w.email}> — ${w.points} points${w.recruits.length ? ` (incl. ${w.recruits.map((r) => r.name).join(", ")})` : ""}`);
+              // A nickname player is named with their code, which is what
+              // they show to claim the prize; anyone else with their email.
+              const lines = fest.standings.slice(0, 3).map((w) => `${w.rank}. ${w.name} ${w.playerCode ? `(player code ${w.playerCode})` : `<${w.email}>`} — ${w.points} points${w.recruits.length ? ` (incl. ${w.recruits.map((r) => r.name).join(", ")})` : ""}`);
               try { navigator.clipboard.writeText(`${fest.name} winners\n${lines.join("\n")}`); } catch {}
             }}
           >
@@ -606,14 +610,14 @@ function StandingsCard({ fest }) {
         <table style={{ width: "100%", borderCollapse: "collapse", fontSize: 14 }}>
           <tbody>
             {fest.standings.slice(0, 5).map((w) => (
-              <tr key={w.email} style={{ borderTop: "1px solid #f1f5f9", background: w.rank <= 3 ? "#fffbeb" : "transparent" }}>
+              <tr key={w.email || w.playerCode || w.rank} style={{ borderTop: "1px solid #f1f5f9", background: w.rank <= 3 ? "#fffbeb" : "transparent" }}>
                 <td style={{ padding: "8px 6px", width: 48, fontSize: 18 }}>{["🥇", "🥈", "🥉"][w.rank - 1] || `#${w.rank}`}</td>
                 <td style={{ padding: "8px 6px" }}>
                   <div style={{ fontWeight: 800, color: "#0f172a" }}>{w.name}{w.rank <= 3 ? <span style={{ marginLeft: 8, fontSize: 12, fontWeight: 800, color: "#b45309" }}>🎁 gift card</span> : null}</div>
-                  <div style={{ fontSize: 12.5, color: "#64748b" }}>{w.email}</div>
+                  <div style={{ fontSize: 12.5, color: "#64748b" }}>{w.playerCode ? <PlayerCode code={w.playerCode} /> : w.email}</div>
                   {w.recruits.length > 0 && (
                     <div style={{ fontSize: 12.5, color: "#475569", marginTop: 3 }}>
-                      Recruits: {w.recruits.map((r) => `${r.name} (${r.email}, ${r.points} pts)`).join(" · ")}
+                      Recruits: {w.recruits.map((r) => `${r.name} (${r.playerCode ? `code ${r.playerCode}` : r.email}, ${r.points} pts)`).join(" · ")}
                     </div>
                   )}
                 </td>
@@ -627,6 +631,16 @@ function StandingsCard({ fest }) {
         </table>
       )}
     </div>
+  );
+}
+
+/* A nickname player's code (shared/playerIdentity.js), shown where an email
+   would be: the student shows it to claim a prize. */
+function PlayerCode({ code }) {
+  return (
+    <span title="Nickname player — no email kept" style={{ fontFamily: "ui-monospace, SFMono-Regular, Menlo, monospace", fontWeight: 800, letterSpacing: 1, color: "#334155", background: "#f1f5f9", border: "1px solid #e2e8f0", borderRadius: 6, padding: "1px 6px" }}>
+      🔑 {code}
+    </span>
   );
 }
 
