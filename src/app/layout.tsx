@@ -35,7 +35,7 @@ export const metadata: Metadata = {
     "educational games", "teacher game platform", "phone ban classroom activities",
     "Chromebook classroom games", "Ontario curriculum",
   ],
-  metadataBase: new URL("https://qrewzi.com"),
+  metadataBase: new URL("https://www.qrewzi.com"),
   // No canonical here: it would be inherited by every page that does not
   // set its own. Each page names itself (seo.ts pageMetadata; the home page
   // in page.tsx).
@@ -48,7 +48,7 @@ export const metadata: Metadata = {
     title: "Qrewzi — the classroom becomes the game",
     description:
       "Live, room-wide team games from a one-line lesson. Three game modes, 85+ task types, any device, projector scoreboard, report at the bell. Your first three months free.",
-    url: "https://qrewzi.com",
+    url: "https://www.qrewzi.com",
     siteName: "Qrewzi",
     type: "website",
     locale: "en_CA",
@@ -97,24 +97,24 @@ const jsonLd = {
   "@graph": [
     {
       "@type": "Organization",
-      "@id": "https://qrewzi.com/#org",
+      "@id": "https://www.qrewzi.com/#org",
       name: "Qrewzi",
-      url: "https://qrewzi.com",
-      logo: "https://qrewzi.com/apple-touch-icon.svg",
+      url: "https://www.qrewzi.com",
+      logo: "https://www.qrewzi.com/apple-touch-icon.svg",
       email: "hello@qrewzi.com",
       address: { "@type": "PostalAddress", addressLocality: "Hamilton", addressRegion: "ON", addressCountry: "CA" },
     },
     {
       "@type": "SoftwareApplication",
-      "@id": "https://qrewzi.com/#app",
+      "@id": "https://www.qrewzi.com/#app",
       name: "Qrewzi",
       alternateName: "Qrewzi (crew-zee)",
       applicationCategory: "EducationalApplication",
       operatingSystem: "Web, Android, iOS",
-      url: "https://qrewzi.com",
+      url: "https://www.qrewzi.com",
       description:
         "Turns a one-line lesson into a live, room-wide team game for classrooms, trivia nights and youth groups. Teams move between QR stations on any device, played as Troopers, Raiders or Duels; the projector keeps score; the teacher's grades and a parent-ready report arrive at the bell.",
-      publisher: { "@id": "https://qrewzi.com/#org" },
+      publisher: { "@id": "https://www.qrewzi.com/#org" },
       offers: { "@type": "Offer", price: "0", priceCurrency: "CAD", description: "First three months free, no card needed" },
       installUrl: [
         "https://play.google.com/store/apps/details?id=net.curriculate.student",
@@ -138,10 +138,10 @@ const jsonLd = {
     },
     {
       "@type": "WebSite",
-      "@id": "https://qrewzi.com/#site",
-      url: "https://qrewzi.com",
+      "@id": "https://www.qrewzi.com/#site",
+      url: "https://www.qrewzi.com",
       name: "Qrewzi",
-      publisher: { "@id": "https://qrewzi.com/#org" },
+      publisher: { "@id": "https://www.qrewzi.com/#org" },
     },
   ],
 };

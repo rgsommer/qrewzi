@@ -19,7 +19,7 @@ export default function robots(): MetadataRoute.Robots {
         disallow: ["/api/", "/practice-dashboard"],
       },
     ],
-    sitemap: "https://qrewzi.com/sitemap.xml",
-    host: "https://qrewzi.com",
+    sitemap: "https://www.qrewzi.com/sitemap.xml",
+    host: "https://www.qrewzi.com",
   };
 }

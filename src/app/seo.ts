@@ -6,7 +6,10 @@ import type { Metadata } from "next";
 // `twitter`. So every page builds both in full here, and a shared link shows
 // the card image whichever page it points at.
 
-export const SITE_URL = "https://qrewzi.com";
+// The address the site is served at: the bare domain redirects here (308),
+// so a canonical, sitemap or structured-data URL on qrewzi.com would point
+// search engines at a redirect.
+export const SITE_URL = "https://www.qrewzi.com";
 
 export const OG_IMAGE = {
   url: "/og-image.png",

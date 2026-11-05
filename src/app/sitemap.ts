@@ -4,7 +4,7 @@ import type { MetadataRoute } from "next";
 // One entry per public marketing route. Pricing priority slightly bumped
 // because that's the conversion page.
 export default function sitemap(): MetadataRoute.Sitemap {
-  const base = "https://qrewzi.com";
+  const base = "https://www.qrewzi.com";
   // Bump this when page content changes; a fresh date on every build tells
   // crawlers nothing.
   const now = new Date("2026-11-04");
