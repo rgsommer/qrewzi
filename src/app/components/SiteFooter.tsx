@@ -25,7 +25,7 @@ export default function SiteFooter() {
         <div
           style={{
             display: "grid",
-            gridTemplateColumns: "repeat(4, 1fr)",
+            gridTemplateColumns: "repeat(auto-fit, minmax(140px, 1fr))",
             gap: 24,
             fontSize: 14,
           }}
@@ -48,6 +48,14 @@ export default function SiteFooter() {
             <FLink href={PLAY_URL}>Google Play</FLink>
             <FLink href={APP_STORE_URL}>App Store</FLink>
             <FLink href="https://play.qrewzi.com">Join in a browser</FLink>
+          </FooterCol>
+          <FooterCol title="Guides">
+            <FLink href="/classroom-scavenger-hunt">Classroom scavenger hunt</FLink>
+            <FLink href="/qr-code-scavenger-hunt">QR code scavenger hunt</FLink>
+            <FLink href="/ai-scavenger-hunt-generator">AI scavenger hunt generator</FLink>
+            <FLink href="/review-games">Review games</FLink>
+            <FLink href="/goosechase-alternative">Goosechase alternative</FLink>
+            <FLink href="/kahoot-alternative">Kahoot alternative</FLink>
           </FooterCol>
           <FooterCol title="Company">
             <FLink href="/about">About</FLink>

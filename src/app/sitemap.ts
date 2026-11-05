@@ -7,7 +7,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const base = "https://qrewzi.com";
   // Bump this when page content changes; a fresh date on every build tells
   // crawlers nothing.
-  const now = new Date("2026-11-01");
+  const now = new Date("2026-11-04");
   const p = (path: string, priority: number, changeFrequency: "daily" | "weekly" | "monthly") => ({
     url: `${base}${path}`,
     lastModified: now,
@@ -18,6 +18,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
   return [
     p("/",              1.0, "weekly"),
     p("/escape-rooms",  0.95, "weekly"),
+    // The pages that answer a teacher's question in so many words.
+    p("/classroom-scavenger-hunt", 0.95, "monthly"),
+    p("/qr-code-scavenger-hunt", 0.9, "monthly"),
+    p("/ai-scavenger-hunt-generator", 0.9, "monthly"),
+    p("/review-games", 0.9, "monthly"),
+    p("/goosechase-alternative", 0.85, "monthly"),
+    p("/kahoot-alternative", 0.85, "monthly"),
     p("/game-modes",    0.9, "monthly"),
     p("/trivia-night",  0.9, "monthly"),
     p("/think-pair-share", 0.9, "monthly"),

@@ -11,6 +11,13 @@ export default function robots(): MetadataRoute.Robots {
         allow: "/",
         disallow: ["/api/", "/practice-dashboard"],
       },
+      // The AI assistants' crawlers, by name: a teacher who asks one which
+      // classroom game to use should get an answer that can name Qrewzi.
+      {
+        userAgent: ["GPTBot", "OAI-SearchBot", "ChatGPT-User", "ClaudeBot", "Claude-User", "PerplexityBot", "Google-Extended", "Applebot-Extended"],
+        allow: "/",
+        disallow: ["/api/", "/practice-dashboard"],
+      },
     ],
     sitemap: "https://qrewzi.com/sitemap.xml",
     host: "https://qrewzi.com",

@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Faq, { type FaqItem } from "../components/Faq";
 
 /**
  * /escape-rooms — the Qrewzi escape-room feature page.
@@ -12,6 +13,18 @@ import Link from "next/link";
  * Primary CTA is the live demo (set.qrewzi.com/demo — Treasure Island
  * right now, no login needed). Secondary CTA is the free sign-up.
  */
+// The questions teachers ask about classroom escape rooms, answered from
+// what this page already says — shown here and given to search engines as
+// FAQPage data (components/Faq).
+const ESCAPE_FAQ: FaqItem[] = [
+  { q: "How long does it take to make a classroom escape room?", a: "About ninety seconds. Type the lesson and a theme — Halloween, Treasure Island, anything — and press Generate. Every team gets its own themed room, built around your curriculum." },
+  { q: "Can several teams play at once in one classroom?", a: "Yes. Six teams can each play their own escape room in the same classroom, side by side, on their own devices, while the projector keeps score." },
+  { q: "Do I need to print anything or buy a kit?", a: "No. There's no kit to buy and nothing to print: the clues, locks and vault live on the students' devices." },
+  { q: "What devices do students need?", a: "Any phone, tablet or Chromebook, in the Qrewzi app or a browser. Students join with a room code — no accounts." },
+  { q: "Is it a Breakout EDU alternative?", a: "Yes. Instead of one physical kit per team, every lesson can be an escape room in any theme, and every team gets its own." },
+  { q: "Can I try one before signing up?", a: "Yes. The live demo opens a ready-made room with a room code and QR — no sign-up needed." },
+];
+
 export default function EscapeRoomsPage() {
   return (
     <>
@@ -305,6 +318,7 @@ export default function EscapeRoomsPage() {
           </p>
         </div>
       </section>
+      <Faq items={ESCAPE_FAQ} title="Classroom escape rooms, answered" />
     </>
   );
 }

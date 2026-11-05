@@ -1,0 +1,38 @@
+# Qrewzi
+
+> Qrewzi (say "crew-zee") is a classroom game app for K–12 teachers. A teacher describes a lesson in one line, or pastes a terms list, and Qrewzi builds a live, room-wide team game: a classroom scavenger hunt at QR stations, a mystery-box quest, an escape room or a trivia night. Students join on any phone, tablet or Chromebook with a room code — no accounts, nothing to install — the projector shows a live scoreboard, and the teacher gets a report at the bell. The first three months are free with no card needed; after that, a Free plan or paid plans.
+
+Qrewzi is made in Canada for teachers. It is also used by youth groups, churches and teams at work.
+
+## What it does
+
+- Writes the game from the lesson: a challenge for every station, at the chosen grade, in dozens of kinds of task — multiple choice, true or false, sorting, ordering, matching, fill the blanks, photo missions, acting out, debates, puzzles and more.
+- Runs a classroom scavenger hunt: teachers print the QR station cards once and post them around the room; each team is sent to a station no other team is at, scans it, and gets that station's task.
+- Plays on screen only when there is no room to move: the same game at the desks, with no scanning.
+- Game modes: Troopers (station to station in order), Raiders (teams pick the next mystery box), Duels (one-on-one), plus escape rooms, trivia nights and Think-Pair-Share.
+- Marks most tasks the moment they are answered; written answers are scored by AI against the lesson.
+- One device per team is enough; roles rotate so every student takes a turn.
+- Students can practise a set on their own afterwards.
+
+## Pages
+
+- [Classroom scavenger hunt app](https://qrewzi.com/classroom-scavenger-hunt): a scavenger hunt built from your lesson, at QR stations, scored live.
+- [How to run a QR code scavenger hunt](https://qrewzi.com/qr-code-scavenger-hunt): by hand with a free QR generator, or with Qrewzi.
+- [AI scavenger hunt generator](https://qrewzi.com/ai-scavenger-hunt-generator): one line about the lesson becomes a whole hunt.
+- [Review games that get students moving](https://qrewzi.com/review-games): test review for any unit, from its terms list.
+- [Goosechase alternative for schools](https://qrewzi.com/goosechase-alternative): how Qrewzi differs from mission-based scavenger hunt apps.
+- [Kahoot alternative for team play](https://qrewzi.com/kahoot-alternative): teams that move and work together instead of a race to the buzzer.
+- [Classroom escape rooms](https://qrewzi.com/escape-rooms): an escape room from any lesson, in any theme, one per team.
+- [Trivia nights](https://qrewzi.com/trivia-night): a whole-room trivia night with nine question banks.
+- [Game modes](https://qrewzi.com/game-modes): Troopers, Raiders, Duels and the Builder add-on.
+- [How it works](https://qrewzi.com/how-it-works): describe, print, pick a mode, share, run, report.
+- [Features](https://qrewzi.com/features)
+- [Pricing](https://qrewzi.com/pricing): three months free, then the Free plan or a paid plan; district pricing on request.
+- [For youth groups](https://qrewzi.com/youth-groups), [for teams at work](https://qrewzi.com/teams), [SEL and brain breaks](https://qrewzi.com/social-emotional-learning), [Think-Pair-Share](https://qrewzi.com/think-pair-share), [Prayer Rounds](https://qrewzi.com/prayer)
+
+## Links
+
+- Teachers sign up: https://set.qrewzi.com/signup
+- Live demo, no sign-up: https://set.qrewzi.com/demo
+- Students join: https://play.qrewzi.com
+- Contact: hello@qrewzi.com
