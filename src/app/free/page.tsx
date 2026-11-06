@@ -141,8 +141,8 @@ export default function FreePage() {
             />
             <Line
               emoji="🎟️"
-              title={`Then ${code} takes a month off`}
-              body="Carry on with a paid plan and your first paid month is free too. One per account."
+              title={`Then ${code} takes a month off — or three`}
+              body="Choose a paid plan after your free months and the first paid month is free. Choose it during them and the first three paid months are free. One per account."
             />
             <Line
               emoji="🙂"
