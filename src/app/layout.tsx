@@ -19,11 +19,11 @@ const body = Nunito({
 
 export const metadata: Metadata = {
   title: {
-    default: "Qrewzi — the classroom becomes the game | Live team games for K-12",
+    default: "Qrewzi — the classroom becomes the game | K-12 team games",
     template: "%s · Qrewzi",
   },
   description:
-    "Qrewzi (say crew-zee) turns a one-line lesson into a live, room-wide team game: QR stations, any device, a projector scoreboard and your report at the bell. Three months free.",
+    "Qrewzi (say crew-zee) turns a lesson into a live team game: QR stations or an outdoor photo hunt, any device, a projector scoreboard, a report at the bell.",
   keywords: [
     "classroom escape room", "AI escape room generator", "Breakout EDU alternative",
     "classroom trivia night", "Bible trivia game", "house points game", "team building classroom game",
@@ -34,6 +34,8 @@ export const metadata: Metadata = {
     "interactive lessons", "K-12 game engine", "GameMaster dashboard",
     "educational games", "teacher game platform", "phone ban classroom activities",
     "Chromebook classroom games", "Ontario curriculum",
+    "outdoor scavenger hunt", "outdoor photo scavenger hunt", "offline classroom game",
+    "study buddy app", "trivia practice", "team grading",
   ],
   metadataBase: new URL("https://www.qrewzi.com"),
   // No canonical here: it would be inherited by every page that does not
@@ -113,7 +115,7 @@ const jsonLd = {
       operatingSystem: "Web, Android, iOS",
       url: "https://www.qrewzi.com",
       description:
-        "Turns a one-line lesson into a live, room-wide team game for classrooms, trivia nights and youth groups. Teams move between QR stations on any device, played as Troopers, Raiders or Duels; the projector keeps score; the teacher's grades and a parent-ready report arrive at the bell.",
+        "Turns a one-line lesson into a live, room-wide team game for classrooms, trivia nights and youth groups. Teams move between QR stations on any device, played as Troopers, Raiders or Duels, or head outside for an ImagineIt photo hunt; play carries on when the Wi-Fi drops; the projector keeps score; each student's grade (for the teacher) and a parent-ready report arrive at the bell.",
       publisher: { "@id": "https://www.qrewzi.com/#org" },
       offers: { "@type": "Offer", price: "0", priceCurrency: "CAD", description: "First three months free, no card needed" },
       installUrl: [
@@ -128,12 +130,18 @@ const jsonLd = {
         "Groups named for the lesson, or your school's houses, with a house showdown",
         "Trivia nights from nine checked question banks, or on your own topic",
         "Classroom escape rooms and quests generated from any lesson",
+        "ImagineIt: an outdoor photo scavenger hunt from the lesson, with no QR codes, a photo wall and a class vote",
+        "Play that carries on when the Wi-Fi drops; Outdoor mode saves the whole route on each device",
+        "Debate Match: two teams, eight timed turns, judged on argument and delivery",
+        "Two-team True/False Connect Four, or against the computer",
         "Prayer Rounds: small-group prayer times for churches and youth groups",
         "Multi-room hunts, or on-screen only with no walking",
         "85+ task types beyond multiple choice",
         "GameMaster projector dashboard with a live leaderboard",
         "Phones, tablets and Chromebooks in one room",
         "A report after every session with grades for the teacher, Bloom's coverage and a note to parents",
+        "Each student's own grade in team play, from the turns they held the device, with an Edsby CSV",
+        "Study practice at home: Study Buddies, trivia rounds, a words sheet and written answers marked",
       ],
     },
     {

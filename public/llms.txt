@@ -9,10 +9,12 @@ Qrewzi is made in Canada for teachers. It is also used by youth groups, churches
 - Writes the game from the lesson: a challenge for every station, at the chosen grade, in dozens of kinds of task — multiple choice, true or false, sorting, ordering, matching, fill the blanks, photo missions, acting out, debates, puzzles and more.
 - Runs a classroom scavenger hunt: teachers print the QR station cards once and post them around the room; each team is sent to a station no other team is at, scans it, and gets that station's task.
 - Plays on screen only when there is no room to move: the same game at the desks, with no scanning.
+- Goes outside: station cards on fence posts with Outdoor mode, which saves the whole route on each device, or ImagineIt, an outdoor photo scavenger hunt from the lesson with no QR codes — nature finds, imagination prompts, a projector photo wall and a class vote.
+- Keeps playing when the Wi-Fi drops: answers wait on the device and send when the connection is back.
 - Game modes: Troopers (station to station in order), Raiders (teams pick the next mystery box), Duels (one-on-one), plus escape rooms, trivia nights and Think-Pair-Share.
 - Marks most tasks the moment they are answered; written answers are scored by AI against the lesson.
-- One device per team is enough; roles rotate so every student takes a turn.
-- Students can practise a set on their own afterwards.
+- One device per team is enough; roles rotate so every student takes a turn, and each student's grade in the teacher's report comes from their own turns blended with the team's. Students see feedback, not grades.
+- Students can practise at home at play.qrewzi.com/practice — study sets, trivia rounds, a words sheet, written answers marked — and pair up as Study Buddies to study together, duel or beat each other's score.
 
 ## Pages
 
@@ -24,6 +26,7 @@ Qrewzi is made in Canada for teachers. It is also used by youth groups, churches
 - [Kahoot alternative for team play](https://www.qrewzi.com/kahoot-alternative): teams that move and work together instead of a race to the buzzer.
 - [Classroom escape rooms](https://www.qrewzi.com/escape-rooms): an escape room from any lesson, in any theme, one per team.
 - [Trivia nights](https://www.qrewzi.com/trivia-night): a whole-room trivia night with nine question banks.
+- [ImagineIt](https://www.qrewzi.com/imagineit): an outdoor photo scavenger hunt from the lesson, with no QR codes, that plays on out of Wi-Fi range.
 - [Game modes](https://www.qrewzi.com/game-modes): Troopers, Raiders, Duels and the Builder add-on.
 - [How it works](https://www.qrewzi.com/how-it-works): describe, print, pick a mode, share, run, report.
 - [Features](https://www.qrewzi.com/features)

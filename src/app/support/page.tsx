@@ -33,7 +33,15 @@ const STUDENTS: FaqItem[] = [
   },
   {
     q: "Do I need an account?",
-    a: "No. Students never make an account. If you want your results and your streak emailed to you, you can add an email on the join screen — that's optional.",
+    a: "Not to play in class: you join with the room code, and adding an email for your results and your streak is optional. To practise at play.qrewzi.com/practice you pick a nickname and get a player code — no email or real name — and your own phone or computer remembers you.",
+  },
+  {
+    q: "What if the Wi-Fi drops in the middle of a game?",
+    a: "Keep playing. Your device already has your team's next tasks, so stations still scan and your answers wait on the device — the bar says how many — then send by themselves when the Wi-Fi is back. A task that needs the whole room live, like a match against another team, waits until then and says so.",
+  },
+  {
+    q: "Can I practise on my own, or with a friend?",
+    a: "Yes. At play.qrewzi.com/practice you pick a subject or a trivia round and play on your own, and a 📖 Words button on every task shows the words and what they mean. To study with a friend, swap buddy codes: then you can study the same task together live, duel, or try to beat each other's score.",
   },
 ];
 
@@ -41,6 +49,14 @@ const TEACHERS: FaqItem[] = [
   {
     q: "How do I make a game for my class?",
     a: "Sign up at set.qrewzi.com, type a line about your lesson — \"water cycle for grade 5\" — and Qrewzi builds the game. Your first three months are free.",
+  },
+  {
+    q: "How is each student graded when a team shares a device?",
+    a: "The tablet deals the tasks round the team evenly and records whose turn each answer was. Each student's grade blends their own turns with the team's — 70% own turns unless you change it — and filler answers like keyboard mash are flagged for you. You see it all in your report and the Edsby CSV; students see feedback, not grades.",
+  },
+  {
+    q: "Can we play outside?",
+    a: "Yes. Tape the station cards to fence posts or playground equipment and switch on Outdoor mode, which saves the whole route on each device before teams go out. Or run ImagineIt, an outdoor photo hunt from your lesson with no station cards at all.",
   },
   {
     q: "Something went wrong in class. How do I report it?",

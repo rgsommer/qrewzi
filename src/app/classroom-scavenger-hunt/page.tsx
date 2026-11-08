@@ -3,9 +3,9 @@ import GuidePage from "../components/GuidePage";
 
 export const metadata = pageMetadata({
   path: "/classroom-scavenger-hunt",
-  title: "Classroom scavenger hunt app — from your lesson to a room-wide hunt",
+  title: "Classroom scavenger hunt app, from your lesson",
   description:
-    "Qrewzi is a classroom scavenger hunt app for K–12: describe your lesson and it writes the stations; teams scan QR codes around the room on any device, and the projector keeps score. First three months free.",
+    "A classroom scavenger hunt app for K–12: describe the lesson and Qrewzi builds it — QR stations in the room or outdoors, scored live, report at the bell.",
   socialTitle: "A classroom scavenger hunt, built from your lesson",
   socialDescription: "Describe the lesson, post the QR stations, and teams hunt the room for it — with a live scoreboard and a report at the bell.",
   keywords: [
@@ -47,6 +47,7 @@ export default function ClassroomScavengerHuntPage() {
         { q: "Do students need their own phones?", a: "No. One device per team is enough — a school tablet, a Chromebook or a phone. Students join from the app or any browser, with no accounts." },
         { q: "Can I use my own questions?", a: "Yes. Paste your terms or questions and Qrewzi builds the stations from them, or edit any task it writes." },
         { q: "What if my room is too small to walk around?", a: "Choose on-screen only: the same game plays at the desks, with no scanning and no walking." },
+        { q: "Can the hunt go outdoors, where the Wi-Fi is patchy?", a: "Yes. Tape the station cards up outside and switch on Outdoor mode, which saves the whole route on each device first, or run an ImagineIt photo hunt with no cards at all. Out of range, teams keep playing and their answers and photos send when they're back." },
         { q: "How much does it cost?", a: "Your first three months are free, with everything included and no card needed. After that, carry on with the Free plan or choose a paid plan." },
       ]}
       related={[
@@ -54,6 +55,7 @@ export default function ClassroomScavengerHuntPage() {
         { href: "/ai-scavenger-hunt-generator", label: "AI scavenger hunt generator" },
         { href: "/game-modes", label: "Game modes" },
         { href: "/escape-rooms", label: "Escape rooms" },
+        { href: "/imagineit", label: "ImagineIt outdoor photo hunt" },
       ]}
     />
   );

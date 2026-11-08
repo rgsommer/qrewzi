@@ -15,11 +15,16 @@ import { useEffect, useState } from "react";
 // paid month off (routes/stripe.js, the QREWFREE bridge).
 
 const DEFAULT_CODE = "QREWFREE";
+// Both demo links say they came from this page, and with which code, so the
+// owner's email about each demo (backend services/demoVisits.js) can say
+// "came from qrewzi.com/free" — a browser sends only "qrewzi.com" as the
+// referrer. utm_campaign is the code on the card.
+const FROM_HERE = "utm_source=qrewzi.com&utm_medium=free-page";
 // The demo game a teacher plays on their own phone: the school one, straight
 // in (the player app's ?demo= skips "Who will be playing?").
-const DEMO_GAME_URL = "https://play.qrewzi.com/?demo=school";
+const DEMO_GAME_URL = `https://play.qrewzi.com/?demo=school&${FROM_HERE}`;
 // The host's side: a live demo room on the projector, which a phone can join.
-const HOST_DEMO_URL = "https://set.qrewzi.com/demo";
+const HOST_DEMO_URL = `https://set.qrewzi.com/demo?${FROM_HERE}`;
 
 export default function FreePage() {
   const [code, setCode] = useState(DEFAULT_CODE);
@@ -31,6 +36,9 @@ export default function FreePage() {
   }, []);
 
   const signupHref = `https://set.qrewzi.com/signup?promo=${encodeURIComponent(code)}`;
+  const campaign = `&utm_campaign=${encodeURIComponent(code)}`;
+  const demoGameHref = `${DEMO_GAME_URL}${campaign}`;
+  const hostDemoHref = `${HOST_DEMO_URL}${campaign}`;
 
   return (
     <>
@@ -107,7 +115,7 @@ export default function FreePage() {
             <Link href={signupHref} className="btn btn-primary">
               Start free with {code} →
             </Link>
-            <a href={DEMO_GAME_URL} target="_blank" rel="noopener" className="btn btn-secondary">
+            <a href={demoGameHref} target="_blank" rel="noopener" className="btn btn-secondary">
               Try a demo game first
             </a>
           </div>
@@ -199,14 +207,14 @@ export default function FreePage() {
               emoji="📱"
               title="Play a demo game"
               body="Five minutes on your own phone, no account. You'll see exactly what your students see."
-              href={DEMO_GAME_URL}
+              href={demoGameHref}
               cta="Play the demo →"
             />
             <TryCard
               emoji="🖥️"
               title="Open the host's screen"
               body="The projector view of a live demo room. Join it from your phone and watch your team appear."
-              href={HOST_DEMO_URL}
+              href={hostDemoHref}
               cta="Open the host demo →"
             />
           </div>
@@ -230,8 +238,10 @@ export default function FreePage() {
             <Feat title="Zero prep" body="A sentence becomes a 45-minute game." />
             <Feat title="85+ task types" body="Sort, mind-map, speech, movement." />
             <Feat title="GameMaster projector" body="Live leaderboard, heat map, celebrations." />
-            <Feat title="Grades + reports" body="Parent-ready recap when the bell rings." />
+            <Feat title="Grades + reports" body="Each student's own grade, and a parent-ready recap at the bell." />
             <Feat title="Any device" body="Phones, Chromebooks, tablets together." />
+            <Feat title="Outside, too" body="ImagineIt photo hunts, and play that carries on when the Wi-Fi drops." />
+            <Feat title="Study at home" body="Practice with Study Buddies, trivia rounds and a words sheet." />
             <Feat title="Three game modes" body="Troopers, Raiders or Duels — same set." />
           </div>
         </div>

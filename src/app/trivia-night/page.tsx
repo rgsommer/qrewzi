@@ -66,6 +66,10 @@ const FAQ: FaqItem[] = [
     a: "Mostly ages 11 and up — school fun nights, youth groups and church nights — and adults play too. Mostly easy and medium, with a few harder ones, and every bank is family-friendly.",
   },
   {
+    q: "Can players practise trivia between nights?",
+    a: "Yes. At play.qrewzi.com/practice, a trivia round deals about ten quick games from any of the nine banks — quick-fire questions, buzzer clues, true or false, flashcard races and tic-tac-toe — for one player on their own, and each round is dealt fresh.",
+  },
+  {
     q: "Can I leave out the extras between rounds?",
     a: "Yes. Untick the extras and the night is rounds of questions with one stretch break halfway.",
   },

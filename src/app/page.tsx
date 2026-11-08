@@ -1,6 +1,7 @@
 import Link from "next/link";
 import type { Metadata } from "next";
 import StoreBadges from "./components/StoreBadges";
+import FeatureSpotlight from "./components/FeatureSpotlight";
 import { GAME_MODES, BUILDER } from "./components/gameModes";
 import { SITE_URL } from "./seo";
 
@@ -85,6 +86,11 @@ export default function HomePage() {
           <HeroArt />
         </div>
       </section>
+
+      {/* ============================ SPOTLIGHT ============================ */}
+      {/* Three feature cards, a different three each visit (all nine are in
+          the page for search engines; components/FeatureSpotlight.tsx). */}
+      <FeatureSpotlight />
 
       {/* ============================ WHAT'S IN IT FOR YOU ============================ */}
       <section className="section-tight">
@@ -204,11 +210,13 @@ export default function HomePage() {
             <Feat title="🙏 Youth nights & Prayer Rounds" body="Fun nights for youth groups and camps, Bible trivia, and Prayer Rounds: small groups praying through your points, round by round." href="/youth-groups" />
             <Feat title="🧩 85+ task types" body="Beyond multiple choice — sorts, mind maps, sequences, motion missions, speech recognition, script plays, role-play decks, live debates, mysterious images, museum artifacts, fake texts, and more." href="/features" />
             <Feat title="🌿 Wellbeing & SEL" body="A Nature Walk in a real forest or garden — imagine being there, breathe, then tap how you feel. Social-emotional role play on seven skills, calming puzzle breaks, and a guided Cross-Body Breath." href="/social-emotional-learning" />
-            <Feat title="☀️ Outside, too" body="Station cards on fence posts and playground equipment, and Outdoor mode for high-contrast screens in the sun." href="/features#room" />
+            <Feat title="🌳 ImagineIt outdoor hunts" body="An outdoor photo scavenger hunt from your lesson: nature finds, then imagination prompts. No QR codes, a projector photo wall, and a class vote at the end." href="/imagineit" />
+            <Feat title="☀️ Outside, and off the Wi-Fi" body="Station cards on fence posts and playground equipment. Outdoor mode saves the whole route on each device, and when the Wi-Fi drops most tasks play on — answers send when it's back." href="/features#offline" />
+            <Feat title="📚 Study at home, with a buddy" body="Practice from your latest unit's terms, written answers marked, a words sheet for words not learned yet, trivia rounds — and Study Buddies to study together, duel or beat each other's score." href="/features#practice" />
             <Feat title="📺 GameMaster mode" body="Projector dashboard for the teacher — live leaderboard, station heat map, celebration confetti, kill-switch controls." />
             <Feat title="🏫 One room, several, or none" body="Stations around one classroom, a hunt across the gym, the library and the hall, or on-screen only — no scanning, no walking." />
             <Feat title="💻 Any device" body="Phones, Chromebooks, tablets. Hidden-QR laptop mode. Rooms mix devices seamlessly." />
-            <Feat title="📄 Real reports" body="Every session ends with your report: grades for each student, Bloom's coverage, the standards it touched, a note to parents and a class-chat blurb." />
+            <Feat title="📄 Real reports" body="Every session ends with your report: each student's own grade — from the turns they held the device, blended with the team's — Bloom's coverage, the standards it touched, a note to parents and a class-chat blurb." href="/features#own-grades" />
           </div>
         </div>
       </section>

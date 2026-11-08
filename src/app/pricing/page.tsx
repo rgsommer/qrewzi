@@ -7,7 +7,7 @@ export const metadata = pageMetadata({
   path: "/pricing",
   title: "Pricing — three months free, then Free, Plus or Pro",
   description:
-    "Every new Qrewzi account gets three months of everything, free, with no card. Then the Free plan, Teacher Plus at $6.99 CAD a month, Teacher Pro at $12.99, or a yearly school plan.",
+    "Every new Qrewzi account gets three months of everything, free, no card. Then the Free plan, Plus at $6.99 CAD a month, Pro at $12.99, or a school plan.",
   socialDescription: "Three months of everything, free, no card. Then Free, Plus at $6.99 or Pro at $12.99 CAD a month, or a yearly school plan.",
   keywords: [
     "free classroom game app", "Kahoot alternative free", "free trial classroom game", "trivia night software",
@@ -29,6 +29,7 @@ const upgrade = (plan: string) => `${SET}/upgrade?plan=${plan}`;
 // routes/tasksets.js for custom trivia topics).
 const FREE = [
   "Live games: every task type and game mode",
+  "ImagineIt outdoor photo hunts",
   "A report by email after every session",
   "Trivia nights up to 30 minutes, 12 devices",
 ];
