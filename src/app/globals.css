@@ -309,3 +309,11 @@ p { margin: 0; }
   .spot-card { transition: none; }
   .spot-card:hover { transform: none; }
 }
+
+/* /hello — the outreach landing page: words and buttons beside the video, then three points. */
+.hello-grid { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr); gap: clamp(24px, 4vw, 56px); align-items: center; }
+.hello-points { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; }
+@media (max-width: 860px) {
+  .hello-grid { grid-template-columns: minmax(0, 1fr); }
+  .hello-points { grid-template-columns: minmax(0, 1fr); }
+}
