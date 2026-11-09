@@ -596,7 +596,12 @@ function StandingsCard({ fest }) {
             onClick={() => {
               // A nickname player is named with their code, which is what
               // they show to claim the prize; anyone else with their email.
-              const lines = fest.standings.slice(0, 3).map((w) => `${w.rank}. ${w.name} ${w.playerCode ? `(player code ${w.playerCode})` : `<${w.email}>`} — ${w.points} points${w.recruits.length ? ` (incl. ${w.recruits.map((r) => r.name).join(", ")})` : ""}`);
+              // The prize places (shared/practiceFest.js prizePlaces): the top
+              // three who are neither last round's champions nor extra accounts.
+              const winners = fest.standings.some((w) => w.prizePlace != null)
+                ? fest.standings.filter((w) => w.prizePlace).sort((a, b) => a.prizePlace - b.prizePlace)
+                : fest.standings.slice(0, 3);
+              const lines = winners.map((w) => `${w.prizePlace || w.rank}. ${w.name} ${w.playerCode ? `(player code ${w.playerCode})` : `<${w.email}>`} — ${w.points} points${w.recruits.length ? ` (incl. ${w.recruits.map((r) => r.name).join(", ")})` : ""}`);
               try { navigator.clipboard.writeText(`${fest.name} winners\n${lines.join("\n")}`); } catch {}
             }}
           >
@@ -609,11 +614,19 @@ function StandingsCard({ fest }) {
       ) : (
         <table style={{ width: "100%", borderCollapse: "collapse", fontSize: 14 }}>
           <tbody>
-            {fest.standings.slice(0, 5).map((w) => (
-              <tr key={w.email || w.playerCode || w.rank} style={{ borderTop: "1px solid #f1f5f9", background: w.rank <= 3 ? "#fffbeb" : "transparent" }}>
-                <td style={{ padding: "8px 6px", width: 48, fontSize: 18 }}>{["🥇", "🥈", "🥉"][w.rank - 1] || `#${w.rank}`}</td>
+            {fest.standings.slice(0, 8).map((w) => {
+              // Champions and extra accounts take no prize place; the medals go to the prize places.
+              const prize = w.prizePlace != null ? w.prizePlace : (w.champion || w.extraAccount ? null : (w.rank <= 3 ? w.rank : null));
+              return (
+              <tr key={w.email || w.playerCode || w.rank} style={{ borderTop: "1px solid #f1f5f9", background: prize ? "#fffbeb" : "transparent" }}>
+                <td style={{ padding: "8px 6px", width: 48, fontSize: 18 }}>{w.champion ? "🏆" : prize ? ["🥇", "🥈", "🥉"][prize - 1] : `#${w.rank}`}</td>
                 <td style={{ padding: "8px 6px" }}>
-                  <div style={{ fontWeight: 800, color: "#0f172a" }}>{w.name}{w.rank <= 3 ? <span style={{ marginLeft: 8, fontSize: 12, fontWeight: 800, color: "#b45309" }}>🎁 gift card</span> : null}</div>
+                  <div style={{ fontWeight: 800, color: "#0f172a" }}>
+                    {w.name}
+                    {prize ? <span style={{ marginLeft: 8, fontSize: 12, fontWeight: 800, color: "#b45309" }}>🎁 gift card</span> : null}
+                    {w.champion ? <span style={{ marginLeft: 8, fontSize: 12, fontWeight: 800, color: "#92400e" }}>🏆 Champion — no prize this round</span> : null}
+                    {w.extraAccount ? <span style={{ marginLeft: 8, fontSize: 12, fontWeight: 700, color: "#94a3b8" }}>extra account — no prize</span> : null}
+                  </div>
                   <div style={{ fontSize: 12.5, color: "#64748b" }}>{w.playerCode ? <PlayerCode code={w.playerCode} /> : w.email}</div>
                   {w.recruits.length > 0 && (
                     <div style={{ fontSize: 12.5, color: "#475569", marginTop: 3 }}>
@@ -626,7 +639,8 @@ function StandingsCard({ fest }) {
                   <div style={{ fontSize: 12, color: "#64748b" }}>{w.recruits.length ? `${w.own} own + ${w.points - w.own} recruits` : `${w.tasks} tasks`}</div>
                 </td>
               </tr>
-            ))}
+              );
+            })}
           </tbody>
         </table>
       )}
