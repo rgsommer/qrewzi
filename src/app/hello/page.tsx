@@ -6,6 +6,12 @@
 // points, and one thing to do — the live demo, no sign-up. A second, quieter
 // way to talk to Richard for 15 minutes.
 //
+// Once the game made from their own subject is ready (the second email's
+// "I made one from Grade 7 History for you to try" links here with &s=1), the
+// page leads with it: one big button that plays it on the phone or laptop in
+// hand, no sign-up (play.qrewzi.com's demo, in a room of their own). The rest
+// of the page follows as before.
+//
 // Their name comes from GET api.curriculate.net/outreach/hello?t=, and the
 // page tells the server it was seen (POST /outreach/hello/seen) only after a
 // few seconds on a visible screen: school link scanners fetch the page but do
@@ -15,7 +21,8 @@ import { useEffect, useState } from "react";
 
 const API = "https://api.curriculate.net";
 
-type Hello = { firstName?: string; organisation?: string; demoUrl?: string; talkUrl?: string; fromName?: string };
+type Sample = { title?: string; subject?: string; grade?: string; unit?: string; tasks?: number; playUrl?: string };
+type Hello = { firstName?: string; organisation?: string; demoUrl?: string; talkUrl?: string; fromName?: string; sample?: Sample };
 
 export default function HelloPage() {
   const [token, setToken] = useState("");
@@ -45,17 +52,47 @@ export default function HelloPage() {
   const talkHref = hello.talkUrl || "mailto:hello@qrewzi.com?subject=Qrewzi%20%E2%80%94%2015%20minutes";
   const first = hello.firstName?.trim();
   const org = hello.organisation?.trim();
+  // Only an address on Qrewzi's own player is a button here.
+  const sample = hello.sample && /^https:\/\/play\.qrewzi\.com\//.test(hello.sample.playUrl || "") ? hello.sample : null;
+  const made = sample ? [sample.grade ? `Grade ${sample.grade}` : "", sample.subject].filter(Boolean).join(" ") : "";
 
   return (
     <>
+      {sample ? (
+        <section className="section" style={{ paddingTop: "clamp(40px, 6vw, 88px)", paddingBottom: 0 }}>
+          <div className="container" style={{ maxWidth: 1080 }}>
+            <div className="card" style={{ padding: "clamp(24px, 4vw, 44px)", borderWidth: 3 }}>
+              <div className="eyebrow">Made for you</div>
+              <h1 style={{ marginTop: 12 }}>
+                {first ? <>{first}, here&rsquo;s a game made from {made || "your subject"}.</> : <>Here&rsquo;s a game made from {made || "your subject"}.</>}
+              </h1>
+              {sample.unit ? (
+                <p style={{ marginTop: 14, fontSize: 20, color: "var(--slate)", maxWidth: "52ch", lineHeight: 1.5 }}>
+                  {sample.unit} — {sample.tasks ? `${sample.tasks} short tasks` : "short tasks"} of different kinds, marked as you answer, the way a class plays them. On this phone or laptop, in a couple of minutes.
+                </p>
+              ) : null}
+              <div style={{ display: "flex", flexWrap: "wrap", gap: 12, marginTop: 26 }}>
+                <a href={sample.playUrl} className="btn btn-primary" style={{ fontSize: 20 }}>
+                  Play it — no sign-up →
+                </a>
+              </div>
+            </div>
+          </div>
+        </section>
+      ) : null}
       <section className="section" style={{ paddingTop: "clamp(40px, 6vw, 88px)", paddingBottom: "clamp(24px, 3vw, 40px)" }}>
         <div className="container" style={{ maxWidth: 1080 }}>
           <div className="hello-grid">
             <div>
               <div className="eyebrow">{org ? `For ${org}` : "For schools"}</div>
-              <h1 style={{ marginTop: 12 }}>
-                {first ? <>Hi {first},<br />here&rsquo;s Qrewzi in one&nbsp;minute.</> : <>Here&rsquo;s Qrewzi in one&nbsp;minute.</>}
-              </h1>
+              {sample ? (
+                // The game leads the page; this is the page's second heading.
+                <h2 style={{ marginTop: 12 }}>And here&rsquo;s Qrewzi in one&nbsp;minute.</h2>
+              ) : (
+                <h1 style={{ marginTop: 12 }}>
+                  {first ? <>Hi {first},<br />here&rsquo;s Qrewzi in one&nbsp;minute.</> : <>Here&rsquo;s Qrewzi in one&nbsp;minute.</>}
+                </h1>
+              )}
               <p style={{ marginTop: 20, fontSize: 20, color: "var(--slate)", maxWidth: "46ch", lineHeight: 1.5 }}>
                 A teacher types one line about the lesson. Qrewzi turns it into a team game the whole class plays — a
                 scavenger hunt around the room, an escape room or a trivia round — on any phone, tablet or Chromebook.
