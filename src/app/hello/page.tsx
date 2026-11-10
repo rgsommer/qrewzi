@@ -22,7 +22,38 @@ import { useEffect, useState } from "react";
 const API = "https://api.curriculate.net";
 
 type Sample = { title?: string; subject?: string; grade?: string; unit?: string; tasks?: number; playUrl?: string };
-type Hello = { firstName?: string; organisation?: string; demoUrl?: string; talkUrl?: string; fromName?: string; sample?: Sample };
+type Hello = { firstName?: string; organisation?: string; demoUrl?: string; talkUrl?: string; fromName?: string; sample?: Sample; audience?: "school" | "workplace" };
+
+// The page a workplace reader lands on must not undo the email that sent
+// them. Their email is written with a host, a group and a session (backend
+// rules.js audienceFor, WORKPLACE_FACTS); arriving at "a teacher types one
+// line about the lesson" tells them, in the first sentence, that this is for
+// somebody else. Same product, same claims, the right nouns — the setting is
+// the host's and the players' screens follow it (shared/audience.js).
+const COPY = {
+  school: {
+    eyebrow: "For schools",
+    intro: "A teacher types one line about the lesson. Qrewzi turns it into a team game the whole class plays — a scavenger hunt around the room, an escape room or a trivia round — on any phone, tablet or Chromebook.",
+    demoNote: "The demo opens the projector\u2019s view in your browser. Join it from your phone and you\u2019re playing in under a minute.",
+    videoAlt: "A class rotating between Qrewzi stations while the projector keeps score",
+    points: [
+      { title: "Made from your lesson in a minute", body: "Type a line about the lesson or paste your terms list. Qrewzi writes a challenge for every station, at your grade, in dozens of kinds of task." },
+      { title: "Every student takes a turn", body: "One device per team is enough. Roles rotate, most tasks are marked as they\u2019re answered, and the report at the bell gives each student their own grade." },
+      { title: "Works where your school is", body: "A room code, no student accounts, nothing to install. It keeps playing when the Wi-Fi drops, and it goes outside too." },
+    ],
+  },
+  workplace: {
+    eyebrow: "For teams",
+    intro: "You type one line about the topic \u2014 the new policy, the product, the safety briefing. Qrewzi turns it into a team game the room plays together \u2014 a scavenger hunt around the venue, an escape room or a trivia round \u2014 on the phones people already have.",
+    demoNote: "The demo opens the host\u2019s view in your browser. Join it from your phone and you\u2019re playing in under a minute.",
+    videoAlt: "Teams rotating between Qrewzi stations while the main screen keeps score",
+    points: [
+      { title: "Made from your material in a minute", body: "Type a line about the topic or paste your terms list. Qrewzi writes a challenge for every station, in dozens of kinds of task." },
+      { title: "Everyone takes a turn", body: "One device per team is enough. Roles rotate, most tasks are marked as they\u2019re answered, and you get a report at the end." },
+      { title: "Works where your people are", body: "A room code, no accounts, nothing to install. It keeps playing when the Wi-Fi drops, and it goes outside for an offsite." },
+    ],
+  },
+} as const;
 
 export default function HelloPage() {
   const [token, setToken] = useState("");
@@ -52,6 +83,7 @@ export default function HelloPage() {
   const talkHref = hello.talkUrl || "mailto:hello@qrewzi.com?subject=Qrewzi%20%E2%80%94%2015%20minutes";
   const first = hello.firstName?.trim();
   const org = hello.organisation?.trim();
+  const copy = COPY[hello.audience === "workplace" ? "workplace" : "school"];
   // Only an address on Qrewzi's own player is a button here.
   const sample = hello.sample && /^https:\/\/play\.qrewzi\.com\//.test(hello.sample.playUrl || "") ? hello.sample : null;
   const made = sample ? [sample.grade ? `Grade ${sample.grade}` : "", sample.subject].filter(Boolean).join(" ") : "";
@@ -84,7 +116,7 @@ export default function HelloPage() {
         <div className="container" style={{ maxWidth: 1080 }}>
           <div className="hello-grid">
             <div>
-              <div className="eyebrow">{org ? `For ${org}` : "For schools"}</div>
+              <div className="eyebrow">{org ? `For ${org}` : copy.eyebrow}</div>
               {sample ? (
                 // The game leads the page; this is the page's second heading.
                 <h2 style={{ marginTop: 12 }}>And here&rsquo;s Qrewzi in one&nbsp;minute.</h2>
@@ -94,8 +126,7 @@ export default function HelloPage() {
                 </h1>
               )}
               <p style={{ marginTop: 20, fontSize: 20, color: "var(--slate)", maxWidth: "46ch", lineHeight: 1.5 }}>
-                A teacher types one line about the lesson. Qrewzi turns it into a team game the whole class plays — a
-                scavenger hunt around the room, an escape room or a trivia round — on any phone, tablet or Chromebook.
+                {copy.intro}
               </p>
               <div style={{ display: "flex", flexWrap: "wrap", gap: 12, marginTop: 28 }}>
                 <a href={demoHref} className="btn btn-primary" style={{ fontSize: 18 }}>
@@ -106,7 +137,7 @@ export default function HelloPage() {
                 </a>
               </div>
               <p style={{ marginTop: 14, fontSize: 14, color: "var(--slate)" }}>
-                The demo opens the projector&rsquo;s view in your browser. Join it from your phone and you&rsquo;re playing in under a minute.
+                {copy.demoNote}
               </p>
             </div>
             <div
@@ -125,7 +156,7 @@ export default function HelloPage() {
                 loop
                 playsInline
                 preload="metadata"
-                aria-label="A class rotating between Qrewzi stations while the projector keeps score"
+                aria-label={copy.videoAlt}
                 style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
               />
             </div>
@@ -136,20 +167,7 @@ export default function HelloPage() {
       <section className="section-tight">
         <div className="container" style={{ maxWidth: 1080 }}>
           <div className="hello-points">
-            {[
-              {
-                title: "Made from your lesson in a minute",
-                body: "Type a line about the lesson or paste your terms list. Qrewzi writes a challenge for every station, at your grade, in dozens of kinds of task.",
-              },
-              {
-                title: "Every student takes a turn",
-                body: "One device per team is enough. Roles rotate, most tasks are marked as they're answered, and the report at the bell gives each student their own grade.",
-              },
-              {
-                title: "Works where your school is",
-                body: "A room code, no student accounts, nothing to install. It keeps playing when the Wi-Fi drops, and it goes outside too.",
-              },
-            ].map((p) => (
+            {copy.points.map((p) => (
               <div key={p.title} className="card" style={{ padding: 24 }}>
                 <h3 style={{ fontSize: 20, margin: 0 }}>{p.title}</h3>
                 <p style={{ marginTop: 10, color: "var(--slate)", lineHeight: 1.55 }}>{p.body}</p>
