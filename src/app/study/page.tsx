@@ -28,7 +28,7 @@ type Section = {
   questions?: { id: string; text: string; rubric?: string[] }[];
   results?: Result[]; marks?: number; sectionOutOf?: number; unmarked?: number;
 };
-type Attempt = { id: string; kind: "study" | "test"; counted: boolean; finished: boolean; marks?: number; outOf?: number; percent?: number; minutes?: number; startedAt?: string; summary?: string; note?: string; sections: Section[] };
+type Attempt = { id: string; kind: "study" | "test"; counted: boolean; locked?: boolean; finished: boolean; marks?: number; outOf?: number; percent?: number; minutes?: number; startedAt?: string; summary?: string; note?: string; sections: Section[] };
 type Me = { unit: string; name: string; best: number | null; tests: number; last: number | null; openAttempt: string | null; board: { rank: number; id: string; name: string; best: number; tests: number }[]; me: string };
 type Answers = Record<string, string | boolean>;
 
@@ -245,6 +245,8 @@ function Sitting({ attempt, token, setAttempt, onDone, onAgain }: { attempt: Att
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState("");
   const [left, setLeft] = useState(!attempt.counted);
+  // A test pauses when the student leaves the screen, until the teacher unlocks it.
+  const [locked, setLocked] = useState(!!attempt.locked);
   const awayAt = useRef<number | null>(null);
 
   // Leaving the screen: reported when they come back, with how long they were away.
@@ -256,11 +258,24 @@ function Sitting({ attempt, token, setAttempt, onDone, onAgain }: { attempt: Att
       const ms = Date.now() - awayAt.current;
       awayAt.current = null;
       setLeft(true);
+      if (test) setLocked(true);
       call(`/attempts/${attempt.id}/left`, { method: "POST", token, body: { ms } }).catch(() => {});
     };
     document.addEventListener("visibilitychange", onVis);
     return () => document.removeEventListener("visibilitychange", onVis);
-  }, [attempt.id, attempt.finished, token]);
+  }, [attempt.id, attempt.finished, token, test]);
+
+  // Paused: look every few seconds for the teacher's unlock.
+  useEffect(() => {
+    if (!locked) return undefined;
+    const t = setInterval(async () => {
+      try {
+        const r = await call<{ attempt: Attempt }>(`/attempts/${attempt.id}`, { token });
+        if (!r.attempt.locked) { setLocked(false); setAttempt(r.attempt); }
+      } catch { /* keep waiting */ }
+    }, 4000);
+    return () => clearInterval(t);
+  }, [locked, attempt.id, token, setAttempt]);
 
   useEffect(() => { if (current) store.set(`qz:ans:${attempt.id}:${current.index}`, answers); }, [answers, attempt.id, current]);
 
@@ -277,7 +292,10 @@ function Sitting({ attempt, token, setAttempt, onDone, onAgain }: { attempt: Att
       setAttempt(r.attempt);
       if (!test) setViewing(current.index);
       window.scrollTo(0, 0);
-    } catch (e) { setError((e as Error).message); } finally { setBusy(false); }
+    } catch (e) {
+      if ((e as { status?: number }).status === 423) setLocked(true);
+      else setError((e as Error).message);
+    } finally { setBusy(false); }
   }, [answers, attempt.id, current, setAttempt, test, token]);
 
   // The test's 50 minutes, from when it started; at the end the part on screen is handed in as it stands.
@@ -286,7 +304,7 @@ function Sitting({ attempt, token, setAttempt, onDone, onAgain }: { attempt: Att
   useEffect(() => { if (!deadline || attempt.finished) return undefined; const t = setInterval(() => setNow(Date.now()), 1000); return () => clearInterval(t); }, [deadline, attempt.finished]);
   const remaining = deadline ? Math.max(0, deadline - now) : null;
   const timeUp = remaining === 0 && !attempt.finished;
-  useEffect(() => { if (timeUp && current && !busy) handIn(true); }, [timeUp, current, busy, handIn]);
+  useEffect(() => { if (timeUp && current && !busy && !locked) handIn(true); }, [timeUp, current, busy, handIn, locked]);
 
   if (viewing != null) {
     const s = attempt.sections[viewing];
@@ -294,6 +312,16 @@ function Sitting({ attempt, token, setAttempt, onDone, onAgain }: { attempt: Att
   }
   if (attempt.finished) return <Finished attempt={attempt} onDone={onDone} onAgain={onAgain} />;
   if (!current) return null;
+  if (test && locked) {
+    return (
+      <section style={S.card}>
+        <h1 style={S.h1}>⏸ Your test is paused</h1>
+        <p>You left the test screen, so your test is paused. Put your hand up and ask your teacher to unlock it — your answers are kept.</p>
+        <p style={S.small}>Waiting for your teacher… this page carries on by itself once you&rsquo;re unlocked.</p>
+        {remaining != null && <p style={S.small}>Time left on the test: {Math.floor(remaining / 60000)} min</p>}
+      </section>
+    );
+  }
 
   return (
     <section style={S.card}>
