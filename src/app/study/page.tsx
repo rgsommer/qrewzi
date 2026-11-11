@@ -41,6 +41,21 @@ const store = {
   del(k: string) { try { sessionStorage.removeItem(k); } catch { /* fine */ } },
 };
 
+// The names that have signed in on this device (owner, 2026-11-10: someone with a
+// PIN should not be shown the whole class list every time). Names only — never a
+// PIN or a sign-in — so a shared tablet offers its last few students first.
+type Recent = { id?: string; name: string; classId?: string };
+const RECENT_KEY = "qz:study:recent";
+function recentNames(): Recent[] {
+  try { const v = JSON.parse(localStorage.getItem(RECENT_KEY) || "[]"); return Array.isArray(v) ? v.slice(0, 8) : []; } catch { return []; }
+}
+function rememberName(r: Recent) {
+  try {
+    const same = (x: Recent) => (r.id ? x.id === r.id : !x.id && x.name.toLowerCase() === r.name.toLowerCase());
+    localStorage.setItem(RECENT_KEY, JSON.stringify([r, ...recentNames().filter((x) => !same(x))].slice(0, 8)));
+  } catch { /* private mode: they pick from the list */ }
+}
+
 /** A random key this browser keeps, so a quiz or test sat by two names on one device can be flagged for the teacher. */
 function deviceKey(): string {
   try {
@@ -167,8 +182,17 @@ export default function StudyPage() {
 }
 
 function SignIn({ join, code, onIn }: { join: Join; code: string; onIn: (a: { token: string; name: string }) => void }) {
-  const [klass, setKlass] = useState<ClassList | null>(join.classes?.length === 1 ? join.classes[0] : null);
-  const [login, setLogin] = useState("");
+  // This device's recent names that are on this code's class lists, newest first.
+  const [recent] = useState<Recent[]>(() => {
+    const all = recentNames();
+    if (join.signIn === "typed") return all.filter((r) => !r.id).slice(0, 4);
+    const known = new Map((join.classes || []).flatMap((c) => c.names.map((n) => [n.id, { ...n, classId: c.id }] as const)));
+    return all.filter((r) => r.id && known.has(r.id)).map((r) => ({ ...r, name: known.get(r.id!)!.name, classId: known.get(r.id!)!.classId })).slice(0, 6);
+  });
+  const [someoneElse, setSomeoneElse] = useState(false);
+  const lastClass = recent[0]?.classId ? (join.classes || []).find((c) => c.id === recent[0].classId) || null : null;
+  const [klass, setKlass] = useState<ClassList | null>(join.classes?.length === 1 ? join.classes[0] : lastClass);
+  const [login, setLogin] = useState(join.signIn === "typed" ? recent[0]?.name || "" : "");
   const [error, setError] = useState("");
   const [busy, setBusy] = useState(false);
   // A name is claimed with a 4-digit PIN: made the first time, asked for after.
@@ -178,7 +202,12 @@ function SignIn({ join, code, onIn }: { join: Join; code: string; onIn: (a: { to
     try {
       const r = await call<{ token?: string; name: string; needPin?: "set" | "enter" }>(path, { method: "POST", body });
       if (r.needPin) { setPinStep({ mode: r.needPin, name: r.name, path, body }); return; }
-      if (r.token) onIn({ token: r.token, name: r.name });
+      if (r.token) {
+        // Remember the name (only the name) for next time on this device.
+        if (path.endsWith("/name") && typeof body.id === "string") rememberName({ id: body.id, name: r.name, classId: (join.classes || []).find((c) => c.names.some((n) => n.id === body.id))?.id });
+        if (path.endsWith("/typed") && typeof body.name === "string") rememberName({ name: String(body.name) });
+        onIn({ token: r.token, name: r.name });
+      }
     } catch (e) { setError((e as Error).message); } finally { setBusy(false); }
   };
   if (pinStep) {
@@ -213,6 +242,19 @@ function SignIn({ join, code, onIn }: { join: Join; code: string; onIn: (a: { to
     );
   }
   const classes = join.classes || [];
+  if (join.signIn === "names" && recent.length > 0 && !someoneElse) {
+    return (
+      <section style={S.card}>
+        <h1 style={S.h1}>Welcome back</h1>
+        <p>Tap your name, then type your PIN.</p>
+        {error && <p role="alert" style={S.alert}>{error}</p>}
+        <div style={S.grid}>
+          {recent.map((r) => <button key={r.id} style={{ ...S.choice, fontSize: 20 }} disabled={busy} onClick={() => pick(`/join/${code}/name`, { id: r.id })}>{r.name}</button>)}
+        </div>
+        <button style={{ ...S.button, marginTop: 12 }} onClick={() => setSomeoneElse(true)}>Someone else</button>
+      </section>
+    );
+  }
   return (
     <section style={S.card}>
       {!klass ? (
