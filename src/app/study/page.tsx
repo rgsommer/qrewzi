@@ -41,6 +41,20 @@ const store = {
   del(k: string) { try { sessionStorage.removeItem(k); } catch { /* fine */ } },
 };
 
+/** A random key this browser keeps, so a quiz or test sat by two names on one device can be flagged for the teacher. */
+function deviceKey(): string {
+  try {
+    let k = localStorage.getItem("qz:study:device") || "";
+    if (!/^[A-Za-z0-9-]{8,64}$/.test(k)) {
+      k = `d-${Math.random().toString(36).slice(2, 12)}${Date.now().toString(36)}`;
+      localStorage.setItem("qz:study:device", k);
+    }
+    return k;
+  } catch {
+    return "";
+  }
+}
+
 async function call<T>(path: string, opts: { method?: string; body?: unknown; token?: string } = {}): Promise<T> {
   const res = await fetch(API + path, {
     method: opts.method || "GET",
@@ -96,7 +110,7 @@ export default function StudyPage() {
   const start = async (fresh = false) => {
     if (!auth) return;
     setBusy(true); setError("");
-    try { setAttempt((await call<{ attempt: Attempt }>(`/s/${code}/attempts`, { method: "POST", token: auth.token, body: { fresh } })).attempt); }
+    try { setAttempt((await call<{ attempt: Attempt }>(`/s/${code}/attempts`, { method: "POST", token: auth.token, body: { fresh, device: deviceKey() } })).attempt); }
     catch (e) {
       // A sign-in the server no longer knows (kept in this tab from before): sign in again.
       if ((e as { status?: number }).status === 401) { signOut(); setError("Please sign in again."); }
@@ -144,11 +158,20 @@ function SignIn({ join, code, onIn }: { join: Join; code: string; onIn: (a: { to
   const [login, setLogin] = useState("");
   const [error, setError] = useState("");
   const [busy, setBusy] = useState(false);
-  const pick = async (path: string, body: unknown) => {
+  // A name is claimed with a 4-digit PIN: made the first time, asked for after.
+  const [pinStep, setPinStep] = useState<null | { mode: "set" | "enter"; name: string; path: string; body: Record<string, unknown> }>(null);
+  const pick = async (path: string, body: Record<string, unknown>) => {
     setBusy(true); setError("");
-    try { const r = await call<{ token: string; name: string }>(path, { method: "POST", body }); onIn({ token: r.token, name: r.name }); }
-    catch (e) { setError((e as Error).message); } finally { setBusy(false); }
+    try {
+      const r = await call<{ token?: string; name: string; needPin?: "set" | "enter" }>(path, { method: "POST", body });
+      if (r.needPin) { setPinStep({ mode: r.needPin, name: r.name, path, body }); return; }
+      if (r.token) onIn({ token: r.token, name: r.name });
+    } catch (e) { setError((e as Error).message); } finally { setBusy(false); }
   };
+  if (pinStep) {
+    return <PinStep step={pinStep} busy={busy} error={error} onBack={() => { setPinStep(null); setError(""); }}
+      onPin={(pin) => pick(pinStep.path, { ...pinStep.body, pin })} onMismatch={() => setError("The two PINs aren't the same. Try again.")} />;
+  }
   if (join.signIn === "typed") {
     return (
       <section style={S.card}>
@@ -194,6 +217,45 @@ function SignIn({ join, code, onIn }: { join: Join; code: string; onIn: (a: { to
           <p style={S.small}>Only pick your own name — your practice and your results are yours.</p>
         </>
       )}
+    </section>
+  );
+}
+
+function PinStep({ step, busy, error, onBack, onPin, onMismatch }: {
+  step: { mode: "set" | "enter"; name: string }; busy: boolean; error: string;
+  onBack: () => void; onPin: (pin: string) => void; onMismatch: () => void;
+}) {
+  const [pin, setPin] = useState("");
+  const [again, setAgain] = useState("");
+  const digits = (v: string) => v.replace(/\D/g, "").slice(0, 4);
+  const box = { ...S.input, fontSize: 28, letterSpacing: 10, width: 150, textAlign: "center" as const };
+  const go = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (pin.length !== 4) return;
+    if (step.mode === "set" && pin !== again) { onMismatch(); setAgain(""); return; }
+    onPin(pin);
+  };
+  return (
+    <section style={S.card}>
+      <button style={S.link} onClick={onBack}>← Not {step.name}?</button>
+      {step.mode === "set" ? (
+        <>
+          <h1 style={S.h1}>Make your PIN, {step.name}</h1>
+          <p>Pick 4 numbers only you know. You&rsquo;ll type them every time you sign in, so nobody else can use your name.</p>
+        </>
+      ) : (
+        <>
+          <h1 style={S.h1}>Your PIN, {step.name}</h1>
+          <p>Type the 4 numbers you made the first time.</p>
+        </>
+      )}
+      {error && <p role="alert" style={S.alert}>{error}</p>}
+      <form onSubmit={go} style={{ display: "flex", gap: 10, flexWrap: "wrap", alignItems: "center" }}>
+        <input value={pin} onChange={(e) => setPin(digits(e.target.value))} type="password" inputMode="numeric" autoComplete="off" aria-label="PIN" placeholder="••••" style={box} autoFocus />
+        {step.mode === "set" && <input value={again} onChange={(e) => setAgain(digits(e.target.value))} type="password" inputMode="numeric" autoComplete="off" aria-label="PIN again" placeholder="again" style={box} />}
+        <button style={S.primary} disabled={busy || pin.length !== 4 || (step.mode === "set" && again.length !== 4)}>{step.mode === "set" ? "Save my PIN" : "Sign in"}</button>
+      </form>
+      {step.mode === "enter" && <p style={S.small}>Forgot it, or this isn&rsquo;t your PIN? Ask your teacher to reset it.</p>}
     </section>
   );
 }
