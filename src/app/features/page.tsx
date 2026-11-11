@@ -4,12 +4,12 @@ import { GAME_MODES, BUILDER } from "../components/gameModes";
 
 export const metadata = pageMetadata({
   path: "/features",
-  title: "Features — game modes, outdoor hunts, practice",
+  title: "Features — game modes, outdoor hunts, study & test",
   description:
-    "Every Qrewzi feature: game modes, trivia nights, escape rooms, ImagineIt outdoor hunts, play that carries on when Wi-Fi drops, Study Buddies, own grades.",
+    "Every Qrewzi feature: game modes, trivia nights, escape rooms, ImagineIt outdoor hunts, play that carries on when Wi-Fi drops, Study Buddies, study and test codes, own grades.",
   socialTitle: "Every feature Qrewzi ships with",
   socialDescription:
-    "Game modes, trivia nights, escape rooms, ImagineIt outdoor photo hunts, games that play on when the Wi-Fi drops, study practice with buddies, and 85+ task types.",
+    "Game modes, trivia nights, escape rooms, ImagineIt outdoor photo hunts, games that play on when the Wi-Fi drops, study practice with buddies, a study code and a test code for every set, and 85+ task types.",
   keywords: [
     "classroom game features", "classroom game modes", "classroom trivia night", "Bible trivia game for kids",
     "house points game", "school houses competition", "team building classroom game", "classroom escape room",
@@ -20,6 +20,7 @@ export const metadata = pageMetadata({
     "auto-assign student groups", "classroom group generator",
     "outdoor photo scavenger hunt", "offline classroom game", "study buddy app", "trivia practice",
     "team grading", "each student's own grade", "debate game for students", "Connect Four review game",
+    "practice tests for students", "online unit test", "study code and test code", "test that pauses when students leave the screen",
   ],
 });
 
@@ -129,13 +130,27 @@ const GROUPS: Group[] = [
     ],
   },
   {
+    id: "study-and-test",
+    eyebrow: "Study & Test",
+    title: "The unit's practice tests, and the test itself.",
+    items: [
+      { name: "🔑 Three codes on every set", body: "Each set's card has a 📚 Study, a ✏️ Quiz and a 📝 Test code, with how many students have used each. Press one and an invitation is copied for your class post. The questions are written from the set and fact-checked; one the checker doubted waits for you.", href: "/study-and-test", cta: "How Study & Test works" },
+      { name: "📚 Practice tests", body: "The study code opens practice tests in the shape of the real one — matching, multiple choice, true or false, fill in the blanks, short answers — with feedback after every part, as often as they like. Their best goes on a class board, but only from a practice test where they stayed on the screen." },
+      { name: "📝 The test, one attempt", body: "Fifty minutes on their own devices, one attempt, no marks shown until the end. The code works for an hour from the first sign-in; make another for a make-up or a second class. A quiz is the short version: the unit's terms, twenty minutes." },
+      { name: "⏸ Leave the screen, and it pauses", body: "Copying and pasting are off, and the browser never holds an answer key. A student who leaves the test screen is paused until you press Unlock on the Live page, which shows who is on which part and who left, and for how long." },
+      { name: "🤝 A group task to finish", body: "The test can end with a group task for two or three classmates who reach it: one types while they decide together, and each gets the group's mark, which you can change for any one of them." },
+      { name: "🧑‍🏫 Marked for you, decided by you", body: "Every answer is marked on the server; written ones by AI against the unit, and one that couldn't be marked is left out, never counted wrong. Students get a short summary and a provisional grade; you review every answer, change any mark, and download an Edsby import file." },
+      { name: "📨 Reports that come to you", body: "The test's results come by email when its hour is up, with the Edsby file. The practice report — each student's best and how much they practised — comes once, when you make the quiz or test code." },
+      { name: "🔐 Names, PINs, nothing kept", body: "Students type their first name and last initial and make a four-digit PIN — or type a short name code like maple42 — so nobody can sign in as a classmate. A shared tablet keeps nothing between students." },
+    ],
+  },
+  {
     id: "after",
     eyebrow: "After the game",
     title: "The marking is done when the bell goes.",
     items: [
       { name: "📄 Your report", body: "Every game ends with a report for you: grades for each student, Bloom's taxonomy coverage, the curriculum standards the session touched, a note to parents and a class-chat blurb ready to paste." },
       { id: "own-grades", name: "👤 Each student's own grade", body: "On a shared tablet the tasks are dealt round the team evenly, and each answer records whose turn it was. Each student's grade blends their own turns with the team's — 70/30 unless you change it — and a filler answer like keyboard mash is flagged for you. Click a student in the report to see their turns. Students see feedback, never the grade." },
-      { name: "📋 Class rosters", body: "Upload a class roster, match each player's name to it after a game, and get a gradebook CSV ready to import into Edsby, with each student's own grade." },
       { name: "📸 ImagineIt photos in the report", body: "An ImagineIt hunt's photos come with its report, email and PDF — and photos that arrive after the game, from a team that was out of range, are added to it." },
     ],
   },

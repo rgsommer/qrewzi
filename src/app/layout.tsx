@@ -36,6 +36,7 @@ export const metadata: Metadata = {
     "Chromebook classroom games", "Ontario curriculum",
     "outdoor scavenger hunt", "outdoor photo scavenger hunt", "offline classroom game",
     "study buddy app", "trivia practice", "team grading",
+    "practice tests for students", "online unit test",
   ],
   metadataBase: new URL("https://www.qrewzi.com"),
   // No canonical here: it would be inherited by every page that does not
@@ -142,6 +143,7 @@ const jsonLd = {
         "A report after every session with grades for the teacher, Bloom's coverage and a note to parents",
         "Each student's own grade in team play, from the turns they held the device, with an Edsby CSV",
         "Study practice at home: Study Buddies, trivia rounds, a words sheet and written answers marked",
+        "Study & Test: a study code, a quiz code and a test code for every set — practice tests with feedback and a class board of personal bests, then one attempt at the test on students' own devices, paused if they leave the screen, marked on the server, with a provisional grade the teacher reviews and an Edsby import file",
       ],
     },
     {

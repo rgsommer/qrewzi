@@ -55,6 +55,7 @@ export default function SiteFooter() {
             <FLink href="/qr-code-scavenger-hunt">QR code scavenger hunt</FLink>
             <FLink href="/ai-scavenger-hunt-generator">AI scavenger hunt generator</FLink>
             <FLink href="/review-games">Review games</FLink>
+            <FLink href="/study-and-test">Practice tests &amp; unit tests</FLink>
             <FLink href="/goosechase-alternative">Goosechase alternative</FLink>
             <FLink href="/kahoot-alternative">Kahoot alternative</FLink>
           </FooterCol>

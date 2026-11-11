@@ -99,13 +99,13 @@ const SPOTS: Spot[] = [
     img: { src: "/spotlight/debate-match.webp", alt: "A debate on a phone: the motion, the team's side, and the speaker's turn clock" },
   },
   {
-    id: "trivia-rounds",
-    tag: "Practice at home",
-    title: "Trivia rounds",
-    hook: "Ten quick games from any of nine checked trivia banks, to play alone between trivia nights.",
-    href: "/features#trivia-rounds",
-    cta: "About trivia rounds",
-    img: { src: "/spotlight/trivia-rounds.webp", alt: "The trivia topics: Bible, general knowledge, history, the Middle Ages, the 1950s, modern times, Christmas, Easter and Thanksgiving" },
+    id: "study-and-test",
+    tag: "Study & Test",
+    title: "Practice tests, then the test",
+    hook: "Every set has a study, a quiz and a test code: one attempt, paused if they leave the screen, the grade yours.",
+    href: "/study-and-test",
+    cta: "How Study & Test works",
+    art: <StudyTestArt />,
   },
   {
     id: "practice",
@@ -325,6 +325,31 @@ function OfflineArt() {
 }
 
 // A written answer in practice, marked, with the word sheet beside it.
+// A set's card as it sits folded: its three codes, how many have used each,
+// and one student's test paused on the Live page.
+function StudyTestArt() {
+  const chip = { padding: "4px 9px", borderRadius: 999, fontSize: 11.5, fontWeight: 900, border: "1px solid #0f766e", background: "#f0fdfa", color: "#0f766e", whiteSpace: "nowrap" as const };
+  return (
+    <div className="art art-grades" role="img" aria-label="A set's card with its Study, Quiz and Test codes, and a paused test waiting to be unlocked">
+      <div className="art-sheet" style={{ gap: 8 }}>
+        <div className="art-sheet-head">
+          <span>History 7 · Ch 1</span>
+          <span className="art-lock">🔒 Teacher only</span>
+        </div>
+        <div style={{ display: "flex", flexWrap: "wrap", gap: 6 }}>
+          <span style={chip}>📚 Study K7Q-MXR · 24 used</span>
+          <span style={chip}>📝 Test TQ7-XMR · 38 min left</span>
+        </div>
+        <div className="art-quote" style={{ display: "flex", justifyContent: "space-between", alignItems: "center", gap: 8 }}>
+          <span>⏸ <b>Ana S.</b> left the test screen</span>
+          <span className="art-pill art-pill-light" style={{ padding: "4px 10px", fontSize: 12 }}>Unlock</span>
+        </div>
+        <div className="art-foot">Provisional 84% · yours to review</div>
+      </div>
+    </div>
+  );
+}
+
 function PracticeArt() {
   return (
     <div className="art art-practice" role="img" aria-label="A practice answer in a student's own words, marked right, with the Words button">
