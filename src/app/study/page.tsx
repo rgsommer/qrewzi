@@ -18,9 +18,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 
 const API = (process.env.NEXT_PUBLIC_STUDY_API || "https://api.curriculate.net").replace(/\/$/, "") + "/study";
 
-type Name = { id: string; name: string };
-type ClassList = { id: string; className: string; names: Name[] };
-type Join = { ok: boolean; kind: "study" | "quiz" | "test"; unit: string; className?: string; signIn: "names" | "codes" | "typed"; classes?: ClassList[]; names?: Name[]; notStarted?: boolean; minutes?: number; error?: string };
+type Join = { ok: boolean; kind: "study" | "quiz" | "test"; unit: string; className?: string; signIn: "who" | "codes" | "typed"; classList?: boolean; notStarted?: boolean; minutes?: number; error?: string };
 type Result = { id: string; question?: string; marks: number; outOf: number; your?: string; correct?: string; why?: string; unmarked?: boolean; criteria?: { criterion: string; met: string }[] };
 type Section = {
   index: number; kind: "match" | "mc" | "tf" | "cloze" | "short" | "essay" | "collab"; title: string; how: string; outOf: number; handedIn: boolean;
@@ -35,39 +33,17 @@ type Group = { id: string; status: "forming" | "writing" | "handedIn"; prompt: s
 
 const normCode = (s: string) => s.toUpperCase().replace(/[^A-Z0-9]/g, "").slice(0, 6);
 const showCode = (s: string) => { const c = normCode(s); return c.length === 6 ? `${c.slice(0, 3)}-${c.slice(3)}` : c; };
-const store = {
-  get(k: string) { try { return JSON.parse(sessionStorage.getItem(k) || "null"); } catch { return null; } },
-  set(k: string, v: unknown) { try { sessionStorage.setItem(k, JSON.stringify(v)); } catch { /* private mode: fine */ } },
-  del(k: string) { try { sessionStorage.removeItem(k); } catch { /* fine */ } },
-};
+// Nothing is kept on the device (owner, 2026-11-10): no names, no sign-ins, no answers.
 
-// The names that have signed in on this device (owner, 2026-11-10: someone with a
-// PIN should not be shown the whole class list every time). Names only — never a
-// PIN or a sign-in — so a shared tablet offers its last few students first.
-type Recent = { id?: string; name: string; classId?: string };
-const RECENT_KEY = "qz:study:recent";
-function recentNames(): Recent[] {
-  try { const v = JSON.parse(localStorage.getItem(RECENT_KEY) || "[]"); return Array.isArray(v) ? v.slice(0, 8) : []; } catch { return []; }
-}
-function rememberName(r: Recent) {
-  try {
-    const same = (x: Recent) => (r.id ? x.id === r.id : !x.id && x.name.toLowerCase() === r.name.toLowerCase());
-    localStorage.setItem(RECENT_KEY, JSON.stringify([r, ...recentNames().filter((x) => !same(x))].slice(0, 8)));
-  } catch { /* private mode: they pick from the list */ }
-}
-
-/** A random key this browser keeps, so a quiz or test sat by two names on one device can be flagged for the teacher. */
+/**
+ * A random key for this page while it is open — not stored — so a quiz or test
+ * sat by two names one after the other on this device ("Done — next student")
+ * can be flagged for the teacher.
+ */
+let pageKey = "";
 function deviceKey(): string {
-  try {
-    let k = localStorage.getItem("qz:study:device") || "";
-    if (!/^[A-Za-z0-9-]{8,64}$/.test(k)) {
-      k = `d-${Math.random().toString(36).slice(2, 12)}${Date.now().toString(36)}`;
-      localStorage.setItem("qz:study:device", k);
-    }
-    return k;
-  } catch {
-    return "";
-  }
+  if (!pageKey) pageKey = `d-${Math.random().toString(36).slice(2, 12)}${Date.now().toString(36)}`;
+  return pageKey;
 }
 
 async function call<T>(path: string, opts: { method?: string; body?: unknown; token?: string } = {}): Promise<T> {
@@ -105,9 +81,7 @@ export default function StudyPage() {
       // never kept, so the next student never finds themselves signed in as the
       // last (owner, 2026-11-10). A reload asks for the name and PIN again and
       // carries on where they were.
-      const saved = store.get(`qz:study:${c}`);
-      if (j.kind === "study" && saved?.token) setAuth(saved);
-      if (j.kind !== "study") store.del(`qz:study:${c}`);
+
       const u = new URL(window.location.href);
       u.searchParams.set("code", showCode(c));
       window.history.replaceState(null, "", u.toString());
@@ -119,8 +93,8 @@ export default function StudyPage() {
     if (q) { setTyped(showCode(q)); openCode(q); }
   }, [openCode]);
 
-  const signedIn = (a: { token: string; name: string }) => { setAuth(a); if (join?.kind === "study") store.set(`qz:study:${code}`, a); };
-  const signOut = () => { store.del(`qz:study:${code}`); setAuth(null); setMe(null); setAttempt(null); };
+  const signedIn = (a: { token: string; name: string }) => { setAuth(a); };
+  const signOut = () => { setAuth(null); setMe(null); setAttempt(null); };
 
   const loadMe = useCallback(async () => {
     if (!auth || !join || join.kind !== "study") return;
@@ -182,51 +156,25 @@ export default function StudyPage() {
 }
 
 function SignIn({ join, code, onIn }: { join: Join; code: string; onIn: (a: { token: string; name: string }) => void }) {
-  // This device's recent names that are on this code's class lists, newest first.
-  const [recent] = useState<Recent[]>(() => {
-    const all = recentNames();
-    if (join.signIn === "typed") return all.filter((r) => !r.id).slice(0, 4);
-    const known = new Map((join.classes || []).flatMap((c) => c.names.map((n) => [n.id, { ...n, classId: c.id }] as const)));
-    return all.filter((r) => r.id && known.has(r.id)).map((r) => ({ ...r, name: known.get(r.id!)!.name, classId: known.get(r.id!)!.classId })).slice(0, 6);
-  });
-  const [someoneElse, setSomeoneElse] = useState(false);
-  const lastClass = recent[0]?.classId ? (join.classes || []).find((c) => c.id === recent[0].classId) || null : null;
-  const [klass, setKlass] = useState<ClassList | null>(join.classes?.length === 1 ? join.classes[0] : lastClass);
-  const [login, setLogin] = useState(join.signIn === "typed" ? recent[0]?.name || "" : "");
+  // Nothing is offered from memory: a student types who they are every time
+  // (owner, 2026-11-10 — a tablet remembers nothing, and no list of names is shown).
+  const [who, setWho] = useState("");
   const [error, setError] = useState("");
   const [busy, setBusy] = useState(false);
-  // A name is claimed with a 4-digit PIN: made the first time, asked for after.
-  const [pinStep, setPinStep] = useState<null | { mode: "set" | "enter"; name: string; path: string; body: Record<string, unknown> }>(null);
+  // A name is claimed with a 4-digit PIN: made the first time (with the name code
+  // to remember), asked for after.
+  const [pinStep, setPinStep] = useState<null | { mode: "set" | "enter"; name: string; nameCode?: string; path: string; body: Record<string, unknown> }>(null);
   const pick = async (path: string, body: Record<string, unknown>) => {
     setBusy(true); setError("");
     try {
-      const r = await call<{ token?: string; name: string; needPin?: "set" | "enter" }>(path, { method: "POST", body });
-      if (r.needPin) { setPinStep({ mode: r.needPin, name: r.name, path, body }); return; }
-      if (r.token) {
-        // Remember the name (only the name) for next time on this device.
-        if (path.endsWith("/name") && typeof body.id === "string") rememberName({ id: body.id, name: r.name, classId: (join.classes || []).find((c) => c.names.some((n) => n.id === body.id))?.id });
-        if (path.endsWith("/typed") && typeof body.name === "string") rememberName({ name: String(body.name) });
-        onIn({ token: r.token, name: r.name });
-      }
+      const r = await call<{ token?: string; name: string; needPin?: "set" | "enter"; nameCode?: string }>(path, { method: "POST", body });
+      if (r.needPin) { setPinStep({ mode: r.needPin, name: r.name, nameCode: r.nameCode, path, body }); return; }
+      if (r.token) onIn({ token: r.token, name: r.name });
     } catch (e) { setError((e as Error).message); } finally { setBusy(false); }
   };
   if (pinStep) {
     return <PinStep step={pinStep} busy={busy} error={error} onBack={() => { setPinStep(null); setError(""); }}
       onPin={(pin) => pick(pinStep.path, { ...pinStep.body, pin })} onMismatch={() => setError("The two PINs aren't the same. Try again.")} />;
-  }
-  if (join.signIn === "typed") {
-    return (
-      <section style={S.card}>
-        <h1 style={S.h1}>Who are you?</h1>
-        <p>Type your first name and the first letter of your last name.</p>
-        {error && <p role="alert" style={S.alert}>{error}</p>}
-        <form onSubmit={(e) => { e.preventDefault(); pick(`/join/${code}/typed`, { name: login }); }} style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
-          <input value={login} onChange={(e) => setLogin(e.target.value)} placeholder="Ana S." aria-label="Your name" autoComplete="off" style={{ ...S.input, fontSize: 22, width: 240 }} />
-          <button style={S.primary} disabled={busy}>Go</button>
-        </form>
-        <p style={S.small}>Type it the same way each time, so your practice stays together.</p>
-      </section>
-    );
   }
   if (join.signIn === "codes") {
     return (
@@ -234,50 +182,28 @@ function SignIn({ join, code, onIn }: { join: Join; code: string; onIn: (a: { to
         <h1 style={S.h1}>Sign in</h1>
         <p>Type the login code on your slip.</p>
         {error && <p role="alert" style={S.alert}>{error}</p>}
-        <form onSubmit={(e) => { e.preventDefault(); pick(`/join/${code}/code`, { loginCode: login }); }} style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
-          <input value={login} onChange={(e) => setLogin(e.target.value)} placeholder="Your login code" aria-label="Login code" autoCapitalize="characters" autoComplete="off" style={{ ...S.input, fontSize: 22, letterSpacing: 2, width: 220, textTransform: "uppercase" }} />
+        <form onSubmit={(e) => { e.preventDefault(); pick(`/join/${code}/code`, { loginCode: who }); }} style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
+          <input value={who} onChange={(e) => setWho(e.target.value)} placeholder="Your login code" aria-label="Login code" autoCapitalize="characters" autoComplete="off" style={{ ...S.input, fontSize: 22, letterSpacing: 2, width: 220, textTransform: "uppercase" }} />
           <button style={S.primary} disabled={busy}>Sign in</button>
         </form>
       </section>
     );
   }
-  const classes = join.classes || [];
-  if (join.signIn === "names" && recent.length > 0 && !someoneElse) {
-    return (
-      <section style={S.card}>
-        <h1 style={S.h1}>Welcome back</h1>
-        <p>Tap your name, then type your PIN.</p>
-        {error && <p role="alert" style={S.alert}>{error}</p>}
-        <div style={S.grid}>
-          {recent.map((r) => <button key={r.id} style={{ ...S.choice, fontSize: 20 }} disabled={busy} onClick={() => pick(`/join/${code}/name`, { id: r.id })}>{r.name}</button>)}
-        </div>
-        <button style={{ ...S.button, marginTop: 12 }} onClick={() => setSomeoneElse(true)}>Someone else</button>
-      </section>
-    );
-  }
   return (
     <section style={S.card}>
-      {!klass ? (
-        <>
-          <h1 style={S.h1}>Which class are you in?</h1>
-          {!classes.length && <p>Your teacher hasn&rsquo;t added a class list yet. Ask them to.</p>}
-          <div style={S.grid}>{classes.map((c) => <button key={c.id} style={S.choice} onClick={() => setKlass(c)}>{c.className}</button>)}</div>
-        </>
-      ) : (
-        <>
-          <h1 style={S.h1}>Which one is you?</h1>
-          {classes.length > 1 && <button style={S.link} onClick={() => setKlass(null)}>← {klass.className}</button>}
-          {error && <p role="alert" style={S.alert}>{error}</p>}
-          <div style={S.grid}>{klass.names.map((n) => <button key={n.id} style={S.choice} disabled={busy} onClick={() => pick(`/join/${code}/name`, { id: n.id })}>{n.name}</button>)}</div>
-          <p style={S.small}>Only pick your own name — your practice and your results are yours.</p>
-        </>
-      )}
+      <h1 style={S.h1}>Who are you?</h1>
+      <p>Type your first name and the first letter of your last name{join.classList ? <>, or your <strong>name code</strong></> : null}.</p>
+      {error && <p role="alert" style={S.alert}>{error}</p>}
+      <form onSubmit={(e) => { e.preventDefault(); pick(`/join/${code}/who`, { who }); }} style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
+        <input value={who} onChange={(e) => setWho(e.target.value)} placeholder="e.g. Ana S." aria-label="Your name or name code" autoComplete="off" name="qz-who" data-lpignore="true" data-1p-ignore="true" spellCheck={false} style={{ ...S.input, fontSize: 22, width: 260 }} />
+        <button style={S.primary} disabled={busy || !who.trim()}>Next</button>
+      </form>
     </section>
   );
 }
 
 function PinStep({ step, busy, error, onBack, onPin, onMismatch }: {
-  step: { mode: "set" | "enter"; name: string }; busy: boolean; error: string;
+  step: { mode: "set" | "enter"; name: string; nameCode?: string }; busy: boolean; error: string;
   onBack: () => void; onPin: (pin: string) => void; onMismatch: () => void;
 }) {
   const [pin, setPin] = useState("");
@@ -290,6 +216,8 @@ function PinStep({ step, busy, error, onBack, onPin, onMismatch }: {
     if (pin.length !== 4) return;
     if (step.mode === "set" && pin !== again) { onMismatch(); setAgain(""); return; }
     onPin(pin);
+    // Emptied at once: after a wrong try the box is ready for the next, not full and refusing a fifth digit.
+    setPin(""); setAgain("");
   };
   return (
     <section style={S.card}>
@@ -298,6 +226,13 @@ function PinStep({ step, busy, error, onBack, onPin, onMismatch }: {
         <>
           <h1 style={S.h1}>Make your PIN, {step.name}</h1>
           <p>Pick 4 numbers only you know. You&rsquo;ll type them every time you sign in, so nobody else can use your name.</p>
+          {step.nameCode && (
+            <div style={{ ...S.warn, margin: "8px 0 12px" }}>
+              <div>Your <strong>name code</strong> — remember it, or write it down:</div>
+              <div style={{ fontSize: 30, fontWeight: 800, letterSpacing: 4, fontFamily: "var(--font-display)", margin: "4px 0" }}>{step.nameCode}</div>
+              <div style={S.small}>You can type it instead of your name — capitals don&rsquo;t matter. If a classmate has the same name, you&rsquo;ll need it.</div>
+            </div>
+          )}
         </>
       ) : (
         <>
@@ -379,7 +314,7 @@ function Sitting({ attempt, token, setAttempt, onDone, onAgain, onNext }: { atte
   const test = attempt.kind === "test" || attempt.kind === "quiz"; // a quiz runs as a test does
   const current = attempt.sections.find((s) => !s.handedIn);
   const [viewing, setViewing] = useState<number | null>(null); // a handed-in part's feedback (study)
-  const [answers, setAnswers] = useState<Answers>(() => (current ? store.get(`qz:ans:${attempt.id}:${current.index}`) || {} : {}));
+  const [answers, setAnswers] = useState<Answers>({});
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState("");
   const [left, setLeft] = useState(!attempt.counted);
@@ -415,7 +350,7 @@ function Sitting({ attempt, token, setAttempt, onDone, onAgain, onNext }: { atte
     return () => clearInterval(t);
   }, [locked, attempt.id, token, setAttempt]);
 
-  useEffect(() => { if (current) store.set(`qz:ans:${attempt.id}:${current.index}`, answers); }, [answers, attempt.id, current]);
+
 
   const handIn = useCallback(async (auto = false) => {
     if (!current) return;
@@ -425,7 +360,7 @@ function Sitting({ attempt, token, setAttempt, onDone, onAgain, onNext }: { atte
     setBusy(true); setError("");
     try {
       const r = await call<{ attempt: Attempt }>(`/attempts/${attempt.id}/sections/${current.index}`, { method: "POST", token, body: { answers } });
-      store.del(`qz:ans:${attempt.id}:${current.index}`);
+
       setAnswers({});
       setAttempt(r.attempt);
       if (!test) setViewing(current.index);
