@@ -75,6 +75,9 @@ export default function StudyPage() {
   const [attempt, setAttempt] = useState<Attempt | null>(null);
   const [error, setError] = useState("");
   const [busy, setBusy] = useState(false);
+  // Opened from the join screen of the student app (play.qrewzi.com), often inside it.
+  const [fromJoin, setFromJoin] = useState(false);
+  useEffect(() => { setFromJoin(new URLSearchParams(window.location.search).get("from") === "join"); }, []);
 
   const openCode = useCallback(async (raw: string) => {
     const c = normCode(raw);
@@ -83,8 +86,13 @@ export default function StudyPage() {
     try {
       const j = await call<Join>(`/join/${c}`);
       setCode(c); setJoin(j);
+      // A quiz or test is often sat on a tablet the class shares: its sign-in is
+      // never kept, so the next student never finds themselves signed in as the
+      // last (owner, 2026-11-10). A reload asks for the name and PIN again and
+      // carries on where they were.
       const saved = store.get(`qz:study:${c}`);
-      if (saved?.token) setAuth(saved);
+      if (j.kind === "study" && saved?.token) setAuth(saved);
+      if (j.kind !== "study") store.del(`qz:study:${c}`);
       const u = new URL(window.location.href);
       u.searchParams.set("code", showCode(c));
       window.history.replaceState(null, "", u.toString());
@@ -96,7 +104,7 @@ export default function StudyPage() {
     if (q) { setTyped(showCode(q)); openCode(q); }
   }, [openCode]);
 
-  const signedIn = (a: { token: string; name: string }) => { setAuth(a); store.set(`qz:study:${code}`, a); };
+  const signedIn = (a: { token: string; name: string }) => { setAuth(a); if (join?.kind === "study") store.set(`qz:study:${code}`, a); };
   const signOut = () => { store.del(`qz:study:${code}`); setAuth(null); setMe(null); setAttempt(null); };
 
   const loadMe = useCallback(async () => {
@@ -146,7 +154,12 @@ export default function StudyPage() {
 
         {attempt && auth && (
           <Sitting attempt={attempt} token={auth.token} setAttempt={setAttempt}
-            onDone={() => { setAttempt(null); loadMe(); }} onAgain={() => start(true)} />
+            onDone={() => { setAttempt(null); loadMe(); }} onAgain={() => start(true)} onNext={signOut} />
+        )}
+        {fromJoin && (
+          <p style={{ ...S.small, textAlign: "center", marginTop: 24 }}>
+            <a href="https://play.qrewzi.com/" target="_top" style={{ color: "var(--slate)" }}>← Back to the join screen</a>
+          </p>
         )}
       </div>
     </div>
@@ -228,7 +241,8 @@ function PinStep({ step, busy, error, onBack, onPin, onMismatch }: {
   const [pin, setPin] = useState("");
   const [again, setAgain] = useState("");
   const digits = (v: string) => v.replace(/\D/g, "").slice(0, 4);
-  const box = { ...S.input, fontSize: 28, letterSpacing: 10, width: 150, textAlign: "center" as const };
+  // Text fields drawn as dots, not password fields: a shared tablet's browser must not offer to save a child's PIN.
+  const box = { ...S.input, fontSize: 28, letterSpacing: 10, width: 150, textAlign: "center" as const, WebkitTextSecurity: "disc" } as React.CSSProperties;
   const go = (e: React.FormEvent) => {
     e.preventDefault();
     if (pin.length !== 4) return;
@@ -251,8 +265,8 @@ function PinStep({ step, busy, error, onBack, onPin, onMismatch }: {
       )}
       {error && <p role="alert" style={S.alert}>{error}</p>}
       <form onSubmit={go} style={{ display: "flex", gap: 10, flexWrap: "wrap", alignItems: "center" }}>
-        <input value={pin} onChange={(e) => setPin(digits(e.target.value))} type="password" inputMode="numeric" autoComplete="off" aria-label="PIN" placeholder="••••" style={box} autoFocus />
-        {step.mode === "set" && <input value={again} onChange={(e) => setAgain(digits(e.target.value))} type="password" inputMode="numeric" autoComplete="off" aria-label="PIN again" placeholder="again" style={box} />}
+        <input value={pin} onChange={(e) => setPin(digits(e.target.value))} type="text" inputMode="numeric" autoComplete="off" name="qz-pin-a" data-lpignore="true" data-1p-ignore="true" aria-label="PIN" placeholder="••••" style={box} autoFocus />
+        {step.mode === "set" && <input value={again} onChange={(e) => setAgain(digits(e.target.value))} type="text" inputMode="numeric" autoComplete="off" name="qz-pin-b" data-lpignore="true" data-1p-ignore="true" aria-label="PIN again" placeholder="again" style={box} />}
         <button style={S.primary} disabled={busy || pin.length !== 4 || (step.mode === "set" && again.length !== 4)}>{step.mode === "set" ? "Save my PIN" : "Sign in"}</button>
       </form>
       {step.mode === "enter" && <p style={S.small}>Forgot it, or this isn&rsquo;t your PIN? Ask your teacher to reset it.</p>}
@@ -319,7 +333,7 @@ function TestIntro({ join, name, busy, onStart }: { join: Join; name: string; bu
   );
 }
 
-function Sitting({ attempt, token, setAttempt, onDone, onAgain }: { attempt: Attempt; token: string; setAttempt: (a: Attempt) => void; onDone: () => void; onAgain: () => void }) {
+function Sitting({ attempt, token, setAttempt, onDone, onAgain, onNext }: { attempt: Attempt; token: string; setAttempt: (a: Attempt) => void; onDone: () => void; onAgain: () => void; onNext: () => void }) {
   const test = attempt.kind === "test" || attempt.kind === "quiz"; // a quiz runs as a test does
   const current = attempt.sections.find((s) => !s.handedIn);
   const [viewing, setViewing] = useState<number | null>(null); // a handed-in part's feedback (study)
@@ -393,7 +407,7 @@ function Sitting({ attempt, token, setAttempt, onDone, onAgain }: { attempt: Att
     const s = attempt.sections[viewing];
     return <Feedback section={s} attempt={attempt} onNext={() => setViewing(null)} />;
   }
-  if (attempt.finished) return <Finished attempt={attempt} onDone={onDone} onAgain={onAgain} />;
+  if (attempt.finished) return <Finished attempt={attempt} onDone={onDone} onAgain={onAgain} onNext={onNext} />;
   if (!current) return null;
   if (test && locked) {
     return (
@@ -652,7 +666,7 @@ function Feedback({ section, attempt, onNext }: { section: Section; attempt: Att
   );
 }
 
-function Finished({ attempt, onDone, onAgain }: { attempt: Attempt; onDone: () => void; onAgain: () => void }) {
+function Finished({ attempt, onDone, onAgain, onNext }: { attempt: Attempt; onDone: () => void; onAgain: () => void; onNext: () => void }) {
   if (attempt.kind === "test" || attempt.kind === "quiz") {
     return (
       <section style={S.card}>
@@ -660,7 +674,8 @@ function Finished({ attempt, onDone, onAgain }: { attempt: Attempt; onDone: () =
         <p style={{ fontSize: 28, margin: "8px 0" }}>Provisional grade: <strong>{attempt.percent}%</strong></p>
         {attempt.summary && <p style={{ fontSize: 18, lineHeight: 1.5 }}>{attempt.summary}</p>}
         <p style={S.warn}>{attempt.note}</p>
-        <p style={S.small}>You can close this page now.</p>
+        <button style={S.primary} onClick={onNext}>Done — next student</button>
+        <p style={S.small}>On a shared tablet, press it so the next student can sign in. On your own device you can just close this page.</p>
       </section>
     );
   }
