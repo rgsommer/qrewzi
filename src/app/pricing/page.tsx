@@ -26,7 +26,8 @@ const upgrade = (plan: string) => `${SET}/upgrade?plan=${plan}`;
 // hasTierAtLeast(…, "PLUS") for class lists in backend/index.js and
 // routes/classRoster.js; routes/reports.js for the Edsby CSV;
 // email/transcriptEmailer.js for the per-student pages and the trend;
-// routes/tasksets.js for custom trivia topics).
+// routes/tasksets.js for custom trivia topics; routes/study.js PLAN_FOR for
+// Study & Test — study codes with Plus, quiz and test codes with Pro).
 const FREE = [
   "Live games: every task type and game mode",
   "ImagineIt outdoor photo hunts",
@@ -34,12 +35,14 @@ const FREE = [
   "Trivia nights up to 30 minutes, 12 devices",
 ];
 const PLUS = [
-  "Class lists and groups, with student and parent emails",
+  "Class lists, and groups made from them",
+  "Study codes: practice tests with feedback and a class board",
   "A one-page report for each student",
   "Edsby CSV matched to your class list",
   "Trivia nights up to 1 hour, 40 devices",
 ];
 const PRO = [
+  "Quiz and test codes: one attempt each, marked for you, with a provisional grade you review",
   "Each student's progress trend in your reports",
   "Trivia nights on your own topic",
   "Trivia nights up to 2 hours, any number of devices",

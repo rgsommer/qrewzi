@@ -56,7 +56,7 @@ export default function StudyAndTestPage() {
         { q: "Do students need accounts?", a: "No. The first time, a student types their first name and last initial and makes a four-digit PIN. With your class list uploaded they also get a short name code, like maple42, for when two students share a name — you can look any student's up on the Live and Results pages." },
         { q: "What about absent students, or a second class?", a: "Make a new test code from the same card. Each code has its own hour, so a make-up or another class gets one of its own." },
         { q: "Does it work with Edsby?", a: "Yes. Each code's results download as an Edsby import file, and the emailed report carries the same file." },
-        { q: "Is it free?", a: "Your first three months are free, with everything included and no card needed. After that, carry on with the Free plan or choose a paid plan." },
+        { q: "Which plan is it on?", a: "Study codes come with Plus, and quiz and test codes with Pro. Every new account gets everything in Pro free for its first three months, no card needed." },
       ]}
       related={[
         { href: "/review-games", label: "Review games that get students moving" },
