@@ -20,15 +20,15 @@ const API = (process.env.NEXT_PUBLIC_STUDY_API || "https://api.curriculate.net")
 
 type Name = { id: string; name: string };
 type ClassList = { id: string; className: string; names: Name[] };
-type Join = { ok: boolean; kind: "study" | "test"; unit: string; className?: string; signIn: "names" | "codes"; classes?: ClassList[]; names?: Name[]; notStarted?: boolean; error?: string };
+type Join = { ok: boolean; kind: "study" | "quiz" | "test"; unit: string; className?: string; signIn: "names" | "codes" | "typed"; classes?: ClassList[]; names?: Name[]; notStarted?: boolean; minutes?: number; error?: string };
 type Result = { id: string; question?: string; marks: number; outOf: number; your?: string; correct?: string; why?: string; unmarked?: boolean; criteria?: { criterion: string; met: string }[] };
 type Section = {
-  index: number; kind: "match" | "tf" | "cloze" | "short" | "essay" | "collab"; title: string; how: string; outOf: number; handedIn: boolean;
+  index: number; kind: "match" | "mc" | "tf" | "cloze" | "short" | "essay" | "collab"; title: string; how: string; outOf: number; handedIn: boolean;
   terms?: { id: string; text: string }[]; choices?: { letter: string; text: string }[];
-  questions?: { id: string; text: string; rubric?: string[] }[];
+  questions?: { id: string; text: string; rubric?: string[]; options?: string[] }[];
   results?: Result[]; marks?: number; sectionOutOf?: number; unmarked?: number;
 };
-type Attempt = { id: string; kind: "study" | "test"; counted: boolean; locked?: boolean; finished: boolean; marks?: number; outOf?: number; percent?: number; minutes?: number; startedAt?: string; summary?: string; note?: string; sections: Section[] };
+type Attempt = { id: string; kind: "study" | "quiz" | "test"; counted: boolean; locked?: boolean; finished: boolean; marks?: number; outOf?: number; percent?: number; minutes?: number; startedAt?: string; summary?: string; note?: string; sections: Section[] };
 type Me = { unit: string; name: string; best: number | null; tests: number; last: number | null; openAttempt: string | null; board: { rank: number; id: string; name: string; best: number; tests: number }[]; me: string };
 type Answers = Record<string, string | boolean>;
 type Group = { id: string; status: "forming" | "writing" | "handedIn"; prompt: string; rubric: string[]; members: string[]; scribe: boolean; scribeName: string; text: string; waitedMs: number; stillWorking: number; canGoSolo: boolean; marks?: number; feedback?: string };
@@ -105,11 +105,11 @@ export default function StudyPage() {
   };
 
   return (
-    <div style={S.cover}>
+    <div style={S.cover} onCopy={(e) => e.preventDefault()} onCut={(e) => e.preventDefault()} onContextMenu={(e) => e.preventDefault()} onDragStart={(e) => e.preventDefault()}>
       <div style={S.page}>
         <header style={S.top}>
           <strong style={{ fontFamily: "var(--font-display)", fontSize: 20 }}>Qrewzi</strong>
-          {join && <span style={S.tag}>{join.kind === "test" ? "📝 Test" : "📚 Study"} · {join.unit}</span>}
+          {join && <span style={S.tag}>{join.kind === "test" ? "📝 Test" : join.kind === "quiz" ? "✏️ Quiz" : "📚 Study"} · {join.unit}</span>}
           {auth && !attempt && <button style={S.link} onClick={signOut}>Not {auth.name}? Sign out</button>}
         </header>
         {error && <p role="alert" style={S.alert}>{error}</p>}
@@ -128,7 +128,7 @@ export default function StudyPage() {
         {join && !auth && <SignIn join={join} code={code} onIn={signedIn} />}
 
         {join && auth && !attempt && join.kind === "study" && <StudyHome me={me} busy={busy} onStart={start} />}
-        {join && auth && !attempt && join.kind === "test" && <TestIntro join={join} name={auth.name} busy={busy} onStart={() => start(false)} />}
+        {join && auth && !attempt && join.kind !== "study" && <TestIntro join={join} name={auth.name} busy={busy} onStart={() => start(false)} />}
 
         {attempt && auth && (
           <Sitting attempt={attempt} token={auth.token} setAttempt={setAttempt}
@@ -149,6 +149,20 @@ function SignIn({ join, code, onIn }: { join: Join; code: string; onIn: (a: { to
     try { const r = await call<{ token: string; name: string }>(path, { method: "POST", body }); onIn({ token: r.token, name: r.name }); }
     catch (e) { setError((e as Error).message); } finally { setBusy(false); }
   };
+  if (join.signIn === "typed") {
+    return (
+      <section style={S.card}>
+        <h1 style={S.h1}>Who are you?</h1>
+        <p>Type your first name and the first letter of your last name.</p>
+        {error && <p role="alert" style={S.alert}>{error}</p>}
+        <form onSubmit={(e) => { e.preventDefault(); pick(`/join/${code}/typed`, { name: login }); }} style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
+          <input value={login} onChange={(e) => setLogin(e.target.value)} placeholder="Ana S." aria-label="Your name" autoComplete="off" style={{ ...S.input, fontSize: 22, width: 240 }} />
+          <button style={S.primary} disabled={busy}>Go</button>
+        </form>
+        <p style={S.small}>Type it the same way each time, so your practice stays together.</p>
+      </section>
+    );
+  }
   if (join.signIn === "codes") {
     return (
       <section style={S.card}>
@@ -230,21 +244,21 @@ function TestIntro({ join, name, busy, onStart }: { join: Join; name: string; bu
   return (
     <section style={S.card}>
       <h1 style={S.h1}>{join.unit}</h1>
-      <p>Hi {name} — you have <strong>50 minutes</strong> and one attempt.</p>
+      <p>Hi {name} — you have <strong>{join.minutes || 50} minutes</strong> and one attempt for this {join.kind}.</p>
       <ul style={{ lineHeight: 1.6 }}>
         <li>Close every other tab and app now. Once you start, stay on this screen — leaving it is recorded and your teacher sees it.</li>
         <li>Type your own answers. Pasting is turned off.</li>
         <li>Each part is saved when you hand it in. You can&rsquo;t go back to a part once it&rsquo;s handed in.</li>
-        <li>The last part may be a group task: you&rsquo;ll be put with one or two classmates who reach it, and you write one answer together.</li>
+        {join.kind === "test" && <li>The last part may be a group task: you&rsquo;ll be put with one or two classmates who reach it, and you write one answer together.</li>}
         <li>At the end you&rsquo;ll see a summary and a provisional grade. Your teacher reviews all your answers and decides your actual grade.</li>
       </ul>
-      <button style={S.primary} disabled={busy} onClick={onStart}>Start the test</button>
+      <button style={S.primary} disabled={busy} onClick={onStart}>Start the {join.kind}</button>
     </section>
   );
 }
 
 function Sitting({ attempt, token, setAttempt, onDone, onAgain }: { attempt: Attempt; token: string; setAttempt: (a: Attempt) => void; onDone: () => void; onAgain: () => void }) {
-  const test = attempt.kind === "test";
+  const test = attempt.kind === "test" || attempt.kind === "quiz"; // a quiz runs as a test does
   const current = attempt.sections.find((s) => !s.handedIn);
   const [viewing, setViewing] = useState<number | null>(null); // a handed-in part's feedback (study)
   const [answers, setAnswers] = useState<Answers>(() => (current ? store.get(`qz:ans:${attempt.id}:${current.index}`) || {} : {}));
@@ -477,19 +491,22 @@ function Questions({ section, answers, setAnswers }: { section: Section; answers
   if (section.kind === "match") {
     return (
       <div style={{ display: "grid", gap: 16, gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))" }}>
-        <ol style={{ margin: 0, paddingLeft: 20, display: "grid", gap: 10 }}>
+        <ol style={{ margin: 0, padding: 0, listStyle: "none", display: "grid", gap: 10 }}>
           {section.terms?.map((t) => (
-            <li key={t.id} style={{ display: "flex", gap: 8, alignItems: "center", justifyContent: "space-between" }}>
-              <span>{t.text}</span>
-              <select value={String(answers[t.id] || "")} onChange={(e) => put(t.id, e.target.value)} aria-label={`Letter for ${t.text}`} style={{ ...S.input, width: 72 }}>
+            <li key={t.id} style={{ display: "flex", gap: 10, alignItems: "center" }}>
+              <select value={String(answers[t.id] || "")} onChange={(e) => put(t.id, e.target.value)} aria-label={`Letter for ${t.text}`} style={{ ...S.input, width: 72, flex: "0 0 auto" }}>
                 <option value="">—</option>
                 {section.choices?.map((c) => <option key={c.letter} value={c.letter}>{c.letter}</option>)}
               </select>
+              <span>{t.text}</span>
             </li>
           ))}
         </ol>
         <ul style={{ margin: 0, padding: 0, listStyle: "none", display: "grid", gap: 8 }}>
-          {section.choices?.map((c) => <li key={c.letter}><strong>{c.letter}.</strong> {c.text}</li>)}
+          {section.choices?.map((c) => {
+            const usedLetter = Object.values(answers).includes(c.letter);
+            return <li key={c.letter} style={usedLetter ? { color: "var(--slate-soft)", textDecoration: "line-through" } : undefined}><strong>{c.letter}.</strong> {c.text}</li>;
+          })}
         </ul>
       </div>
     );
@@ -498,6 +515,19 @@ function Questions({ section, answers, setAnswers }: { section: Section; answers
     <ol style={{ paddingLeft: 20, display: "grid", gap: 18, margin: 0 }}>
       {section.questions?.map((q) => (
         <li key={q.id}>
+          {section.kind === "mc" && (
+            <div>
+              <div style={{ marginBottom: 6 }}>{q.text}</div>
+              <div style={{ display: "grid", gap: 6 }}>
+                {q.options?.map((o, k) => (
+                  <button key={k} type="button" onClick={() => put(q.id, String(k))}
+                    style={{ ...S.button, textAlign: "left", fontWeight: 600, ...(String(answers[q.id]) === String(k) ? S.on : {}) }}>
+                    {"ABCD"[k]}. {o}
+                  </button>
+                ))}
+              </div>
+            </div>
+          )}
           {section.kind === "tf" && (
             <div style={{ display: "flex", gap: 12, alignItems: "center", flexWrap: "wrap", justifyContent: "space-between" }}>
               <span style={{ flex: "1 1 280px" }}>{q.text}</span>
@@ -561,10 +591,10 @@ function Feedback({ section, attempt, onNext }: { section: Section; attempt: Att
 }
 
 function Finished({ attempt, onDone, onAgain }: { attempt: Attempt; onDone: () => void; onAgain: () => void }) {
-  if (attempt.kind === "test") {
+  if (attempt.kind === "test" || attempt.kind === "quiz") {
     return (
       <section style={S.card}>
-        <h1 style={S.h1}>Test handed in</h1>
+        <h1 style={S.h1}>{attempt.kind === "quiz" ? "Quiz" : "Test"} handed in</h1>
         <p style={{ fontSize: 28, margin: "8px 0" }}>Provisional grade: <strong>{attempt.percent}%</strong></p>
         {attempt.summary && <p style={{ fontSize: 18, lineHeight: 1.5 }}>{attempt.summary}</p>}
         <p style={S.warn}>{attempt.note}</p>
@@ -589,14 +619,14 @@ function Stat({ label, value }: { label: string; value: string }) {
 }
 
 const S: Record<string, React.CSSProperties> = {
-  cover: { position: "fixed", inset: 0, zIndex: 1000, overflowY: "auto", background: "var(--cream)", color: "var(--navy)", fontFamily: "var(--font-body)" },
+  cover: { position: "fixed", inset: 0, zIndex: 1000, overflowY: "auto", background: "var(--cream)", color: "var(--navy)", fontFamily: "var(--font-body)", userSelect: "none", WebkitUserSelect: "none", WebkitTouchCallout: "none" },
   page: { maxWidth: 860, margin: "0 auto", padding: "16px 16px 64px" },
   top: { display: "flex", gap: 12, alignItems: "center", flexWrap: "wrap", marginBottom: 16 },
   tag: { padding: "4px 10px", borderRadius: 999, background: "var(--cream-shade)", fontSize: 14 },
   card: { background: "#fff", borderRadius: 16, padding: 20, marginBottom: 16, boxShadow: "0 1px 3px rgba(11,31,58,0.08)" },
   h1: { fontFamily: "var(--font-display)", fontSize: 22, margin: "0 0 8px" },
   h2: { fontFamily: "var(--font-display)", fontSize: 18, margin: "0 0 8px" },
-  input: { padding: "10px 12px", borderRadius: 10, border: "1.5px solid var(--slate-soft)", font: "inherit", fontSize: 17, background: "#fff", color: "var(--navy)" },
+  input: { padding: "10px 12px", borderRadius: 10, border: "1.5px solid var(--slate-soft)", font: "inherit", fontSize: 17, background: "#fff", color: "var(--navy)", userSelect: "text", WebkitUserSelect: "text" },
   primary: { padding: "12px 20px", borderRadius: 12, border: "none", background: "var(--coral)", color: "#fff", fontWeight: 800, fontSize: 17, cursor: "pointer" },
   button: { padding: "10px 16px", borderRadius: 12, border: "1.5px solid var(--slate-soft)", background: "#fff", color: "var(--navy)", fontWeight: 700, fontSize: 16, cursor: "pointer" },
   on: { background: "var(--navy)", color: "#fff", borderColor: "var(--navy)" },
