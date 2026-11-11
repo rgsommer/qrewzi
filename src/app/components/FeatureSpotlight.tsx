@@ -101,8 +101,8 @@ const SPOTS: Spot[] = [
   {
     id: "study-and-test",
     tag: "Study & Test",
-    title: "Practice tests, then the test",
-    hook: "Every set has a study, a quiz and a test code: one attempt, paused if they leave the screen, the grade yours.",
+    title: "Study with a partner, then the test",
+    hook: "Every set has a study, a quiz and a test code: study alone or with a partner, then one attempt at the test, paused if they leave the screen, the grade yours.",
     href: "/study-and-test",
     cta: "How Study & Test works",
     art: <StudyTestArt />,

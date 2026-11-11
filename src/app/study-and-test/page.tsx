@@ -9,10 +9,10 @@ import GuidePage from "../components/GuidePage";
 
 export const metadata = pageMetadata({
   path: "/study-and-test",
-  title: "Study & Test — practice tests and a unit test from the same set",
+  title: "Study & Test — study with a partner, then the quiz and the test, from the same set",
   description:
-    "Every Qrewzi set has a study code, a quiz code and a test code. Students take practice tests shaped like the real one, then sit the test once, on their own devices or the class's tablets — leaving the screen pauses it, answers are marked on the server, and you decide the grade.",
-  socialTitle: "The unit's practice tests, and the test itself",
+    "Every Qrewzi set has a study code, a quiz code and a test code. Students study alone or with a partner — practice tests shaped like the real one, quick rounds and blank races — then sit the quiz and the test on their own devices or the class's tablets. Leaving the screen pauses a test, answers are marked on the server, and you decide the grade.",
+  socialTitle: "Study with a partner, then the quiz and the test",
   socialDescription:
     "A study code for practice tests with feedback and a class board of personal bests; a test code for one attempt, paused if they leave the screen, marked for you to review.",
   keywords: [
@@ -20,6 +20,7 @@ export const metadata = pageMetadata({
     "test students take on their own devices", "test that pauses when students leave the screen", "online quiz for the classroom",
     "auto-marked short answers", "AI marking for teachers", "provisional grade teacher review", "Edsby import",
     "class leaderboard personal best", "test review practice", "group task on a test", "shared tablet test sign-in",
+    "study with a partner", "study game for classmates", "study with parents at home", "fill in the blanks race",
   ],
 });
 
@@ -27,21 +28,22 @@ export default function StudyAndTestPage() {
   return (
     <GuidePage
       eyebrow="Study & Test"
-      title="The unit's practice tests, and the test itself."
+      title="Study for it — alone or with a partner — then the quiz and the test."
       answer={[
         "Every Qrewzi set has a study code, a quiz code and a test code on its card. Press one and an invitation is copied for your class post. Qrewzi writes the questions from the set — matching, multiple choice, true or false, fill in the blanks, short answers, a synthesis essay and a group task — checks them, and keeps the test's own questions apart from the ones students practise on.",
-        "With the study code, students take practice tests in the shape of the real one, with feedback after every part and a class board of personal bests. With the test code, each student gets one attempt, on their own device or a class tablet: leaving the screen pauses the test until you unlock it, and every answer is marked on the server. They finish with a short summary and a provisional grade; you review every answer and decide the real one.",
+        "With the study code, students take practice tests in the shape of the real one, with feedback after every part and a class board of personal bests — or study with a partner: up to two classmates on the same code, or someone from home with a code the student gives them, in quick rounds, races to fill in the blanks and fill-and-compare. With the test code, each student gets one attempt, on their own device or a class tablet: leaving the screen pauses the test until you unlock it, and every answer is marked on the server. They finish with a short summary and a provisional grade; you review every answer and decide the real one.",
       ]}
       stepsTitle="From the set's card to the gradebook."
       steps={[
         { emoji: "📋", name: "Press a code on the card", body: "Study, Quiz or Test. The invitation is copied — the code, the link, how to sign in and the rules — ready to paste into your class post." },
         { emoji: "👁", name: "Preview the test", body: "See every question with its answer before you give the code out. Strike any, or move one between the test and practice. A question the fact checker doubted waits for you." },
-        { emoji: "📚", name: "Students practise", body: "As often as they like, in the test's shape, with feedback after every part. Their best goes on the class board — but only from a practice test where they stayed on the screen." },
+        { emoji: "📚", name: "Students study", body: "As often as they like, alone or with a partner. Practice tests come in the test's shape, with feedback after every part, and the essay carries over from one to the next with the suggestions beside it. Their best goes on the class board — but only from a practice test where they stayed on the screen." },
         { emoji: "📝", name: "Test day", body: "The test code works for an hour from the first student's sign-in: fifty minutes, one attempt, no marks shown until the end. Leaving the screen pauses a student's test until you press Unlock on the Live page." },
         { emoji: "📊", name: "Review and export", body: "The results come by email when the hour is up, with an Edsby import file. Change any mark on the review page and the totals follow; then send yourself the final report." },
       ]}
       pointsTitle="Why it's built this way."
       points={[
+        { emoji: "👥", title: "Studying is better with someone", body: "With partners it's quick rounds on everyone's own screen, a race to fill in the blanks, and fill-and-compare — everyone fills the same blanks alone, then sees everyone's side by side. The right answer and why after every round, and a missed question comes back. A classmate can be asked mid-practice; someone from home joins with the student's code; a practice partner fills any empty seat." },
         { emoji: "🎯", title: "Practice in the shape of the test", body: "The same parts and kinds of question, drawn fresh each time — so a better score means they've learned more, not that they remember the answers." },
         { emoji: "🔒", title: "Nothing to copy, nothing to find", body: "Copying and pasting are off, and the browser never holds an answer key. Leaving the screen pauses a test; in practice it just doesn't count toward their best." },
         { emoji: "🧑‍🏫", title: "The grade is yours", body: "Written answers are marked against the unit, and one that couldn't be marked is left out of the total, never counted wrong. The provisional grade is where you start: change any mark." },

@@ -15,7 +15,7 @@ Qrewzi is made in Canada for teachers. It is also used by youth groups, churches
 - Marks most tasks the moment they are answered; written answers are scored by AI against the lesson.
 - One device per team is enough; roles rotate so every student takes a turn, and each student's grade in the teacher's report comes from their own turns blended with the team's. Students see feedback, not grades.
 - Students can practise at home at play.qrewzi.com/practice — study sets, trivia rounds, a words sheet, written answers marked — and pair up as Study Buddies to study together, duel or beat each other's score.
-- Study & Test: every set has a study code, a quiz code and a test code. The study code opens practice tests in the shape of the real test, with feedback after every part and a class board of personal bests. The test code gives each student one attempt on their own device — leaving the screen pauses it until the teacher unlocks it, copying and pasting are off, and every answer is marked on the server. Students see a short summary and a provisional grade; the teacher reviews every answer, can change any mark, and gets an Edsby import file. Students sign in with their name and a four-digit PIN, with no accounts.
+- Study & Test: every set has a study code, a quiz code and a test code. The study code opens practice tests in the shape of the real test, with feedback after every part and a class board of personal bests; students can also study with a partner — up to two classmates on the same code, or someone from home with a code the student gives them — in quick rounds, races to fill in the blanks and fill-and-compare. The quiz code checks the unit's terms in twenty minutes. The test code gives each student one attempt on their own device — leaving the screen pauses it until the teacher unlocks it, copying and pasting are off, and every answer is marked on the server. Students see a short summary and a provisional grade; the teacher reviews every answer, can change any mark, and gets an Edsby import file. Students sign in with their name and a four-digit PIN, with no accounts.
 
 ## Pages
 
@@ -23,7 +23,7 @@ Qrewzi is made in Canada for teachers. It is also used by youth groups, churches
 - [How to run a QR code scavenger hunt](https://www.qrewzi.com/qr-code-scavenger-hunt): by hand with a free QR generator, or with Qrewzi.
 - [AI scavenger hunt generator](https://www.qrewzi.com/ai-scavenger-hunt-generator): one line about the lesson becomes a whole hunt.
 - [Review games that get students moving](https://www.qrewzi.com/review-games): test review for any unit, from its terms list.
-- [Study & Test](https://www.qrewzi.com/study-and-test): practice tests and a one-attempt unit test from the same set, marked for the teacher to review.
+- [Study & Test](https://www.qrewzi.com/study-and-test): studying alone or with a partner, a quiz, and a one-attempt unit test from the same set, marked for the teacher to review.
 - [Goosechase alternative for schools](https://www.qrewzi.com/goosechase-alternative): how Qrewzi differs from mission-based scavenger hunt apps.
 - [Kahoot alternative for team play](https://www.qrewzi.com/kahoot-alternative): teams that move and work together instead of a race to the buzzer.
 - [Classroom escape rooms](https://www.qrewzi.com/escape-rooms): an escape room from any lesson, in any theme, one per team.

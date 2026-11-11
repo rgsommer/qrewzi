@@ -33,7 +33,7 @@ type Hello = { firstName?: string; organisation?: string; demoUrl?: string; talk
 const COPY = {
   school: {
     eyebrow: "For schools",
-    intro: "A teacher types one line about the lesson. Qrewzi turns it into a team game the whole class plays — a scavenger hunt around the room, an escape room or a trivia round — on any phone, tablet or Chromebook.",
+    intro: "A teacher types one line about the lesson. Qrewzi turns it into a team game the whole class plays — a scavenger hunt around the room, an escape room or a trivia round — on any phone, tablet or Chromebook. From the same set, students study for the test, alone or with a partner, and you give the quiz and the test.",
     demoNote: "The demo opens the projector\u2019s view in your browser. Join it from your phone and you\u2019re playing in under a minute.",
     videoAlt: "A class rotating between Qrewzi stations while the projector keeps score",
     points: [
