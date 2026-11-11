@@ -34,7 +34,7 @@ const COPY = {
   school: {
     eyebrow: "For schools",
     intro: "A teacher types one line about the lesson. Qrewzi turns it into a team game the whole class plays — a scavenger hunt around the room, an escape room or a trivia round — on any phone, tablet or Chromebook. From the same set, students study for the test, alone or with a partner, and you give the quiz and the test.",
-    demoNote: "The demo opens the projector\u2019s view in your browser. Join it from your phone and you\u2019re playing in under a minute.",
+    demoNote: "The demo opens the projector\u2019s view in your browser. Join it from your phone \u2014 or, with no phone to hand, in another tab \u2014 and you\u2019re playing in under a minute. At the end you see what the teacher sees: every team\u2019s answers, marked.",
     videoAlt: "A class rotating between Qrewzi stations while the projector keeps score",
     points: [
       { title: "Made from your lesson in a minute", body: "Type a line about the lesson or paste your terms list. Qrewzi writes a challenge for every station, at your grade, in dozens of kinds of task." },
@@ -45,7 +45,7 @@ const COPY = {
   workplace: {
     eyebrow: "For teams",
     intro: "You type one line about the topic \u2014 the new policy, the product, the safety briefing. Qrewzi turns it into a team game the room plays together \u2014 a scavenger hunt around the venue, an escape room or a trivia round \u2014 on the phones people already have.",
-    demoNote: "The demo opens the host\u2019s view in your browser. Join it from your phone and you\u2019re playing in under a minute.",
+    demoNote: "The demo opens the host\u2019s view in your browser. Join it from your phone \u2014 or, with no phone to hand, in another tab \u2014 and you\u2019re playing in under a minute. At the end you see what the host sees: every team\u2019s answers, marked.",
     videoAlt: "Teams rotating between Qrewzi stations while the main screen keeps score",
     points: [
       { title: "Made from your material in a minute", body: "Type a line about the topic or paste your terms list. Qrewzi writes a challenge for every station, in dozens of kinds of task." },
