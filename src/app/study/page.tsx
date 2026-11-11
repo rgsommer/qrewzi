@@ -23,7 +23,7 @@ type ClassList = { id: string; className: string; names: Name[] };
 type Join = { ok: boolean; kind: "study" | "test"; unit: string; className?: string; signIn: "names" | "codes"; classes?: ClassList[]; names?: Name[]; notStarted?: boolean; error?: string };
 type Result = { id: string; question?: string; marks: number; outOf: number; your?: string; correct?: string; why?: string; unmarked?: boolean; criteria?: { criterion: string; met: string }[] };
 type Section = {
-  index: number; kind: "match" | "tf" | "cloze" | "short" | "essay"; title: string; how: string; outOf: number; handedIn: boolean;
+  index: number; kind: "match" | "tf" | "cloze" | "short" | "essay" | "collab"; title: string; how: string; outOf: number; handedIn: boolean;
   terms?: { id: string; text: string }[]; choices?: { letter: string; text: string }[];
   questions?: { id: string; text: string; rubric?: string[] }[];
   results?: Result[]; marks?: number; sectionOutOf?: number; unmarked?: number;
@@ -31,6 +31,7 @@ type Section = {
 type Attempt = { id: string; kind: "study" | "test"; counted: boolean; locked?: boolean; finished: boolean; marks?: number; outOf?: number; percent?: number; minutes?: number; startedAt?: string; summary?: string; note?: string; sections: Section[] };
 type Me = { unit: string; name: string; best: number | null; tests: number; last: number | null; openAttempt: string | null; board: { rank: number; id: string; name: string; best: number; tests: number }[]; me: string };
 type Answers = Record<string, string | boolean>;
+type Group = { id: string; status: "forming" | "writing" | "handedIn"; prompt: string; rubric: string[]; members: string[]; scribe: boolean; scribeName: string; text: string; waitedMs: number; stillWorking: number; canGoSolo: boolean; marks?: number; feedback?: string };
 
 const normCode = (s: string) => s.toUpperCase().replace(/[^A-Z0-9]/g, "").slice(0, 6);
 const showCode = (s: string) => { const c = normCode(s); return c.length === 6 ? `${c.slice(0, 3)}-${c.slice(3)}` : c; };
@@ -96,7 +97,11 @@ export default function StudyPage() {
     if (!auth) return;
     setBusy(true); setError("");
     try { setAttempt((await call<{ attempt: Attempt }>(`/s/${code}/attempts`, { method: "POST", token: auth.token, body: { fresh } })).attempt); }
-    catch (e) { setError((e as Error).message); } finally { setBusy(false); }
+    catch (e) {
+      // A sign-in the server no longer knows (kept in this tab from before): sign in again.
+      if ((e as { status?: number }).status === 401) { signOut(); setError("Please sign in again."); }
+      else setError((e as Error).message);
+    } finally { setBusy(false); }
   };
 
   return (
@@ -230,6 +235,7 @@ function TestIntro({ join, name, busy, onStart }: { join: Join; name: string; bu
         <li>Close every other tab and app now. Once you start, stay on this screen — leaving it is recorded and your teacher sees it.</li>
         <li>Type your own answers. Pasting is turned off.</li>
         <li>Each part is saved when you hand it in. You can&rsquo;t go back to a part once it&rsquo;s handed in.</li>
+        <li>The last part may be a group task: you&rsquo;ll be put with one or two classmates who reach it, and you write one answer together.</li>
         <li>At the end you&rsquo;ll see a summary and a provisional grade. Your teacher reviews all your answers and decides your actual grade.</li>
       </ul>
       <button style={S.primary} disabled={busy} onClick={onStart}>Start the test</button>
@@ -304,7 +310,8 @@ function Sitting({ attempt, token, setAttempt, onDone, onAgain }: { attempt: Att
   useEffect(() => { if (!deadline || attempt.finished) return undefined; const t = setInterval(() => setNow(Date.now()), 1000); return () => clearInterval(t); }, [deadline, attempt.finished]);
   const remaining = deadline ? Math.max(0, deadline - now) : null;
   const timeUp = remaining === 0 && !attempt.finished;
-  useEffect(() => { if (timeUp && current && !busy && !locked) handIn(true); }, [timeUp, current, busy, handIn, locked]);
+  // (The group part hands itself in — GroupPart.)
+  useEffect(() => { if (timeUp && current && current.kind !== "collab" && !busy && !locked) handIn(true); }, [timeUp, current, busy, handIn, locked]);
 
   if (viewing != null) {
     const s = attempt.sections[viewing];
@@ -323,6 +330,11 @@ function Sitting({ attempt, token, setAttempt, onDone, onAgain }: { attempt: Att
     );
   }
 
+  if (current.kind === "collab") {
+    return <GroupPart attempt={attempt} section={current} token={token} remaining={remaining} left={left}
+      onLocked={() => setLocked(true)} onFinished={(a) => { setAttempt(a); window.scrollTo(0, 0); }} />;
+  }
+
   return (
     <section style={S.card}>
       <div style={{ display: "flex", justifyContent: "space-between", gap: 8, flexWrap: "wrap", alignItems: "baseline" }}>
@@ -334,6 +346,126 @@ function Sitting({ attempt, token, setAttempt, onDone, onAgain }: { attempt: Att
       {error && <p role="alert" style={S.alert}>{error}</p>}
       <Questions section={current} answers={answers} setAnswers={setAnswers} />
       <button style={{ ...S.primary, marginTop: 16 }} disabled={busy} onClick={() => handIn(false)}>{busy ? "Marking…" : `Hand in part ${current.index + 1}`}</button>
+    </section>
+  );
+}
+
+/**
+ * The test's group task: two or three classmates who reached it, one answer.
+ * The first to arrive types; the others watch it grow and talk it over in the
+ * room. Any of them hands it in, and every member's test gets its mark.
+ */
+function GroupPart({ attempt, section, token, remaining, left, onLocked, onFinished }: {
+  attempt: Attempt; section: Section; token: string; remaining: number | null; left: boolean;
+  onLocked: () => void; onFinished: (a: Attempt) => void;
+}) {
+  const [group, setGroup] = useState<Group | null>(null);
+  const [text, setText] = useState("");
+  const [error, setError] = useState("");
+  const [busy, setBusy] = useState(false);
+  const sent = useRef("");
+  const typedOnce = useRef(false);
+  // The parent re-renders every second for the clock and passes fresh callbacks
+  // each time: held on refs, so the polling below is not torn down and the
+  // group re-joined once a second.
+  const onFinishedRef = useRef(onFinished);
+  const onLockedRef = useRef(onLocked);
+  onFinishedRef.current = onFinished;
+  onLockedRef.current = onLocked;
+
+  const fail = useCallback((e: unknown) => {
+    if ((e as { status?: number }).status === 423) onLockedRef.current();
+    else setError((e as Error).message);
+  }, []);
+
+  // Join (or rejoin) the group, then look again every few seconds.
+  useEffect(() => {
+    let stop = false;
+    const look = async (first: boolean) => {
+      try {
+        const r = first
+          ? await call<{ group: Group }>(`/attempts/${attempt.id}/group`, { method: "POST", token })
+          : await call<{ group: Group; finished?: boolean }>(`/attempts/${attempt.id}/group`, { token });
+        if (stop) return;
+        setGroup(r.group);
+        if (!typedOnce.current && r.group.text) { setText(r.group.text); sent.current = r.group.text; typedOnce.current = true; }
+        if (r.group.status === "handedIn") {
+          const a = await call<{ attempt: Attempt }>(`/attempts/${attempt.id}`, { token });
+          if (!stop) onFinishedRef.current(a.attempt);
+        }
+      } catch (e) { if (!stop) fail(e); }
+    };
+    look(true);
+    const t = setInterval(() => look(false), 2500);
+    return () => { stop = true; clearInterval(t); };
+  }, [attempt.id, token, fail]);
+
+  // The one typing: their words go up as they type, a moment after they pause.
+  useEffect(() => {
+    if (!group?.scribe || group.status !== "writing" || text === sent.current) return undefined;
+    const t = setTimeout(() => {
+      sent.current = text;
+      call(`/attempts/${attempt.id}/group/text`, { method: "POST", token, body: { text } }).catch(fail);
+    }, 1200);
+    return () => clearTimeout(t);
+  }, [text, group?.scribe, group?.status, attempt.id, token, fail]);
+
+  const handIn = useCallback(async (auto = false) => {
+    if (!auto && !window.confirm("Hand in your group's answer? It's handed in for everyone in your group.")) return;
+    setBusy(true); setError("");
+    try {
+      const r = await call<{ attempt: Attempt }>(`/attempts/${attempt.id}/group/handin`, { method: "POST", token, body: group?.scribe ? { text } : {} });
+      onFinishedRef.current(r.attempt);
+    } catch (e) { fail(e); } finally { setBusy(false); }
+  }, [attempt.id, token, group?.scribe, text, fail]);
+
+  // When the test's time runs out, the answer as it stands goes in.
+  useEffect(() => { if (remaining === 0 && group?.status === "writing" && !busy) handIn(true); }, [remaining, group?.status, busy, handIn]);
+
+  const goSolo = async () => {
+    try { setGroup((await call<{ group: Group }>(`/attempts/${attempt.id}/group/solo`, { method: "POST", token })).group); } catch (e) { fail(e); }
+  };
+
+  const clock = remaining != null && <span style={{ ...S.tag, background: remaining < 5 * 60000 ? "var(--coral)" : "var(--navy)", color: "#fff" }}>⏱ {Math.floor(remaining / 60000)}:{String(Math.floor((remaining % 60000) / 1000)).padStart(2, "0")}</span>;
+  const words = text.trim().split(/\s+/).filter(Boolean).length;
+  return (
+    <section style={S.card}>
+      <div style={{ display: "flex", justifyContent: "space-between", gap: 8, flexWrap: "wrap", alignItems: "baseline" }}>
+        <h1 style={S.h1}>Part {section.index + 1} of {attempt.sections.length}: Group task</h1>
+        {clock}
+      </div>
+      {left && <p style={S.warn}>You left the test screen. That is recorded, and your teacher will see it.</p>}
+      {error && <p role="alert" style={S.alert}>{error}</p>}
+      {!group && <p>Finding your group…</p>}
+      {group?.status === "forming" && (
+        <>
+          <p style={{ fontSize: 18 }}>Waiting for {group.members.length === 1 ? "a classmate" : "one more classmate"} to reach this part…</p>
+          <p>In your group so far: <strong>{group.members.join(", ")}</strong></p>
+          {group.members.length === 1 && group.stillWorking > 0 && <p style={S.small}>{group.stillWorking} classmate{group.stillWorking === 1 ? " is" : "s are"} still working on earlier parts.</p>}
+          {group.members.length === 2 && <p style={S.small}>You&rsquo;ll start in a moment — a third classmate can still join.</p>}
+          {group.canGoSolo && <button style={S.button} onClick={goSolo}>Do it on my own</button>}
+        </>
+      )}
+      {group && group.status !== "forming" && (
+        <>
+          <p style={{ fontWeight: 700, fontSize: 18 }}>{group.prompt}</p>
+          {group.rubric.length > 0 && <div style={S.small}>Your group is marked on: {group.rubric.join(" · ")}</div>}
+          <p style={{ marginTop: 10 }}>Your group: <strong>{group.members.join(", ")}</strong>{group.members.length > 1 ? " — talk it over together." : ""}</p>
+          {group.scribe ? (
+            <>
+              <p style={S.small}>{group.members.length > 1 ? "You're typing for your group. Write what you decide together." : "Write your answer."} About 150 words.</p>
+              <textarea value={text} onChange={(e) => setText(e.target.value)} {...noPaste} rows={10} spellCheck={false} style={{ ...S.input, width: "100%" }} />
+              <div style={S.small}>{words} words</div>
+            </>
+          ) : (
+            <>
+              <p style={S.small}><strong>{group.scribeName}</strong> is typing for your group. Help decide what to write — it appears here as it&rsquo;s typed.</p>
+              <div style={{ ...S.input, minHeight: 160, whiteSpace: "pre-wrap", background: "var(--cream)" }}>{group.text || <span style={S.small}>Nothing yet.</span>}</div>
+            </>
+          )}
+          <button style={{ ...S.primary, marginTop: 12 }} disabled={busy || group.status !== "writing"} onClick={() => handIn(false)}>{busy ? "Marking…" : "Hand in our answer"}</button>
+        </>
+      )}
     </section>
   );
 }
