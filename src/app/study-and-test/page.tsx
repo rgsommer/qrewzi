@@ -14,13 +14,14 @@ export const metadata = pageMetadata({
     "Every Qrewzi set has a study code, a quiz code and a test code. Students study alone or with a partner — practice tests shaped like the real one, quick rounds and blank races — then sit the quiz and the test on their own devices or the class's tablets. Leaving the screen pauses a test, answers are marked on the server, and you decide the grade.",
   socialTitle: "Study with a partner, then the quiz and the test",
   socialDescription:
-    "A study code for practice tests with feedback and a class board of personal bests; a test code for one attempt, paused if they leave the screen, marked for you to review.",
+    "A study code for practice tests with feedback, a class board of personal bests and a jar of gold that good answers fill; a test code for one attempt, paused if they leave the screen, marked for you to review.",
   keywords: [
     "online unit test for students", "practice test for students", "practice tests from a unit", "study code for students",
     "test students take on their own devices", "test that pauses when students leave the screen", "online quiz for the classroom",
     "auto-marked short answers", "AI marking for teachers", "provisional grade teacher review", "Edsby import",
     "class leaderboard personal best", "test review practice", "group task on a test", "shared tablet test sign-in",
     "study with a partner", "study game for classmates", "study with parents at home", "fill in the blanks race",
+    "gamified practice tests", "reward coins for good answers", "motivate students to study", "classroom reward system",
   ],
 });
 
@@ -44,6 +45,7 @@ export default function StudyAndTestPage() {
       pointsTitle="Why it's built this way."
       points={[
         { emoji: "👥", title: "Studying is better with someone", body: "With partners it's quick rounds on everyone's own screen, a race to fill in the blanks, and fill-and-compare — everyone fills the same blanks alone, then sees everyone's side by side. The right answer and why after every round, and a missed question comes back. A classmate can be asked mid-practice; someone from home joins with the student's code; a practice partner fills any empty seat." },
+        { emoji: "🪙", title: "Gold for good answers", body: "Every student has a glass jar for each set, and practice fills it: a coin for each right answer, and for the written ones, more the better the answer — up to 4 for a short answer that explains why, 8 for the essay. The jar remembers, so the same set practised again fills it further, and the gold buys a joke, a riddle or a brain teaser without emptying it." },
         { emoji: "🎯", title: "Practice in the shape of the test", body: "The same parts and kinds of question, drawn fresh each time — so a better score means they've learned more, not that they remember the answers." },
         { emoji: "🔒", title: "Nothing to copy, nothing to find", body: "Copying and pasting are off, and the browser never holds an answer key. Leaving the screen pauses a test; in practice it just doesn't count toward their best." },
         { emoji: "🧑‍🏫", title: "The grade is yours", body: "Written answers are marked against the unit, and one that couldn't be marked is left out of the total, never counted wrong. The provisional grade is where you start: change any mark." },
@@ -53,6 +55,7 @@ export default function StudyAndTestPage() {
       faqTitle="Study & Test, answered"
       faq={[
         { q: "What's on the test?", a: "Ten each of matching, multiple choice, true or false and fill in the blanks (a mark each), ten short answers (two marks each), a short synthesis essay that weighs the unit through the student's own worldview, and a group task. A quiz is the short version: matching and multiple choice (or true or false) on the unit's terms, in twenty minutes." },
+        { q: "What is the pot of gold?", a: "Each student's jar for a set, in the corner of the study screens. When a practice part is marked, coins poof out of the answers that earned them and drop into the jar: one for each right matching, multiple choice, true or false or fill-in answer, and for short answers, working and the essay, more the better the answer — a bare right answer earns less than one that explains why. Students spend it on a joke (15), a riddle (25) or a brain teaser (40), and the jar keeps every coin. Quizzes and tests drop no gold, and a practice test stops earning once a student leaves the screen." },
         { q: "Can students cheat by switching tabs?", a: "Leaving the screen pauses the test until you unlock it, it's recorded with how long they were away, and copying and pasting are off. Qrewzi can't see a second device on the desk, so the room still matters." },
         { q: "Who marks the written answers?", a: "Matching, multiple choice and true or false are marked exactly. Fill-in-the-blank near misses, short answers, the essay and the group task are marked by AI against the unit. Anything it couldn't mark is shown to you and left out of the total, and you can change any mark." },
         { q: "Do students need accounts?", a: "No. The first time, a student types their first name and last initial and makes a four-digit PIN. With your class list uploaded they also get a short name code, like maple42, for when two students share a name — you can look any student's up on the Live and Results pages." },

@@ -317,3 +317,43 @@ p { margin: 0; }
   .hello-grid { grid-template-columns: minmax(0, 1fr); }
   .hello-points { grid-template-columns: minmax(0, 1fr); }
 }
+
+/* The pot of gold (components/GoldJarArt.tsx): three marked answers each poof a coin that
+   arcs over and drops into the jar, two seconds apart, round and round. Laid out from the
+   left edge in pixels, since each coin's flight (--dx, --dy) is measured to the jar's mouth. */
+.gold-art { position: relative; height: 200px; margin: -6px -6px 18px; border-radius: 14px; border: 2px solid var(--navy); background: var(--cream); overflow: hidden; }
+.gold-jar { position: absolute; left: 4px; bottom: 6px; width: 72px; animation: gold-clink 2s 0.12s ease-out infinite; transform-origin: 50% 85%; }
+.gold-jar svg { display: block; width: 100%; height: auto; }
+.gold-count { display: flex; align-items: center; justify-content: center; gap: 3px; margin: 0 auto; width: fit-content; padding: 1px 8px; border-radius: 999px; background: #fff; box-shadow: 0 1px 3px rgba(11, 31, 58, .18); font-family: var(--font-body); font-weight: 900; font-size: 13px; color: var(--navy); }
+.gold-chip { position: absolute; display: inline-flex; align-items: center; gap: 4px; height: 24px; padding: 0 8px; border-radius: 999px; background: #fff; border: 1.5px solid #f2c94c; font-family: var(--font-body); font-size: 11.5px; font-weight: 800; color: var(--navy); white-space: nowrap; animation: gold-chip 6s ease-out infinite; }
+.gold-chip b { color: #8a5a00; }
+.gold-fly { position: absolute; width: 22px; height: 22px; pointer-events: none; animation: gold-x 6s linear infinite; }
+.gold-drop { position: relative; width: 22px; height: 22px; animation: gold-y 6s infinite; }
+.gold-coin { position: relative; width: 22px; height: 22px; opacity: 0; filter: drop-shadow(0 2px 2px rgba(11, 31, 58, .25)); animation: gold-coin 6s linear infinite; }
+.gold-puff { position: absolute; inset: -12px; border-radius: 50%; opacity: 0; background: radial-gradient(circle, rgba(255, 232, 120, .95) 0 30%, rgba(255, 214, 71, .5) 45%, rgba(255, 214, 71, 0) 70%); animation: gold-puff 6s ease-out infinite; }
+.gold-plus { position: absolute; left: 62px; top: 46px; opacity: 0; font-family: var(--font-display); font-weight: 800; font-size: 16px; color: #b45309; text-shadow: 0 1px 0 #fff; animation: gold-plus 6s ease-out infinite; }
+.gold-shop { position: absolute; right: 8px; bottom: 10px; display: inline-flex; align-items: center; gap: 4px; padding: 3px 9px; border-radius: 10px; background: #fff7d6; border: 1.5px solid #e0a800; font-family: var(--font-body); font-size: 11.5px; font-weight: 800; color: var(--navy); }
+@keyframes gold-chip { 0% { box-shadow: 0 0 0 0 rgba(242, 201, 76, .9); } 6% { box-shadow: 0 0 0 5px rgba(242, 201, 76, .45); } 16%, 100% { box-shadow: 0 0 0 0 rgba(242, 201, 76, 0); } }
+@keyframes gold-x { 0%, 15% { transform: translateX(0); } 38%, 100% { transform: translateX(var(--dx)); } }
+@keyframes gold-y {
+  0%, 15% { transform: translateY(0); animation-timing-function: cubic-bezier(.2, .7, .4, 1); }
+  22% { transform: translateY(-26px); animation-timing-function: cubic-bezier(.55, 0, .9, .4); }
+  38%, 100% { transform: translateY(var(--dy)); }
+}
+@keyframes gold-coin {
+  0% { transform: scale(0) rotate(-90deg); opacity: 0; }
+  5% { transform: scale(1.35) rotate(10deg); opacity: 1; }
+  8%, 15% { transform: scale(1); opacity: 1; }
+  21% { transform: scaleX(.25); }
+  27% { transform: scaleX(1); }
+  33% { transform: scaleX(.25); }
+  36% { transform: scale(.85); opacity: 1; }
+  39%, 100% { transform: scale(.4); opacity: 0; }
+}
+@keyframes gold-puff { 0% { transform: scale(.2); opacity: .95; } 9% { transform: scale(1.6); opacity: 0; } 100% { transform: scale(1.6); opacity: 0; } }
+@keyframes gold-plus { 0%, 37% { opacity: 0; transform: translateY(4px); } 41% { opacity: 1; transform: translateY(0); } 55% { opacity: 1; transform: translateY(-4px); } 64%, 100% { opacity: 0; transform: translateY(-12px); } }
+@keyframes gold-clink { 0%, 2% { transform: scale(1, 1); } 8% { transform: scale(1.06, .95); } 14% { transform: scale(.98, 1.02); } 20%, 100% { transform: scale(1, 1); } }
+@media (prefers-reduced-motion: reduce) {
+  .gold-jar, .gold-chip, .gold-fly, .gold-drop, .gold-coin, .gold-puff, .gold-plus { animation: none; }
+  .gold-fly, .gold-plus { display: none; }
+}

@@ -1,15 +1,17 @@
 import Link from "next/link";
 import { pageMetadata } from "../seo";
+import type { ReactNode } from "react";
 import { GAME_MODES, BUILDER } from "../components/gameModes";
+import GoldJarArt from "../components/GoldJarArt";
 
 export const metadata = pageMetadata({
   path: "/features",
   title: "Features — game modes, outdoor hunts, study & test",
   description:
-    "Every Qrewzi feature: game modes, trivia nights, escape rooms, ImagineIt outdoor hunts, play that carries on when Wi-Fi drops, Study Buddies, study and test codes, own grades.",
+    "Every Qrewzi feature: game modes, trivia nights, escape rooms, ImagineIt outdoor hunts, play that carries on when Wi-Fi drops, study and test codes with a pot of gold for good answers, own grades.",
   socialTitle: "Every feature Qrewzi ships with",
   socialDescription:
-    "Game modes, trivia nights, escape rooms, ImagineIt outdoor photo hunts, games that play on when the Wi-Fi drops, study practice with buddies, a study code and a test code for every set, and 85+ task types.",
+    "Game modes, trivia nights, escape rooms, ImagineIt outdoor photo hunts, games that play on when the Wi-Fi drops, study practice with buddies, a study code and a test code for every set — with a jar of gold that good answers fill — and 85+ task types.",
   keywords: [
     "classroom game features", "classroom game modes", "classroom trivia night", "Bible trivia game for kids",
     "house points game", "school houses competition", "team building classroom game", "classroom escape room",
@@ -21,6 +23,7 @@ export const metadata = pageMetadata({
     "outdoor photo scavenger hunt", "offline classroom game", "study buddy app", "trivia practice",
     "team grading", "each student's own grade", "debate game for students", "Connect Four review game",
     "practice tests for students", "online unit test", "study code and test code", "test that pauses when students leave the screen",
+    "gamified practice tests", "reward coins for good answers", "classroom reward system", "motivate students to study", "riddles and brain teasers for students",
   ],
 });
 
@@ -32,7 +35,7 @@ const MODE_BODY: Record<string, string> = {
 };
 
 // `id` makes a card a link target (/features#offline), for the home page's spotlight and elsewhere.
-type Feature = { id?: string; name: string; body: string; href?: string; cta?: string };
+type Feature = { id?: string; name: string; body: string; href?: string; cta?: string; art?: ReactNode };
 type Group = { id: string; eyebrow: string; title: string; items: Feature[] };
 
 const GROUPS: Group[] = [
@@ -136,6 +139,7 @@ const GROUPS: Group[] = [
     items: [
       { name: "🔑 Three codes on every set", body: "Each set's card has a 📚 Study, a ✏️ Quiz and a 📝 Test code, with how many students have used each. Press one and an invitation is copied for your class post. The questions are written from the set and fact-checked; one the checker doubted waits for you.", href: "/study-and-test", cta: "How Study & Test works" },
       { name: "📚 Practice tests", body: "The study code opens practice tests in the shape of the real one — matching, multiple choice, true or false, fill in the blanks, short answers — with feedback after every part, as often as they like. Their best goes on a class board, but only from a practice test where they stayed on the screen." },
+      { id: "pot-of-gold", art: <GoldJarArt />, name: "🪙 A pot of gold for every set", body: "Each set has a glass jar for every student, and practice fills it. A right answer drops in a coin; the written ones pay for quality — up to 4 for a short answer that explains why, 4 for working where every line checks out, 8 for the essay, and 1 more for beating last time's. The jar keeps every coin, so practising the set again fills it further. Students spend their gold on a joke for 15, a riddle for 25 or a brain teaser for 40 — and a practice test stops earning the moment they leave the screen." },
       { name: "👥 Study with a partner", body: "Up to two classmates on the same code — asked with a tap, even mid-practice — or someone from home with a code the student gives them. Quick rounds on everyone's own screen, a race to fill in the blanks, and fill-and-compare, side by side; a practice partner fills any empty seat. It counts as practice in your report, never toward the class board." },
       { name: "📝 The test, one attempt", body: "Fifty minutes on their own devices, one attempt, no marks shown until the end. The code works for an hour from the first sign-in; make another for a make-up or a second class. A quiz is the short version: the unit's terms, twenty minutes." },
       { name: "⏸ Leave the screen, and it pauses", body: "Copying and pasting are off, and the browser never holds an answer key. A student who leaves the test screen is paused until you press Unlock on the Live page, which shows who is on which part and who left, and for how long." },
@@ -180,6 +184,7 @@ export default function FeaturesPage() {
             <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: 18 }}>
               {g.items.map((f) => (
                 <div key={f.name} id={f.id} className="card" style={f.id ? { scrollMarginTop: 90 } : undefined}>
+                  {f.art}
                   <h3 style={{ fontSize: 19 }}>{f.name}</h3>
                   <p style={{ marginTop: 10, color: "var(--slate)", fontSize: 15 }}>{f.body}</p>
                   {f.href && (
