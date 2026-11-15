@@ -51,7 +51,7 @@ export default function HomePage() {
               {/* Primary CTA: a teacher lands on this page and in ONE click
                   is projecting a live Qrewzi room with code QREWDEMO. The
                   backend self-provisions the demo on host:join; students
-                  join at play.qrewzi.com from any device. "Join for free"
+                  join at play.qrewzi.com from any device. "Quick Launch"
                   stays secondary — that's for teachers already sold. */}
               <a
                 href="https://set.qrewzi.com/demo"
@@ -61,13 +61,21 @@ export default function HomePage() {
               >
                 Try it live now →
               </a>
-              <a href="https://set.qrewzi.com/signup" className="btn btn-secondary">
-                Join for free
+              {/* Quick Launch: the teacher who is ready to run one. A free
+                  account, then straight to "Create a task set" — subject,
+                  grade, topic — and "Launch now" on the set it builds. Signed
+                  in already, the sign-up page passes them straight through. */}
+              <a href="https://set.qrewzi.com/signup?next=/teacher/ai-tasksets" className="btn btn-secondary" data-testid="quick-launch">
+                🚀 Teachers: Quick Launch
               </a>
               <Link href="/how-it-works" className="btn btn-ghost">
                 See how it works
               </Link>
             </div>
+            <p style={{ marginTop: 10, fontSize: 14, color: "var(--slate)", maxWidth: "56ch" }}>
+              <strong style={{ color: "var(--navy)" }}>Quick Launch:</strong> make a free account, type your subject, grade
+              and topic, and your game is built and ready to host.
+            </p>
             {/* A student who typed qrewzi.com with a code in hand: straight
                 into their game (play.qrewzi.com fills in ?room=). */}
             <form action="https://play.qrewzi.com/" method="get" className="join-code">
