@@ -104,5 +104,14 @@ if __name__ == "__main__":
     for key, names in STRIPS.items():
         img = strip(names)
         out = os.path.join(PUB, "email", f"strip-{key}.png")
-        img.quantize(colors=256, method=Image.Quantize.FASTOCTREE, dither=Image.Dither.NONE).save(out, optimize=True)
+        q = img.quantize(colors=256, method=Image.Quantize.FASTOCTREE, dither=Image.Dither.NONE)
+        # Reducing to 256 colours folds the empty background in with the faint
+        # tail of the shadows, and it came out 3/255 opaque: a grey box round
+        # the strip on a white email. A colour that faint is made clear.
+        pal = q.getpalette(rawmode="RGBA")
+        for k in range(3, len(pal), 4):
+            if pal[k] < 12:
+                pal[k] = 0
+        q.putpalette(pal, rawmode="RGBA")
+        q.save(out, optimize=True)
         print(f"{out}  {img.width}x{img.height}  {os.path.getsize(out) // 1024} KB")
