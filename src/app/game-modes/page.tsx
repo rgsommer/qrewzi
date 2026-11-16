@@ -76,7 +76,7 @@ const FAQ: FaqItem[] = [
   },
   {
     q: "Do duel points and bonuses count toward grades?",
-    a: "No. Duel points, face-off and house-showdown bonuses, Catch Qrew and the Master Builder award go on the leaderboard. The grades in your report come from the tasks themselves.",
+    a: "No. Duel points, face-off and house-showdown bonuses, Catch Qrew, FlipOut's cards and the Master Builder award go on the leaderboard. The grades in your report come from the tasks themselves — a FlipOut is marked on its right answers.",
   },
   {
     q: "Can I add Builder to Duels?",
@@ -165,6 +165,7 @@ export default function GameModesPage() {
             <Card title="⚔️ Face-offs" body="Switch face-offs on and now and then the game pits two teams head-to-head in a quick challenge; the winner earns bonus points. Or start one yourself with Instant face-off." />
             <Card title="🏠 House showdown" body="The room plays in groups, or in your school's houses. Fire a showdown and one question goes to every device at once; the house with the biggest share right earns every one of its teams a bonus." />
             <Card title="🦊 Catch Qrew" body="Qrew the fox pops up on the players' screens for a few seconds, and the first team to tap it scores. A team busy drawing, miming or moving isn't pulled away to chase it." />
+            <Card title="🃏 FlipOut" body="Nine cards face down — on the projector when everyone's in one room, or on each team's device. Every three right answers earn a flip, and a wrong one knocks one off. Under a card: points, a clue, a layer on the build, a steal, a freeze, the hot potato, Qrew let loose …" />
           </div>
           <p style={{ marginTop: 28, textAlign: "center", color: "var(--slate)" }}>
             See <Link href="/features">every feature</Link>, or how a{" "}

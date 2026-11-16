@@ -135,6 +135,7 @@ const jsonLd = {
         "Play that carries on when the Wi-Fi drops; Outdoor mode saves the whole route on each device",
         "Debate Match: two teams, eight timed turns, judged on argument and delivery",
         "Two-team True/False Connect Four, or against the computer",
+        "FlipOut: nine face-down cards on the projector, flipped by right answers",
         "Prayer Rounds: small-group prayer times for churches and youth groups",
         "Multi-room hunts, or on-screen only with no walking",
         "85+ task types beyond multiple choice",
