@@ -61,6 +61,7 @@ export default function GoosechaseAlternativePage() {
       related={[
         { href: "/classroom-scavenger-hunt", label: "Classroom scavenger hunt app" },
         { href: "/kahoot-alternative", label: "Kahoot alternative for teams" },
+        { href: "/compare", label: "How Qrewzi compares" },
         { href: "/game-modes", label: "Game modes" },
         { href: "/imagineit", label: "ImagineIt outdoor photo hunt" },
       ]}

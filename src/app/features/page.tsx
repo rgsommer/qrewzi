@@ -71,7 +71,7 @@ const GROUPS: Group[] = [
     eyebrow: "Mid-game moments",
     title: "Surprises that keep every team in it.",
     items: [
-      { name: "⚔️ Face-offs", body: "Switch them on and now and then the game pits two teams head-to-head in a quick challenge; the winner earns bonus points. Or start one yourself with Instant face-off." },
+      { name: "⚔️ Face-offs", body: "Switch them on and, around halfway through the game, the whole room splits into two sides for a few rapid questions on the projector — everyone answers, and the side with more right takes each one. Or play a whole game of face-offs, best of five." },
       { name: "👥 Groups, houses & showdowns", body: "The room splits into groups named for the lesson — 🔥 Flames vs 🕊️ Doves for Pentecost, ⚛️ Atoms vs 🧪 Beakers for chemistry — or your school's own houses, joined by code. Standings go by the average per team, so a bigger side isn't ahead for being bigger, and a house showdown puts one question on every device at once." },
       { name: "🦊 Catch Qrew", body: "Qrew the fox pops up on the players' screens for a few seconds, a handful of times a game; the first team to tap it scores. A team busy drawing, miming or moving isn't pulled away to chase it." },
       { name: "🌪️ Defend the village", body: "In Builder, a tornado, a dragon, a flood or a meteor shower heads for the builds. Every device gets the same quick question; if enough of the room gets it right, the shield holds and every team earns a bonus." },
