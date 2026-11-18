@@ -461,7 +461,7 @@ export const GROUPS: Group[] = [
       {
         id: "ai",
         label: "Generated for you by Qrewzi",
-        why: "Fresh material takes time to write; AI can draft it, and a teacher still checks it.",
+        why: "Fresh material takes time to write; Qrewzi can draft it, and a teacher still checks it.",
         cells: {
           qrewzi: y("Describe the lesson and Qrewzi writes the tasks; study and test questions are fact-checked, and any it doubts wait for you."),
           kahoot: y("AI question generator from a topic, PDF or web page, on paid plans.", ["k-ai", "k-plans"]),
