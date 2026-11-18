@@ -162,7 +162,7 @@ export default function GameModesPage() {
           <div className="eyebrow" style={{ textAlign: "center" }}>Mid-game surprises</div>
           <h2 style={{ textAlign: "center", marginTop: 12, marginBottom: 32 }}>Moments that wake the room up.</h2>
           <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))", gap: 16 }}>
-            <Card title="⚔️ Face-offs" body="Switch face-offs on and now and then the game pits two teams head-to-head in a quick challenge; the winner earns bonus points. Or start one yourself with Instant face-off." />
+            <Card title="⚔️ Face-offs" body="Switch face-offs on and, around halfway through, the whole room splits into two sides for a few rapid questions on the projector — everyone answers, and the side with more right takes each one. Or choose Face-off as the mode and play a whole game of them, best of five." />
             <Card title="🏠 House showdown" body="The room plays in groups, or in your school's houses. Fire a showdown and one question goes to every device at once; the house with the biggest share right earns every one of its teams a bonus." />
             <Card title="🦊 Catch Qrew" body="Qrew the fox pops up on the players' screens for a few seconds, and the first team to tap it scores. A team busy drawing, miming or moving isn't pulled away to chase it." />
             <Card title="🃏 FlipOut" body="Nine cards face down — on the projector when everyone's in one room, or on each team's device. Every three right answers earn a flip, and a wrong one knocks one off. Under a card: points, a clue, a layer on the build, a steal, a freeze, the hot potato, Qrew let loose …" />

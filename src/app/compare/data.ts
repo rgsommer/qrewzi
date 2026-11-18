@@ -79,7 +79,6 @@ export const SOURCES: { id: string; tool: ToolId; title: string; url: string }[]
   { id: "g-accounts", tool: "gimkit", title: "Account FAQ", url: "https://help.gimkit.com/en/article/account-faq-jjz7b2/" },
   { id: "g-draw", tool: "gimkit", title: "Draw That (Gimkit blog, archived)", url: "https://web.archive.org/web/20250406020652/https://blog.gimkit.com/blog/draw-that" },
   { id: "g-tno", tool: "gimkit", title: "Trust No One (Gimkit blog, archived)", url: "https://web.archive.org/web/20250403102937/https://blog.gimkit.com/blog/trust-no-one" },
-  { id: "g-ai", tool: "gimkit", title: "Gimkit on X: AI Question Generator", url: "https://x.com/gimkit/status/1967986263526613318" },
   // Wayground (formerly Quizizz)
   { id: "w-rename", tool: "wayground", title: "Quizizz is now Wayground", url: "https://help.wayground.com/support/solutions/articles/158000403867-quizizz-is-now-wayground-what-s-changing-and-what-s-not" },
   { id: "w-live", tool: "wayground", title: "Live session modes", url: "https://help.wayground.com/support/solutions/articles/158000404918-live-session-modes-on-wayground" },
@@ -467,7 +466,7 @@ export const GROUPS: Group[] = [
           qrewzi: y("Describe the lesson and Qrewzi writes the tasks; study and test questions are fact-checked, and any it doubts wait for you."),
           kahoot: y("AI question generator from a topic, PDF or web page, on paid plans.", ["k-ai", "k-plans"]),
           blooket: p("Through Khan Academy's Khanmigo Blooket Generator, outside Blooket.", ["b-ai"]),
-          gimkit: y("An AI question generator in the kit editor, announced in September 2025; not yet described on its help pages.", ["g-ai"]),
+          gimkit: n("Not found on its help pages."),
           wayground: y("Generates quizzes from a prompt, a document, a web page, a video or photos of a worksheet.", ["w-ai"]),
           quizlet: y("Smart Assist turns notes, a file or a topic into flashcards; AI Practice Tests and Study Guides.", ["q-ai", "q-study"]),
         },
