@@ -460,7 +460,7 @@ export const GROUPS: Group[] = [
       },
       {
         id: "ai",
-        label: "Written for you by AI",
+        label: "Generated for you by Qrewzi",
         why: "Fresh material takes time to write; AI can draft it, and a teacher still checks it.",
         cells: {
           qrewzi: y("Describe the lesson and Qrewzi writes the tasks; study and test questions are fact-checked, and any it doubts wait for you."),
