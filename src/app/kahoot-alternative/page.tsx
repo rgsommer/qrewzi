@@ -56,6 +56,7 @@ export default function KahootAlternativePage() {
         { q: "How much does it cost?", a: "Your first three months are free, with everything included and no card needed. After that, carry on with the Free plan or choose a paid plan." },
       ]}
       related={[
+        { href: "/compare", label: "How Qrewzi compares with Kahoot, Blooket and more" },
         { href: "/goosechase-alternative", label: "Goosechase alternative" },
         { href: "/review-games", label: "Review games that get students moving" },
         { href: "/game-modes", label: "Game modes" },

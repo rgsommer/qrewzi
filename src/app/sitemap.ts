@@ -8,9 +8,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
   // Bump this when page content changes; a fresh date on every build tells
   // crawlers nothing.
   const now = new Date("2026-11-11");
-  const p = (path: string, priority: number, changeFrequency: "daily" | "weekly" | "monthly") => ({
+  const p = (path: string, priority: number, changeFrequency: "daily" | "weekly" | "monthly", lastModified = now) => ({
     url: `${base}${path}`,
-    lastModified: now,
+    lastModified,
     changeFrequency,
     priority,
   });
@@ -26,6 +26,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     p("/study-and-test", 0.9, "monthly"),
     p("/goosechase-alternative", 0.85, "monthly"),
     p("/kahoot-alternative", 0.85, "monthly"),
+    p("/compare", 0.85, "monthly", new Date("2026-11-18")),
     p("/game-modes",    0.9, "monthly"),
     p("/trivia-night",  0.9, "monthly"),
     p("/imagineit",     0.9, "monthly"),

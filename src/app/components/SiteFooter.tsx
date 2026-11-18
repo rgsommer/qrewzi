@@ -58,6 +58,7 @@ export default function SiteFooter() {
             <FLink href="/study-and-test">Practice tests &amp; unit tests</FLink>
             <FLink href="/goosechase-alternative">Goosechase alternative</FLink>
             <FLink href="/kahoot-alternative">Kahoot alternative</FLink>
+            <FLink href="/compare">How Qrewzi compares</FLink>
           </FooterCol>
           <FooterCol title="Company">
             <FLink href="/about">About</FLink>

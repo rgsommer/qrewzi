@@ -357,3 +357,109 @@ p { margin: 0; }
   .gold-jar, .gold-chip, .gold-fly, .gold-drop, .gold-coin, .gold-puff, .gold-plus { animation: none; }
   .gold-fly, .gold-plus { display: none; }
 }
+
+/* ---------- Screen-reader only ---------- */
+.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
+
+/* ---------- /compare (src/app/compare) ----------
+   Six tools in one table per group of criteria. "Compare Qrewzi with" is a
+   radio group: with one tool chosen, the other tools' columns are hidden by
+   :has(), so every claim stays in the HTML. Wide screens get the table; below
+   1080px each row is a card — and with "All five" chosen there, the five
+   other tools shrink to a row of marks until one is picked. */
+.cmp-h1 { font-size: clamp(32px, 4.6vw, 56px); line-height: 1.08; }
+.cmp-wide { max-width: 1320px; }
+.cmp-method p { margin-top: 10px; color: var(--slate); line-height: 1.6; }
+.cmp-legend { list-style: none; margin: 14px 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px 22px; font-size: 14.5px; color: var(--navy); }
+.cmp-legend li { display: inline-flex; align-items: center; gap: 8px; }
+
+.cmp-mark { display: inline-flex; align-items: center; justify-content: center; flex: none; width: 24px; height: 24px; border-radius: 999px; font-size: 14px; font-weight: 900; line-height: 1; }
+.cmp-yes { background: #DCFCE7; color: #166534; }
+.cmp-partly { background: #FEF3C7; color: #92400E; }
+.cmp-no { background: #EEF0F4; color: #475569; }
+
+.cmp { --cmp-top: 70px; --cmp-pick-h: 62px; }
+.cmp-pick { position: sticky; top: var(--cmp-top); z-index: 5; display: flex; align-items: center; gap: 14px; height: var(--cmp-pick-h); margin-top: 24px; background: #fff; border-bottom: 1px solid rgba(15, 23, 42, 0.12); }
+.cmp-pick-label { flex: none; font-size: 12px; font-weight: 900; letter-spacing: 0.14em; text-transform: uppercase; color: var(--slate); }
+.cmp-pick-row { display: flex; gap: 8px; min-width: 0; }
+.cmp-pick label { flex: none; display: inline-flex; align-items: center; min-height: 40px; padding: 8px 16px; border-radius: 999px; border: 2px solid var(--navy); background: #fff; color: var(--navy); font-weight: 900; font-size: 14.5px; cursor: pointer; }
+.cmp-pick label:hover { background: var(--cream-shade); }
+.cmp-radio:checked + label { background: var(--navy); color: var(--cream); }
+.cmp-radio:focus-visible + label { outline: 3px solid var(--coral); outline-offset: 2px; }
+.cmp-pick-hint { display: none; margin-top: 20px; font-size: 13.5px; color: var(--slate); }
+.cmp:has(.cmp-radio:not(#cmp-all):checked) .cmp-pick-hint { display: none !important; }
+
+.cmp-group { margin-top: 44px; scroll-margin-top: calc(var(--cmp-top) + var(--cmp-pick-h) + 8px); }
+.cmp-group-title { font-size: clamp(20px, 2.2vw, 26px); }
+.cmp-group-q { margin-top: 4px; color: var(--slate); font-size: 15.5px; }
+
+.cmp-table { width: 100%; margin-top: 14px; border-collapse: collapse; table-layout: fixed; font-size: 14px; line-height: 1.5; }
+.cmp-table th, .cmp-table td { padding: 12px 10px; text-align: left; vertical-align: top; border-bottom: 1px solid rgba(15, 23, 42, 0.12); }
+.cmp-table thead th { position: sticky; top: calc(var(--cmp-top) + var(--cmp-pick-h)); z-index: 2; background: #fff; border-bottom: 2px solid var(--navy); font-size: 14px; color: var(--navy); }
+.cmp-table thead th.t-qrewzi { color: var(--coral-deep); }
+.cmp-table .cmp-feature { width: 17%; }
+.cmp-label { display: block; font-weight: 900; color: var(--navy); font-size: 14.5px; }
+.cmp-why { display: block; margin-top: 4px; font-weight: 400; font-size: 13px; color: var(--slate); }
+.cmp-aka { display: block; font-size: 11.5px; font-weight: 700; color: var(--slate); letter-spacing: 0; }
+.cmp-table td { color: var(--slate); }
+.cmp-table td .cmp-mark { margin-bottom: 6px; }
+.cmp-table td .cmp-text { display: block; }
+.cmp-table td.t-qrewzi { background: #FFF6EE; color: var(--navy); }
+.cmp-tool { display: none; }
+.cmp-refs { margin-left: 2px; font-size: 10.5px; font-weight: 800; line-height: 0; }
+.cmp-refs a { color: var(--slate); }
+.cmp-refs a:hover { color: var(--coral); }
+
+/* One tool chosen: hide the other four. */
+.cmp:has(#cmp-kahoot:checked) :is(.t-blooket, .t-gimkit, .t-wayground, .t-quizlet),
+.cmp:has(#cmp-blooket:checked) :is(.t-kahoot, .t-gimkit, .t-wayground, .t-quizlet),
+.cmp:has(#cmp-gimkit:checked) :is(.t-kahoot, .t-blooket, .t-wayground, .t-quizlet),
+.cmp:has(#cmp-wayground:checked) :is(.t-kahoot, .t-blooket, .t-gimkit, .t-quizlet),
+.cmp:has(#cmp-quizlet:checked) :is(.t-kahoot, .t-blooket, .t-gimkit, .t-wayground) { display: none; }
+.cmp:has(.cmp-radio:not(#cmp-all):checked) .cmp-table .cmp-feature { width: 24%; }
+.cmp:has(.cmp-radio:not(#cmp-all):checked) .cmp-table { font-size: 15px; }
+
+@media (max-width: 1080px) {
+  .cmp { --cmp-pick-h: 82px; }
+  .cmp-pick { flex-direction: column; align-items: stretch; justify-content: center; gap: 6px; margin-left: calc(-1 * var(--gutter)); margin-right: calc(-1 * var(--gutter)); padding: 0 var(--gutter); }
+  .cmp-pick-label { font-size: 11px; }
+  .cmp-pick-row { overflow-x: auto; scrollbar-width: none; margin-right: calc(-1 * var(--gutter)); padding-right: var(--gutter); -webkit-mask-image: linear-gradient(to right, #000 calc(100% - 28px), transparent); mask-image: linear-gradient(to right, #000 calc(100% - 28px), transparent); }
+  .cmp-pick-row::-webkit-scrollbar { display: none; }
+  .cmp-pick label { min-height: 36px; padding: 6px 14px; font-size: 14px; }
+  .cmp-pick-hint { display: block; }
+
+  .cmp-table, .cmp-table tbody, .cmp-table tr, .cmp-table th, .cmp-table td { display: block; width: auto; }
+  .cmp:has(.cmp-radio:not(#cmp-all):checked) .cmp-table .cmp-feature { width: auto; }
+  .cmp-table thead { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0, 0, 0, 0); }
+  .cmp-table { margin-top: 10px; font-size: 15px; }
+  .cmp-table tr { margin-top: 14px; padding: 14px; border: 2px solid var(--navy); border-radius: 16px; background: #fff; }
+  .cmp-table th, .cmp-table td { padding: 0; border: none; }
+  .cmp-table th.cmp-feature { padding-bottom: 10px; }
+  .cmp-label { font-size: 16px; }
+  .cmp-why { font-size: 13.5px; }
+  .cmp-table td { display: grid; grid-template-columns: auto 1fr; column-gap: 10px; align-items: start; margin-top: 10px; padding-top: 10px; border-top: 1px solid rgba(15, 23, 42, 0.1); }
+  .cmp-table td .cmp-mark { margin: 0; grid-row: 1 / span 2; grid-column: 1; }
+  .cmp-tool { display: block; grid-column: 2; font-weight: 900; color: var(--navy); font-size: 14px; }
+  .cmp-table td .cmp-text { grid-column: 2; }
+  .cmp-table td.t-qrewzi { margin: 0 -14px; padding: 12px 14px; border-top: none; background: #FFF6EE; }
+  .cmp-table td.t-qrewzi .cmp-tool { color: var(--coral-deep); }
+
+  /* All five, on a narrow screen: the others as a row of marks. */
+  .cmp:has(#cmp-all:checked) .cmp-table tr { display: flex; flex-wrap: wrap; gap: 8px; }
+  .cmp:has(#cmp-all:checked) .cmp-table th.cmp-feature,
+  .cmp:has(#cmp-all:checked) .cmp-table td.t-qrewzi { flex: 1 1 100%; }
+  .cmp:has(#cmp-all:checked) .cmp-table td:not(.t-qrewzi) { display: inline-flex; align-items: center; gap: 6px; margin: 2px 0 0; padding: 4px 10px 4px 4px; border: 1px solid rgba(15, 23, 42, 0.14); border-radius: 999px; }
+  .cmp:has(#cmp-all:checked) .cmp-table td:not(.t-qrewzi) .cmp-text { display: none; }
+  .cmp:has(#cmp-all:checked) .cmp-table td:not(.t-qrewzi) .cmp-tool { font-size: 13px; }
+}
+
+.cmp-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr)); gap: 16px; }
+.cmp-brief dl { margin: 12px 0 0; }
+.cmp-brief dt { margin-top: 10px; font-size: 11px; font-weight: 900; letter-spacing: 0.14em; text-transform: uppercase; color: var(--coral-deep); }
+.cmp-brief dd { margin: 3px 0 0; color: var(--slate); font-size: 15px; line-height: 1.5; }
+.cmp-cite { color: var(--navy); font-weight: 700; font-size: 0.95em; }
+.cmp-biblio { margin: 12px 0 0; padding-left: 20px; display: grid; gap: 10px; font-size: 14px; color: var(--slate); line-height: 1.55; }
+.cmp-biblio a, .cmp-sources a { overflow-wrap: anywhere; }
+.cmp-sources ol { margin: 8px 0 0; padding-left: 28px; display: grid; gap: 6px; font-size: 13.5px; color: var(--slate); line-height: 1.5; }
+.cmp-sources li { scroll-margin-top: 90px; }
+.cmp-sources li:target { background: var(--butter); border-radius: 6px; }
