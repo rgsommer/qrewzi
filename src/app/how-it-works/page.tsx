@@ -5,7 +5,7 @@ export const metadata = pageMetadata({
   path: "/how-it-works",
   title: "How it works — a lesson to a live game in 5 minutes",
   description:
-    "Describe a lesson, print the QR stations, pick Troopers, Raiders or Duels, share a room code and run the projector dashboard. Your report arrives at the bell.",
+    "Describe a lesson, print the QR stations, pick Qrewzers, Raiders or Duels, share a room code and run the projector dashboard. Your report arrives at the bell.",
   socialTitle: "How Qrewzi turns a lesson into a game",
   socialDescription: "Describe, print, pick a mode, share, run, report. Five minutes of prep, one class period, no marking pile.",
   keywords: ["how to run a classroom game", "QR code stations", "station rotation activity", "no-prep lesson", "team quiz game", "classroom game modes"],
@@ -32,7 +32,7 @@ export default function HowItWorks() {
           <Step
             n={3}
             title="Pick a mode"
-            body="Troopers: teams go station to station, through the set in order. Raiders: teams pick which mystery box to raid next. Duels: every player on their own device, paired 1-on-1, and with someone new after every duel. Add Builder to Troopers or Raiders and every task adds a layer to the team's build."
+            body="Qrewzers: teams go station to station, through the set in order. Raiders: teams pick which mystery box to raid next. Duels: every player on their own device, paired 1-on-1, and with someone new after every duel. Add Builder to Qrewzers or Raiders and every task adds a layer to the team's build."
             link={{ href: "/game-modes", label: "Compare the game modes" }}
           />
           <Step

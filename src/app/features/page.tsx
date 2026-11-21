@@ -45,7 +45,7 @@ const GROUPS: Group[] = [
     title: "Three game modes, and Builder on top.",
     items: [
       ...GAME_MODES.map((m) => ({ name: `${m.emoji} ${m.name}`, body: MODE_BODY[m.id], href: `/game-modes#${m.id}`, cta: `How ${m.name} plays` })),
-      { name: `${BUILDER.emoji} ${BUILDER.name}`, body: "An add-on to Troopers and Raiders. Every task adds a layer to the team's castle, rocket or ark — gold, stone, brick, wood or straw, by how well it went. Tap a weak layer to rebuild it; the mightiest build holds Master Builder.", href: "/game-modes#builder", cta: "How Builder works" },
+      { name: `${BUILDER.emoji} ${BUILDER.name}`, body: "An add-on to Qrewzers and Raiders. Every task adds a layer to the team's castle, rocket or ark — gold, stone, brick, wood or straw, by how well it went. Tap a weak layer to rebuild it; the mightiest build holds Master Builder.", href: "/game-modes#builder", cta: "How Builder works" },
     ],
   },
   {

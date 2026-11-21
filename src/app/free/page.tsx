@@ -242,7 +242,7 @@ export default function FreePage() {
             <Feat title="Any device" body="Phones, Chromebooks, tablets together." />
             <Feat title="Outside, too" body="ImagineIt photo hunts, and play that carries on when the Wi-Fi drops." />
             <Feat title="Study at home" body="Practice with Study Buddies, trivia rounds and a words sheet." />
-            <Feat title="Three game modes" body="Troopers, Raiders or Duels — same set." />
+            <Feat title="Three game modes" body="Qrewzers, Raiders or Duels — same set." />
           </div>
         </div>
       </section>

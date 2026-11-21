@@ -77,7 +77,7 @@ export default function YouthGroupsPage() {
             <Mini title="Race and play" body="Flashcard races, hangman duels and true-false tic-tac-toe." />
           </div>
           <p style={{ marginTop: 20, fontSize: 15, color: "var(--slate)" }}>
-            Play it as <Link href="/game-modes">Troopers or Raiders</Link>, with Builder on top if you like, and the
+            Play it as <Link href="/game-modes">Qrewzers or Raiders</Link>, with Builder on top if you like, and the
             room splits into groups — or your own houses — for a showdown.
           </p>
         </div>

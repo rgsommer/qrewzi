@@ -5,10 +5,10 @@ import { GAME_MODES, BUILDER } from "../components/gameModes";
 
 export const metadata = pageMetadata({
   path: "/game-modes",
-  title: "Game modes — Troopers, Raiders and Duels",
+  title: "Game modes — Qrewzers, Raiders and Duels",
   description:
-    "Three ways to play a Qrewzi set: Troopers (station to station), Raiders (pick your next mystery box) and Duels (every player 1-on-1, someone new after every duel).",
-  socialTitle: "Troopers, Raiders, Duels — three ways to play one set",
+    "Three ways to play a Qrewzi set: Qrewzers (station to station), Raiders (pick your next mystery box) and Duels (every player 1-on-1, someone new after every duel).",
+  socialTitle: "Qrewzers, Raiders, Duels — three ways to play one set",
   socialDescription:
     "Teams station to station, teams raiding mystery boxes, or every player 1-on-1 with someone new after every duel. Pick the mode before you press Start.",
   keywords: [
@@ -18,7 +18,7 @@ export const metadata = pageMetadata({
 });
 
 /* How each mode plays, as the server runs it (backend/socket/*.js in the
-   Curriculate repo): Troopers is the default route, Raiders the Mystery
+   Curriculate repo): Qrewzers is the default route, Raiders the Mystery
    Box route (mysteryBoxEngine.js), Duels the 1-on-1 rounds (duelRounds.js). */
 const DETAIL: Record<string, { lead: string; steps: string[]; bestFor: string; extra?: string }> = {
   troopers: {
@@ -60,11 +60,11 @@ const DETAIL: Record<string, { lead: string; steps: string[]; bestFor: string; e
 const FAQ: FaqItem[] = [
   {
     q: "Which mode should we start with?",
-    a: "Troopers. It's the main game — teams go through the set in order — so it's the simplest to run the first time. Raiders suits a class that knows the game and likes choosing its route; Duels suits a room where everyone has a device of their own.",
+    a: "Qrewzers. It's the main game — teams go through the set in order — so it's the simplest to run the first time. Raiders suits a class that knows the game and likes choosing its route; Duels suits a room where everyone has a device of their own.",
   },
   {
     q: "Does every player need their own device?",
-    a: "For Troopers and Raiders, no: a team of a few players shares one phone, tablet or Chromebook. For Duels, yes — every device is one player.",
+    a: "For Qrewzers and Raiders, no: a team of a few players shares one phone, tablet or Chromebook. For Duels, yes — every device is one player.",
   },
   {
     q: "Can any set be played as Duels?",
@@ -80,7 +80,7 @@ const FAQ: FaqItem[] = [
   },
   {
     q: "Can I add Builder to Duels?",
-    a: "No — Builder is an add-on to Troopers and Raiders, where a team works through tasks together and its build grows with them.",
+    a: "No — Builder is an add-on to Qrewzers and Raiders, where a team works through tasks together and its build grows with them.",
   },
 ];
 
@@ -144,7 +144,7 @@ export default function GameModesPage() {
             <span aria-hidden="true">{BUILDER.emoji}</span> Builder: every answer adds a layer.
           </h2>
           <p style={{ marginTop: 16, fontSize: 17, color: "var(--navy)", textAlign: "center", maxWidth: "62ch", marginLeft: "auto", marginRight: "auto" }}>
-            Switch Builder on for Troopers or Raiders and each team builds something as it plays.
+            Switch Builder on for Qrewzers or Raiders and each team builds something as it plays.
           </p>
           <div style={{ marginTop: 28, display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))", gap: 16 }}>
             <Card title="Pick a build" body="A house, castle, rocket, Noah's Ark, ship, lighthouse, bridge, church or treehouse — the team's choice, until the first block goes on." />

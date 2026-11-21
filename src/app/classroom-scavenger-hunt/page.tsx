@@ -29,7 +29,7 @@ export default function ClassroomScavengerHuntPage() {
         { emoji: "✍️", name: "Describe the lesson", body: "One line is enough — \"Grade 6 fractions\" or \"the water cycle\" — or paste the terms your class is learning. Qrewzi writes the stations at your grade." },
         { emoji: "🖨️", name: "Post the station cards", body: "Print the QR station cards and tape them around the room. They are the same for every game, so you print them once." },
         { emoji: "📱", name: "Teams join with a code", body: "Students open the app or a browser, type the room code and pick their team. One device per team is enough." },
-        { emoji: "🏃", name: "Hunt the room", body: "Teams go station to station in order (Troopers), or choose which mystery box to raid next (Raiders). Each scan brings up that station's challenge." },
+        { emoji: "🏃", name: "Hunt the room", body: "Teams go station to station in order (Qrewzers), or choose which mystery box to raid next (Raiders). Each scan brings up that station's challenge." },
         { emoji: "📺", name: "Keep score out loud", body: "The projector shows every team's score as it changes. Most challenges are marked the moment they are answered." },
         { emoji: "📨", name: "Read the report", body: "A report of what each team got right, and where they struggled, reaches you at the bell." },
       ]}

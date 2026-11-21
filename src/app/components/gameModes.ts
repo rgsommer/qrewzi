@@ -11,7 +11,7 @@ export type GameMode = {
 };
 
 export const GAME_MODES: GameMode[] = [
-  { id: "troopers", name: "Troopers", emoji: "🪖", blurb: "Teams go station to station, through the set in order." },
+  { id: "troopers", name: "Qrewzers", emoji: "🚢", blurb: "Teams go station to station, through the set in order." },
   { id: "raiders", name: "Raiders", emoji: "🏴‍☠️", blurb: "Teams raid the mystery boxes, picking their next one." },
   { id: "duels", name: "Duels", emoji: "🥊", blurb: "Every player on their own — paired 1-on-1, then with someone new after every duel; first right answer wins." },
 ];
@@ -19,5 +19,5 @@ export const GAME_MODES: GameMode[] = [
 export const BUILDER = {
   name: "Builder",
   emoji: "🏗️",
-  blurb: "An add-on to Troopers and Raiders: each team builds a castle, a rocket, Noah's Ark… a layer for every task, in gold, stone, brick, wood or straw by how well it went.",
+  blurb: "An add-on to Qrewzers and Raiders: each team builds a castle, a rocket, Noah's Ark… a layer for every task, in gold, stone, brick, wood or straw by how well it went.",
 };

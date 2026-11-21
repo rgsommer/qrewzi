@@ -25,7 +25,7 @@ export default function AboutPage() {
             thing runs in a class period.
           </p>
           <p>
-            A class can play it three ways — <Link href="/game-modes">Troopers, Raiders or Duels</Link> —
+            A class can play it three ways — <Link href="/game-modes">Qrewzers, Raiders or Duels</Link> —
             and the same engine runs <Link href="/trivia-night">trivia nights</Link>,{" "}
             <Link href="/escape-rooms">escape rooms</Link>, and{" "}
             <Link href="/youth-groups">youth nights and prayer times</Link> for churches and youth groups.

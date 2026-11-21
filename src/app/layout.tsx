@@ -116,7 +116,7 @@ const jsonLd = {
       operatingSystem: "Web, Android, iOS",
       url: "https://www.qrewzi.com",
       description:
-        "Turns a one-line lesson into a live, room-wide team game for classrooms, trivia nights and youth groups. Teams move between QR stations on any device, played as Troopers, Raiders or Duels, or head outside for an ImagineIt photo hunt; play carries on when the Wi-Fi drops; the projector keeps score; each student's grade (for the teacher) and a parent-ready report arrive at the bell.",
+        "Turns a one-line lesson into a live, room-wide team game for classrooms, trivia nights and youth groups. Teams move between QR stations on any device, played as Qrewzers, Raiders or Duels, or head outside for an ImagineIt photo hunt; play carries on when the Wi-Fi drops; the projector keeps score; each student's grade (for the teacher) and a parent-ready report arrive at the bell.",
       publisher: { "@id": "https://www.qrewzi.com/#org" },
       offers: { "@type": "Offer", price: "0", priceCurrency: "CAD", description: "First three months free, no card needed" },
       installUrl: [
@@ -125,7 +125,7 @@ const jsonLd = {
       ],
       audience: { "@type": "EducationalAudience", educationalRole: "teacher" },
       featureList: [
-        "Three game modes: Troopers (station to station), Raiders (mystery boxes) and Duels (1-on-1 rounds)",
+        "Three game modes: Qrewzers (station to station), Raiders (mystery boxes) and Duels (1-on-1 rounds)",
         "Builder add-on: every task adds a layer to the team's build, with a Master Builder award",
         "Face-offs: surprise team head-to-heads for bonus points",
         "Groups named for the lesson, or your school's houses, with a house showdown",
