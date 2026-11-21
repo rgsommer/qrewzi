@@ -22,7 +22,11 @@ import { useEffect, useState } from "react";
 const API = "https://api.curriculate.net";
 
 type Sample = { title?: string; subject?: string; grade?: string; unit?: string; tasks?: number; playUrl?: string };
-type Hello = { firstName?: string; organisation?: string; demoUrl?: string; talkUrl?: string; fromName?: string; sample?: Sample; audience?: "school" | "workplace" };
+// `page` (2026-11-21): "youth" for a youth leader (backend rules.js audienceFor "youth"), "party"
+// for a party planner, a venue or a community events coordinator (role "party") — whose emails are
+// about an escape room for their group's night, and whose page points at the ready-made murder
+// mysteries (`partyRoomsUrl`, qrewzi.com/murder-mystery-party).
+type Hello = { firstName?: string; organisation?: string; demoUrl?: string; talkUrl?: string; fromName?: string; sample?: Sample; audience?: "school" | "workplace" | "youth"; page?: "youth" | "party"; partyRoomsUrl?: string };
 
 // The page a workplace reader lands on must not undo the email that sent
 // them. Their email is written with a host, a group and a session (backend
@@ -53,7 +57,35 @@ const COPY = {
       { title: "Works where your people are", body: "A room code, no accounts, nothing to install. It keeps playing when the Wi-Fi drops, and it goes outside for an offsite." },
     ],
   },
+  // A youth leader: their youth night, never a lesson or a test.
+  youth: {
+    eyebrow: "For youth nights",
+    intro: "You type one line about the night — a Bible story, a theme, the series you’re in. Qrewzi turns it into a team game the group plays together — an escape room they solve together, a scavenger hunt around the building or a Bible trivia night — on the phones they already have.",
+    demoNote: "The demo opens in your browser. Join it from your phone — or, with no phone to hand, in another tab — and you’re playing in under a minute. At the end you see what the leader sees: every team’s answers, marked.",
+    videoAlt: "Teams rotating between Qrewzi stations while the main screen keeps score",
+    points: [
+      { title: "An escape room they solve together", body: "One case for the whole group, each on their own phone: they share the evidence they find and open the locks together. Print 8 station cards and tape them up around the building." },
+      { title: "Bible trivia and Prayer Rounds", body: "A Bible trivia night ready to play, with nothing to write, and Prayer Rounds: small-group prayer cards, round by round, for a prayer time that moves the room." },
+      { title: "Works where your group is", body: "A room code, no accounts, nothing to install. It keeps playing when the Wi-Fi drops — at camp, on a retreat, outdoors." },
+    ],
+    price: "Your first three months are free, with no card. After that there’s a Free plan or a paid plan.",
+  },
+  // A party planner, a venue, a church's or community centre's events coordinator.
+  party: {
+    eyebrow: "For parties and group nights",
+    intro: "Pick a ready-made murder mystery, or type one line about the theme. Qrewzi turns it into a game the guests play together — an escape room the whole group solves, a hunt around the venue or a trivia round — on the phones they already have.",
+    demoNote: "The demo opens in your browser. Join it from your phone — or, with no phone to hand, in another tab — and you’re playing in under a minute. At the end you see what the host sees: every team’s answers, marked.",
+    videoAlt: "Teams rotating between Qrewzi stations while the main screen keeps score",
+    points: [
+      { title: "One case, everyone on it", body: "Each guest on their own phone, sharing the evidence they find and opening the locks together, then naming the murderer — about 45–50 minutes." },
+      { title: "Print 8 cards, and that’s the set-up", body: "Tape the station cards up around the room or the house, put the room code on the TV, and the guests join with no app and no accounts." },
+      { title: "Any theme", body: "Two murder mysteries are ready made for adults, and Qrewzi can make an escape room on any other theme." },
+    ],
+    price: "Your first three months are free, with no card. After that there’s a Free plan or a paid plan.",
+  },
 } as const;
+
+const PARTY_ROOMS_PAGE = "https://www.qrewzi.com/murder-mystery-party";
 
 export default function HelloPage() {
   const [token, setToken] = useState("");
@@ -83,7 +115,11 @@ export default function HelloPage() {
   const talkHref = hello.talkUrl || "mailto:hello@qrewzi.com?subject=Qrewzi%20%E2%80%94%2015%20minutes";
   const first = hello.firstName?.trim();
   const org = hello.organisation?.trim();
-  const copy = COPY[hello.audience === "workplace" ? "workplace" : "school"];
+  const kind = hello.page === "youth" || hello.page === "party" ? hello.page : hello.audience === "workplace" ? "workplace" : "school";
+  const copy = COPY[kind];
+  const price = "price" in copy ? copy.price : "";
+  // Only Qrewzi's own page is a link here.
+  const partyRooms = (kind === "youth" || kind === "party") ? (hello.partyRoomsUrl && hello.partyRoomsUrl.startsWith(PARTY_ROOMS_PAGE) ? hello.partyRoomsUrl : PARTY_ROOMS_PAGE) : "";
   // Only an address on Qrewzi's own player is a button here.
   const sample = hello.sample && /^https:\/\/play\.qrewzi\.com\//.test(hello.sample.playUrl || "") ? hello.sample : null;
   const made = sample ? [sample.grade ? `Grade ${sample.grade}` : "", sample.subject].filter(Boolean).join(" ") : "";
@@ -177,13 +213,36 @@ export default function HelloPage() {
         </div>
       </section>
 
+      {partyRooms ? (
+        <section className="section-tight">
+          <div className="container" style={{ maxWidth: 1080 }}>
+            <div className="card" style={{ padding: "clamp(22px, 3vw, 32px)", borderWidth: 3 }}>
+              <div className="eyebrow">Ready to play</div>
+              <h2 style={{ marginTop: 10, fontSize: "clamp(24px, 3vw, 32px)" }}>Two murder mysteries for a group night</h2>
+              <p style={{ marginTop: 12, fontSize: 18, color: "var(--slate)", lineHeight: 1.55, maxWidth: "62ch" }}>
+                <strong>Murder on the Alpine Star</strong> (a night train, 1937) and <strong>Murder at Quillhurst Hall</strong> (a
+                country house, 1924): one case the whole group solves together, each on their own phone, in about
+                45&ndash;50 minutes. Print 8 cards and tape them up first. Written for adults.
+              </p>
+              <div style={{ display: "flex", flexWrap: "wrap", gap: 12, marginTop: 20 }}>
+                <a href={partyRooms} className="btn btn-secondary">How a murder-mystery night runs →</a>
+              </div>
+            </div>
+          </div>
+        </section>
+      ) : null}
+
       <section className="section-tight">
         <div className="container" style={{ maxWidth: 760 }}>
           <div className="card" style={{ padding: "28px 28px 24px" }}>
             <div className="eyebrow">What it costs</div>
             <p style={{ marginTop: 10, fontSize: 18, lineHeight: 1.55 }}>
-              Teachers get the first three months free, with no card. After that there&rsquo;s a Free plan or a paid plan —
-              and {org ? `for ${org}` : "for a whole school or district"}, pricing on request.
+              {price || (
+                <>
+                  Teachers get the first three months free, with no card. After that there&rsquo;s a Free plan or a paid plan —
+                  and {org ? `for ${org}` : "for a whole school or district"}, pricing on request.
+                </>
+              )}
             </p>
           </div>
           <div style={{ marginTop: 28, padding: "0 4px" }}>

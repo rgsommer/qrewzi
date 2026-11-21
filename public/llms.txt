@@ -27,6 +27,7 @@ Qrewzi is made in Canada for teachers. It is also used by youth groups, churches
 - [Goosechase alternative for schools](https://www.qrewzi.com/goosechase-alternative): how Qrewzi differs from mission-based scavenger hunt apps.
 - [Kahoot alternative for team play](https://www.qrewzi.com/kahoot-alternative): teams that move and work together instead of a race to the buzzer.
 - [Classroom escape rooms](https://www.qrewzi.com/escape-rooms): an escape room from any lesson, in any theme, one per team.
+- [Murder-mystery party](https://www.qrewzi.com/murder-mystery-party): two ready-made murder mysteries for adults — one case the whole group solves together, each on their own phone, about 45 minutes, 8 cards to print.
 - [Trivia nights](https://www.qrewzi.com/trivia-night): a whole-room trivia night with nine question banks.
 - [ImagineIt](https://www.qrewzi.com/imagineit): an outdoor photo scavenger hunt from the lesson, with no QR codes, that plays on out of Wi-Fi range.
 - [Game modes](https://www.qrewzi.com/game-modes): Troopers, Raiders, Duels and the Builder add-on.

@@ -33,6 +33,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     p("/think-pair-share", 0.9, "monthly"),
     p("/social-emotional-learning", 0.9, "monthly"),
     p("/youth-groups",  0.85, "monthly"),
+    p("/murder-mystery-party", 0.85, "monthly", new Date("2026-11-21")),
     p("/prayer",        0.85, "monthly"),
     p("/teams",         0.85, "monthly"),
     p("/features",      0.8, "monthly"),
