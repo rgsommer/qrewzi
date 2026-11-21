@@ -11,7 +11,7 @@ export type GameMode = {
 };
 
 export const GAME_MODES: GameMode[] = [
-  { id: "troopers", name: "Qrewzers", emoji: "🚢", blurb: "Teams go station to station, through the set in order." },
+  { id: "troopers", name: "Qrewzers", emoji: "🪖", blurb: "Teams go station to station, through the set in order." },
   { id: "raiders", name: "Raiders", emoji: "🏴‍☠️", blurb: "Teams raid the mystery boxes, picking their next one." },
   { id: "duels", name: "Duels", emoji: "🥊", blurb: "Every player on their own — paired 1-on-1, then with someone new after every duel; first right answer wins." },
 ];
